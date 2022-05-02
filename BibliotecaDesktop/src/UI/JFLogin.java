@@ -154,7 +154,7 @@ public class JFLogin extends javax.swing.JFrame {
         Usuario Datos = login.usuarioAcceso(jTFUsuario.getText(), spass);
         System.out.println(Datos);
         if (Datos.Nivel==1){
-            JOptionPane.showMessageDialog(null, "Ingreso exitoso" +"\n" + "Bienvenido " + Datos.Usuario, "", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ingreso exitoso" +"\n" + "Bienvenido " + Datos.Nombre, "", JOptionPane.INFORMATION_MESSAGE);
             JFPrincipal Principal=new JFPrincipal();
             Principal.setVisible(true);
             dispose();
