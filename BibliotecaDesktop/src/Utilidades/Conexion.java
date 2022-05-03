@@ -16,7 +16,7 @@ public class Conexion {
    public static Connection conn=null;//conn es la conexion
    private static String driver ="com.mysql.jdbc.Driver";//The name of the class that implements java.sql.Driver in MySQL Connector/J has changed from com.mysql.jdbc.Driver to com.mysql.cj.jdbc.Driver. The old class name has been deprecated.
    private static String user = "root";
-   private static String password = "hola";
+   private static String password = "";
    private static String server = "jdbc:mysql://localhost:3306/poo";//server el cual establece la 
 
 
