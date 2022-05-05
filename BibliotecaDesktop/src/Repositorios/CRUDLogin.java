@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  * @author amgoo
  */
 public class CRUDLogin {
-    private final String SqlUsuarioAcceso = "SELECT idsocio,nombre,usuario,password,nivel FROM socio where usuario=? and password=?;";
+    private final String SqlUsuarioAcceso = "SELECT idsocio,upper(nombre) as nombre,usuario,password,nivel FROM socio where usuario=? and password=?;";
     
     public Usuario usuarioAcceso(String Usuario, String Password){
         Connection conn =null;

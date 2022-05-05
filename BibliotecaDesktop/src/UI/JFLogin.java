@@ -9,6 +9,7 @@ import Utilidades.Conexion;
 import Repositorios.CRUDLogin;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import Utilidades.ParametrosGlobales;
 /**
  *
  * @author amgoo
@@ -45,8 +46,8 @@ public class JFLogin extends javax.swing.JFrame {
         jPasswordField1 = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         background = new javax.swing.JLabel();
-        jBExit = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -80,18 +81,16 @@ public class JFLogin extends javax.swing.JFrame {
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/LoginBack.png"))); // NOI18N
         jPanel2.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, -1));
 
-        jBExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/cancellog.png"))); // NOI18N
-        jBExit.setBorder(null);
-        jBExit.setBorderPainted(false);
-        jBExit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBExitActionPerformed(evt);
-            }
-        });
-
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Login");
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/close-app.png"))); // NOI18N
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -103,7 +102,7 @@ public class JFLogin extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBExit))
+                        .addComponent(jLabel4))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -114,8 +113,8 @@ public class JFLogin extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBExit))
-                .addGap(0, 3, Short.MAX_VALUE)
+                    .addComponent(jLabel4))
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -133,10 +132,6 @@ public class JFLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExitActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_jBExitActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         char[] pass = jPasswordField1.getPassword();
         String spass = new String(pass);
@@ -145,11 +140,17 @@ public class JFLogin extends javax.swing.JFrame {
         System.out.println(Datos);
         if (Datos.Nivel==1){
             JOptionPane.showMessageDialog(null, "Ingreso exitoso" +"\n" + "Bienvenido " + Datos.Nombre, "", JOptionPane.INFORMATION_MESSAGE);
+            ParametrosGlobales.GlobalUser = Datos.Nombre;
+            ParametrosGlobales.GlobalAccesNivel = Datos.Nivel;
             JFPrincipal Principal=new JFPrincipal();
             Principal.setVisible(true);
             dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_jLabel4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -195,11 +196,11 @@ public class JFLogin extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
-    private javax.swing.JButton jBExit;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField jPasswordField1;
