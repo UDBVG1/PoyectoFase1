@@ -18,12 +18,11 @@ public class JPMetodos extends javax.swing.JPanel {
      */
     public JPMetodos() {
         initComponents();
-        if (ParametrosGlobales.UsuariosPanelAgregar){
-            System.out.println("Mostrar Agregar Layout");
-        }
-        if(ParametrosGlobales.UsuariosPanelModificar){
-            System.out.println("Mostrar Modificar Layout");
-        }
+        //if ParametrosGlobales.UsuariosPanelAgregar
+        jButton1.setVisible(false);
+        jButton2.setVisible(false);
+        jButton3.setVisible(false);
+        showOptionPanelMetodos();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -34,19 +33,52 @@ public class JPMetodos extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+
+        jButton1.setText("Metodo1");
+
+        jButton2.setText("Metodo2");
+
+        jButton3.setText("Metodo3");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(479, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addGap(18, 18, 18)
+                .addComponent(jButton3)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 340, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(306, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    private void showOptionPanelMetodos(){
+        if (ParametrosGlobales.UsuariosPanelAgregar){
+            System.out.println("Mostrar Agregar Layout");
+        }
+        if(ParametrosGlobales.UsuariosPanelModificar){
+            System.out.println("Mostrar Modificar Layout");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     // End of variables declaration//GEN-END:variables
 }

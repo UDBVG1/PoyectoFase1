@@ -5,6 +5,7 @@
  */
 package UI;
 import Utilidades.ParametrosGlobales;
+import java.awt.BorderLayout;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JPanel;
@@ -30,16 +31,23 @@ public class JFPrincipal extends javax.swing.JFrame {
         jDateLogin.setText(now.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         jGlobalUsuario.setText(ParametrosGlobales.GlobalUser);
         jPMenuUsuario.setVisible(false);
+        jPSetPanel.setVisible(false);
         //jMenuOptionMT.setVisible(false);
     }
     
     private void setLocationWindow(){
         setLocationRelativeTo(null);
+    } 
+    private void ShowOption(JPanel p){
+        p.setSize(750, 340);
+        p.setLocation(0,0);
+        jPSetPanel.setVisible(true);
+        jPSetPanel.add(p, BorderLayout.CENTER);
+        jPSetPanel.removeAll();
+        jPSetPanel.add(p);
+        jPSetPanel.revalidate();
+        jPSetPanel.repaint();
     }
-    
-    private void mostrarTabbedPanel(String titulo,JPanel MostrarPanel, int vp){
-        
-    }  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,6 +57,11 @@ public class JFPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPMenuUsuario = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         tituloPrincipal = new javax.swing.JLabel();
         cerrarPrincipal1 = new javax.swing.JLabel();
@@ -62,16 +75,36 @@ public class JFPrincipal extends javax.swing.JFrame {
         jLUsuariosIcon = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPMostrar = new javax.swing.JPanel();
-        jPMenuUsuario = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jPSetPanel = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jGlobalUsuario = new javax.swing.JLabel();
         jDateLogin = new javax.swing.JLabel();
+
+        jPMenuUsuario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/AgregarUsuario.png"))); // NOI18N
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
+        jPMenuUsuario.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/EditarUsuario.png"))); // NOI18N
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
+        jPMenuUsuario.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(68, 11, -1, -1));
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/EliminarUsuario.png"))); // NOI18N
+        jPMenuUsuario.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 11, -1, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/BackUsuarioMenu.png"))); // NOI18N
+        jPMenuUsuario.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -174,11 +207,12 @@ public class JFPrincipal extends javax.swing.JFrame {
         jMenuPanelAdLayout.setVerticalGroup(
             jMenuPanelAdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jMenuPanelAdLayout.createSequentialGroup()
-                .addGroup(jMenuPanelAdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jMenuOptionAD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jMenuOptionMT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jMenuOptionEX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                .addGroup(jMenuPanelAdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addGroup(jMenuPanelAdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jMenuOptionAD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jMenuOptionMT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jMenuOptionEX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -200,21 +234,18 @@ public class JFPrincipal extends javax.swing.JFrame {
 
         jPMostrar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPMenuUsuario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        javax.swing.GroupLayout jPSetPanelLayout = new javax.swing.GroupLayout(jPSetPanel);
+        jPSetPanel.setLayout(jPSetPanelLayout);
+        jPSetPanelLayout.setHorizontalGroup(
+            jPSetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 750, Short.MAX_VALUE)
+        );
+        jPSetPanelLayout.setVerticalGroup(
+            jPSetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 340, Short.MAX_VALUE)
+        );
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/AgregarUsuario.png"))); // NOI18N
-        jPMenuUsuario.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/EditarUsuario.png"))); // NOI18N
-        jPMenuUsuario.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(68, 11, -1, -1));
-
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/EliminarUsuario.png"))); // NOI18N
-        jPMenuUsuario.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 11, -1, -1));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/BackUsuarioMenu.png"))); // NOI18N
-        jPMenuUsuario.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        jPMostrar.add(jPMenuUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 180, 60));
+        jPMostrar.add(jPSetPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 340));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/PanelBackprincipal.png"))); // NOI18N
         jPMostrar.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 340));
@@ -338,6 +369,9 @@ public class JFPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuOptionMTActionPerformed
 
     private void jLUsuariosIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLUsuariosIconMouseClicked
+        if (jPSetPanel.isVisible()){
+            jPSetPanel.setVisible(false);
+        }
         if (jPMenuUsuario.isVisible()){
             jPMenuUsuario.setVisible(false);
         }
@@ -345,6 +379,22 @@ public class JFPrincipal extends javax.swing.JFrame {
             jPMenuUsuario.setVisible(true);
         }
     }//GEN-LAST:event_jLUsuariosIconMouseClicked
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        JPMetodos OpcionUsuario1 = new JPMetodos();
+        jPMenuUsuario.setVisible(false);
+        ShowOption(OpcionUsuario1);
+        ParametrosGlobales.UsuariosPanelAgregar = true;
+        ParametrosGlobales.UsuariosPanelModificar = false;
+    }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        JPMetodos OpcionUsuario1 = new JPMetodos();
+        jPMenuUsuario.setVisible(false);
+        ShowOption(OpcionUsuario1);
+        ParametrosGlobales.UsuariosPanelAgregar = false;
+        ParametrosGlobales.UsuariosPanelModificar = true;
+    }//GEN-LAST:event_jLabel8MouseClicked
     
     /**
      * @param args the command line arguments
@@ -402,6 +452,7 @@ public class JFPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jMostrarPanel;
     private javax.swing.JPanel jPMenuUsuario;
     private javax.swing.JPanel jPMostrar;
+    private javax.swing.JPanel jPSetPanel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel tituloPrincipal;
