@@ -7,6 +7,7 @@ package UI;
 import Utilidades.ParametrosGlobales;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import javax.swing.JPanel;
 /**
  *
  * @author amgoo
@@ -19,19 +20,26 @@ public class JFPrincipal extends javax.swing.JFrame {
     
     int LX;
     int LY;
+    int vp0=1;
+    int vp1=1;
+    int vp2=1;
     LocalDateTime now = LocalDateTime.now();
     public JFPrincipal() {
         initComponents();
         setLocationWindow();
         jDateLogin.setText(now.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         jGlobalUsuario.setText(ParametrosGlobales.GlobalUser);
-        //jMenuOptionAD.setVisible(false);
+        jPMenuUsuario.setVisible(false);
         //jMenuOptionMT.setVisible(false);
     }
     
     private void setLocationWindow(){
         setLocationRelativeTo(null);
     }
+    
+    private void mostrarTabbedPanel(String titulo,JPanel MostrarPanel, int vp){
+        
+    }  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,11 +56,18 @@ public class JFPrincipal extends javax.swing.JFrame {
         jMenuPanelAd = new javax.swing.JPanel();
         jMenuOptionAD = new javax.swing.JComboBox<>();
         jMenuOptionMT = new javax.swing.JComboBox<>();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jMenuOptionEX = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jMostrarPanel = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jLUsuariosIcon = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jPMostrar = new javax.swing.JPanel();
+        jPMenuUsuario = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jGlobalUsuario = new javax.swing.JLabel();
@@ -113,18 +128,32 @@ public class JFPrincipal extends javax.swing.JFrame {
         jMenuOptionAD.setBackground(new java.awt.Color(255, 0, 0));
         jMenuOptionAD.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jMenuOptionAD.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Usuarios", "Agregar Usuario", "Modificar Usuario", "Borrar Usuario" }));
-        jMenuOptionAD.setBorder(null);
-        jMenuOptionAD.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jMenuOptionAD.setPreferredSize(new java.awt.Dimension(130, 21));
+        jMenuOptionAD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuOptionADActionPerformed(evt);
+            }
+        });
 
         jMenuOptionMT.setBackground(new java.awt.Color(255, 0, 0));
         jMenuOptionMT.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jMenuOptionMT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Materiales", "Agregar Material", "Modificar Material", "Borrar Material", "Buscar Material" }));
+        jMenuOptionMT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuOptionMTActionPerformed(evt);
+            }
+        });
 
-        jComboBox1.setBackground(new java.awt.Color(255, 0, 0));
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Existencias", "Ajustar Existencia", "Listar Existencias" }));
+        jMenuOptionEX.setBackground(new java.awt.Color(255, 0, 0));
+        jMenuOptionEX.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jMenuOptionEX.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Existencias", "Ajustar Existencia", "Listar Existencias" }));
+        jMenuOptionEX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuOptionEXActionPerformed(evt);
+            }
+        });
 
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/HomeIcon.png"))); // NOI18N
 
         javax.swing.GroupLayout jMenuPanelAdLayout = new javax.swing.GroupLayout(jMenuPanelAd);
@@ -132,14 +161,14 @@ public class JFPrincipal extends javax.swing.JFrame {
         jMenuPanelAdLayout.setHorizontalGroup(
             jMenuPanelAdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jMenuPanelAdLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5)
-                .addGap(18, 18, 18)
-                .addComponent(jMenuOptionAD, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jMenuOptionAD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addComponent(jMenuOptionMT, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jMenuOptionEX, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jMenuPanelAdLayout.setVerticalGroup(
@@ -148,21 +177,49 @@ public class JFPrincipal extends javax.swing.JFrame {
                 .addGroup(jMenuPanelAdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jMenuOptionAD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jMenuOptionMT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jMenuOptionEX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jMostrarPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/UsuariosIcon.png"))); // NOI18N
-        jMostrarPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, -1));
+        jLUsuariosIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/UsuariosIcon.png"))); // NOI18N
+        jLUsuariosIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLUsuariosIconMouseClicked(evt);
+            }
+        });
+        jMostrarPanel.add(jLUsuariosIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(204, 204, 204));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Usuarios");
-        jMostrarPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 70, -1));
+        jMostrarPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 70, -1));
+
+        jPMostrar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPMenuUsuario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/AgregarUsuario.png"))); // NOI18N
+        jPMenuUsuario.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/EditarUsuario.png"))); // NOI18N
+        jPMenuUsuario.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(68, 11, -1, -1));
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/EliminarUsuario.png"))); // NOI18N
+        jPMenuUsuario.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 11, -1, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/BackUsuarioMenu.png"))); // NOI18N
+        jPMenuUsuario.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jPMostrar.add(jPMenuUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 180, 60));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/PanelBackprincipal.png"))); // NOI18N
+        jPMostrar.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 340));
+
+        jMostrarPanel.add(jPMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 750, 340));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/Backprincipal.png"))); // NOI18N
@@ -190,9 +247,9 @@ public class JFPrincipal extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jGlobalUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jDateLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jDateLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jGlobalUsuario)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -234,6 +291,61 @@ public class JFPrincipal extends javax.swing.JFrame {
         this.setLocation(evt.getXOnScreen()-LX, evt.getYOnScreen()-LY);
     }//GEN-LAST:event_tituloPrincipalMouseDragged
 
+    private void jMenuOptionADActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuOptionADActionPerformed
+//        System.out.println(evt.getID());
+//        if (evt.getID() == 1001) {
+//            JPMetodos Metodos = new JPMetodos();
+//            switch (jMenuOptionAD.getSelectedItem().toString()) {
+//                case "Agregar Usuario":
+//                    ParametrosGlobales.UsuariosPanelAgregar = true;
+//                    ParametrosGlobales.UsuariosPanelModificar = false;
+//
+//                    if (vp0 == 1) {
+//                        jTPMostrar.addTab("Usuarios", Metodos);
+//                        jTPMostrar.setSelectedComponent(Metodos);
+//
+//                    } else if (!"Usuarios".equals(jTPMostrar.getTitleAt(jTPMostrar.getSelectedIndex()))) {
+//                        jTPMostrar.setSelectedComponent(Metodos);
+//                    }
+//                    vp0 = 0;
+//                    break;
+//                case "Modificar Usuario":
+//                    ParametrosGlobales.UsuariosPanelAgregar = false;
+//                    ParametrosGlobales.UsuariosPanelModificar = true;
+//
+//                    if (vp0 == 1) {
+//                        jTPMostrar.addTab("Usuarios", Metodos);
+//                        jTPMostrar.setSelectedComponent(Metodos);
+//
+//                    } else if (!"Usuarios".equals(jTPMostrar.getTitleAt(jTPMostrar.getSelectedIndex()))) {
+//                        jTPMostrar.setSelectedComponent(Metodos);
+//                    }
+//                    vp0 = 0;
+//                    break;
+//                default:
+//                    ParametrosGlobales.UsuariosPanelAgregar = false;
+//                    ParametrosGlobales.UsuariosPanelModificar = false;
+//            }
+//        }
+    }//GEN-LAST:event_jMenuOptionADActionPerformed
+
+    private void jMenuOptionEXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuOptionEXActionPerformed
+        System.out.println(jMenuOptionEX.getSelectedItem().toString());
+    }//GEN-LAST:event_jMenuOptionEXActionPerformed
+
+    private void jMenuOptionMTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuOptionMTActionPerformed
+        System.out.println(jMenuOptionMT.getSelectedItem().toString());
+    }//GEN-LAST:event_jMenuOptionMTActionPerformed
+
+    private void jLUsuariosIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLUsuariosIconMouseClicked
+        if (jPMenuUsuario.isVisible()){
+            jPMenuUsuario.setVisible(false);
+        }
+        else{
+            jPMenuUsuario.setVisible(true);
+        }
+    }//GEN-LAST:event_jLUsuariosIconMouseClicked
+    
     /**
      * @param args the command line arguments
      */
@@ -271,18 +383,25 @@ public class JFPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel cerrarPrincipal1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jDateLogin;
     private javax.swing.JLabel jGlobalUsuario;
+    private javax.swing.JLabel jLUsuariosIcon;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JComboBox<String> jMenuOptionAD;
+    private javax.swing.JComboBox<String> jMenuOptionEX;
     private javax.swing.JComboBox<String> jMenuOptionMT;
     private javax.swing.JPanel jMenuPanelAd;
     private javax.swing.JPanel jMostrarPanel;
+    private javax.swing.JPanel jPMenuUsuario;
+    private javax.swing.JPanel jPMostrar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel tituloPrincipal;

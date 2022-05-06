@@ -12,7 +12,9 @@ package Utilidades;
 public class ParametrosGlobales {
     //Aqui se pondran todos los parametros globales necesarios
     //para usar en la aplicaion en general
-    public static boolean Administrador;
+    public static boolean UsuariosPanelAgregar;
+    public static boolean UsuariosPanelModificar;
+    
     
     //Usuario Global
     public static String GlobalUser;
