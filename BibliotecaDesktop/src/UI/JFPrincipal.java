@@ -30,7 +30,7 @@ public class JFPrincipal extends javax.swing.JFrame {
         setLocationWindow();
         jDateLogin.setText(now.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         jGlobalUsuario.setText(ParametrosGlobales.GlobalUser);
-        jPMenuUsuario.setVisible(false);
+        jTBUsuario.setVisible(false);
         jPSetPanel.setVisible(false);
         //jMenuOptionMT.setVisible(false);
     }
@@ -57,54 +57,33 @@ public class JFPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPMenuUsuario = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         tituloPrincipal = new javax.swing.JLabel();
         cerrarPrincipal1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jMenuPanelAd = new javax.swing.JPanel();
-        jMenuOptionAD = new javax.swing.JComboBox<>();
-        jMenuOptionMT = new javax.swing.JComboBox<>();
-        jMenuOptionEX = new javax.swing.JComboBox<>();
+        jLIconoHome = new javax.swing.JLabel();
+        jTBUsuario = new javax.swing.JToolBar();
+        jLIconoAgregarU = new javax.swing.JLabel();
+        jLIconoModificarU = new javax.swing.JLabel();
+        jLIconoEliminarU = new javax.swing.JLabel();
+        jTBMaterial = new javax.swing.JToolBar();
+        jLIconoAgregarM = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jMostrarPanel = new javax.swing.JPanel();
         jLUsuariosIcon = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPMostrar = new javax.swing.JPanel();
         jPSetPanel = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        jLMaterialIcon = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jGlobalUsuario = new javax.swing.JLabel();
         jDateLogin = new javax.swing.JLabel();
-
-        jPMenuUsuario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/AgregarUsuario.png"))); // NOI18N
-        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel7MouseClicked(evt);
-            }
-        });
-        jPMenuUsuario.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/EditarUsuario.png"))); // NOI18N
-        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel8MouseClicked(evt);
-            }
-        });
-        jPMenuUsuario.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(68, 11, -1, -1));
-
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/EliminarUsuario.png"))); // NOI18N
-        jPMenuUsuario.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 11, -1, -1));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/BackUsuarioMenu.png"))); // NOI18N
-        jPMenuUsuario.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -156,38 +135,61 @@ public class JFPrincipal extends javax.swing.JFrame {
                         .addComponent(tituloPrincipal, javax.swing.GroupLayout.Alignment.TRAILING))))
         );
 
-        jMenuPanelAd.setBackground(new java.awt.Color(153, 0, 0));
+        jMenuPanelAd.setBackground(new java.awt.Color(133, 2, 2));
 
-        jMenuOptionAD.setBackground(new java.awt.Color(255, 0, 0));
-        jMenuOptionAD.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jMenuOptionAD.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Usuarios", "Agregar Usuario", "Modificar Usuario", "Borrar Usuario" }));
-        jMenuOptionAD.setPreferredSize(new java.awt.Dimension(130, 21));
-        jMenuOptionAD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuOptionADActionPerformed(evt);
+        jLIconoHome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLIconoHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/HomeIcon.png"))); // NOI18N
+
+        jTBUsuario.setFloatable(false);
+        jTBUsuario.setRollover(true);
+
+        jLIconoAgregarU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/AgregarUsuario.png"))); // NOI18N
+        jLIconoAgregarU.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLIconoAgregarUMouseClicked(evt);
             }
         });
+        jTBUsuario.add(jLIconoAgregarU);
+        jLIconoAgregarU.getAccessibleContext().setAccessibleName("Agregar");
+        jLIconoAgregarU.getAccessibleContext().setAccessibleDescription("Agregar Material");
 
-        jMenuOptionMT.setBackground(new java.awt.Color(255, 0, 0));
-        jMenuOptionMT.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jMenuOptionMT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Materiales", "Agregar Material", "Modificar Material", "Borrar Material", "Buscar Material" }));
-        jMenuOptionMT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuOptionMTActionPerformed(evt);
+        jLIconoModificarU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/EditarUsuario.png"))); // NOI18N
+        jLIconoModificarU.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLIconoModificarUMouseClicked(evt);
             }
         });
+        jTBUsuario.add(jLIconoModificarU);
+        jLIconoModificarU.getAccessibleContext().setAccessibleName("Editar");
+        jLIconoModificarU.getAccessibleContext().setAccessibleDescription("Editar Usuario");
 
-        jMenuOptionEX.setBackground(new java.awt.Color(255, 0, 0));
-        jMenuOptionEX.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jMenuOptionEX.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Existencias", "Ajustar Existencia", "Listar Existencias" }));
-        jMenuOptionEX.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuOptionEXActionPerformed(evt);
-            }
-        });
+        jLIconoEliminarU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/EliminarUsuario.png"))); // NOI18N
+        jTBUsuario.add(jLIconoEliminarU);
+        jLIconoEliminarU.getAccessibleContext().setAccessibleName("Eliminar");
+        jLIconoEliminarU.getAccessibleContext().setAccessibleDescription("Eliminar Usuario");
 
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/HomeIcon.png"))); // NOI18N
+        jTBMaterial.setFloatable(false);
+        jTBMaterial.setRollover(true);
+
+        jLIconoAgregarM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/AgregarMaterial.png"))); // NOI18N
+        jTBMaterial.add(jLIconoAgregarM);
+        jLIconoAgregarM.getAccessibleContext().setAccessibleName("Agregar");
+        jLIconoAgregarM.getAccessibleContext().setAccessibleDescription("Agregar Material");
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/EditarMaterial.png"))); // NOI18N
+        jTBMaterial.add(jLabel5);
+        jLabel5.getAccessibleContext().setAccessibleName("Editar");
+        jLabel5.getAccessibleContext().setAccessibleDescription("Editar Material");
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/EliminarMaterial.png"))); // NOI18N
+        jTBMaterial.add(jLabel7);
+        jLabel7.getAccessibleContext().setAccessibleName("Eliminar");
+        jLabel7.getAccessibleContext().setAccessibleDescription("Eliminar Material");
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/ListarMaterial.png"))); // NOI18N
+        jTBMaterial.add(jLabel8);
+        jLabel8.getAccessibleContext().setAccessibleName("Listar Disp.");
+        jLabel8.getAccessibleContext().setAccessibleDescription("Listar Material");
 
         javax.swing.GroupLayout jMenuPanelAdLayout = new javax.swing.GroupLayout(jMenuPanelAd);
         jMenuPanelAd.setLayout(jMenuPanelAdLayout);
@@ -195,44 +197,40 @@ public class JFPrincipal extends javax.swing.JFrame {
             jMenuPanelAdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jMenuPanelAdLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLIconoHome, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jMenuOptionAD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(jMenuOptionMT, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jMenuOptionEX, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTBUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTBMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jMenuPanelAdLayout.setVerticalGroup(
             jMenuPanelAdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jMenuPanelAdLayout.createSequentialGroup()
-                .addGroup(jMenuPanelAdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addGroup(jMenuPanelAdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jMenuOptionAD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jMenuOptionMT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jMenuOptionEX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jTBUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLIconoHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jTBMaterial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jMostrarPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLUsuariosIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLUsuariosIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/UsuariosIcon.png"))); // NOI18N
         jLUsuariosIcon.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLUsuariosIconMouseClicked(evt);
             }
         });
-        jMostrarPanel.add(jLUsuariosIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+        jMostrarPanel.add(jLUsuariosIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 60, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(204, 204, 204));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Usuarios");
-        jMostrarPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 70, -1));
+        jMostrarPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 60, -1));
 
         jPMostrar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPSetPanel.setBackground(new java.awt.Color(233, 233, 233));
 
         javax.swing.GroupLayout jPSetPanelLayout = new javax.swing.GroupLayout(jPSetPanel);
         jPSetPanel.setLayout(jPSetPanelLayout);
@@ -251,6 +249,20 @@ public class JFPrincipal extends javax.swing.JFrame {
         jPMostrar.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 340));
 
         jMostrarPanel.add(jPMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 750, 340));
+
+        jLMaterialIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLMaterialIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/IconoMateriales.png"))); // NOI18N
+        jLMaterialIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLMaterialIconMouseClicked(evt);
+            }
+        });
+        jMostrarPanel.add(jLMaterialIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 60, -1));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel2.setText("Materiales");
+        jMostrarPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/Backprincipal.png"))); // NOI18N
@@ -322,79 +334,37 @@ public class JFPrincipal extends javax.swing.JFrame {
         this.setLocation(evt.getXOnScreen()-LX, evt.getYOnScreen()-LY);
     }//GEN-LAST:event_tituloPrincipalMouseDragged
 
-    private void jMenuOptionADActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuOptionADActionPerformed
-//        System.out.println(evt.getID());
-//        if (evt.getID() == 1001) {
-//            JPMetodos Metodos = new JPMetodos();
-//            switch (jMenuOptionAD.getSelectedItem().toString()) {
-//                case "Agregar Usuario":
-//                    ParametrosGlobales.UsuariosPanelAgregar = true;
-//                    ParametrosGlobales.UsuariosPanelModificar = false;
-//
-//                    if (vp0 == 1) {
-//                        jTPMostrar.addTab("Usuarios", Metodos);
-//                        jTPMostrar.setSelectedComponent(Metodos);
-//
-//                    } else if (!"Usuarios".equals(jTPMostrar.getTitleAt(jTPMostrar.getSelectedIndex()))) {
-//                        jTPMostrar.setSelectedComponent(Metodos);
-//                    }
-//                    vp0 = 0;
-//                    break;
-//                case "Modificar Usuario":
-//                    ParametrosGlobales.UsuariosPanelAgregar = false;
-//                    ParametrosGlobales.UsuariosPanelModificar = true;
-//
-//                    if (vp0 == 1) {
-//                        jTPMostrar.addTab("Usuarios", Metodos);
-//                        jTPMostrar.setSelectedComponent(Metodos);
-//
-//                    } else if (!"Usuarios".equals(jTPMostrar.getTitleAt(jTPMostrar.getSelectedIndex()))) {
-//                        jTPMostrar.setSelectedComponent(Metodos);
-//                    }
-//                    vp0 = 0;
-//                    break;
-//                default:
-//                    ParametrosGlobales.UsuariosPanelAgregar = false;
-//                    ParametrosGlobales.UsuariosPanelModificar = false;
-//            }
-//        }
-    }//GEN-LAST:event_jMenuOptionADActionPerformed
-
-    private void jMenuOptionEXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuOptionEXActionPerformed
-        System.out.println(jMenuOptionEX.getSelectedItem().toString());
-    }//GEN-LAST:event_jMenuOptionEXActionPerformed
-
-    private void jMenuOptionMTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuOptionMTActionPerformed
-        System.out.println(jMenuOptionMT.getSelectedItem().toString());
-    }//GEN-LAST:event_jMenuOptionMTActionPerformed
-
     private void jLUsuariosIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLUsuariosIconMouseClicked
         if (jPSetPanel.isVisible()){
             jPSetPanel.setVisible(false);
         }
-        if (jPMenuUsuario.isVisible()){
-            jPMenuUsuario.setVisible(false);
+        if (jTBUsuario.isVisible()){
+            jTBUsuario.setVisible(false);
         }
         else{
-            jPMenuUsuario.setVisible(true);
+            jTBUsuario.setVisible(true);
         }
     }//GEN-LAST:event_jLUsuariosIconMouseClicked
 
-    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+    private void jLIconoAgregarUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLIconoAgregarUMouseClicked
         JPMetodos OpcionUsuario1 = new JPMetodos();
-        jPMenuUsuario.setVisible(false);
+        jTBUsuario.setVisible(false);
         ShowOption(OpcionUsuario1);
         ParametrosGlobales.UsuariosPanelAgregar = true;
         ParametrosGlobales.UsuariosPanelModificar = false;
-    }//GEN-LAST:event_jLabel7MouseClicked
+    }//GEN-LAST:event_jLIconoAgregarUMouseClicked
 
-    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+    private void jLIconoModificarUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLIconoModificarUMouseClicked
         JPMetodos OpcionUsuario1 = new JPMetodos();
-        jPMenuUsuario.setVisible(false);
+        jTBUsuario.setVisible(false);
         ShowOption(OpcionUsuario1);
         ParametrosGlobales.UsuariosPanelAgregar = false;
         ParametrosGlobales.UsuariosPanelModificar = true;
-    }//GEN-LAST:event_jLabel8MouseClicked
+    }//GEN-LAST:event_jLIconoModificarUMouseClicked
+
+    private void jLMaterialIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLMaterialIconMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLMaterialIconMouseClicked
     
     /**
      * @param args the command line arguments
@@ -435,6 +405,12 @@ public class JFPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel cerrarPrincipal1;
     private javax.swing.JLabel jDateLogin;
     private javax.swing.JLabel jGlobalUsuario;
+    private javax.swing.JLabel jLIconoAgregarM;
+    private javax.swing.JLabel jLIconoAgregarU;
+    private javax.swing.JLabel jLIconoEliminarU;
+    private javax.swing.JLabel jLIconoHome;
+    private javax.swing.JLabel jLIconoModificarU;
+    private javax.swing.JLabel jLMaterialIcon;
     private javax.swing.JLabel jLUsuariosIcon;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -444,17 +420,14 @@ public class JFPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JComboBox<String> jMenuOptionAD;
-    private javax.swing.JComboBox<String> jMenuOptionEX;
-    private javax.swing.JComboBox<String> jMenuOptionMT;
     private javax.swing.JPanel jMenuPanelAd;
     private javax.swing.JPanel jMostrarPanel;
-    private javax.swing.JPanel jPMenuUsuario;
     private javax.swing.JPanel jPMostrar;
     private javax.swing.JPanel jPSetPanel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JToolBar jTBMaterial;
+    private javax.swing.JToolBar jTBUsuario;
     private javax.swing.JLabel tituloPrincipal;
     // End of variables declaration//GEN-END:variables
 }
