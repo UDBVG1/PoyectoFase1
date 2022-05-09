@@ -9,15 +9,19 @@ import Modelos.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author amgoo
  */
-public class CRUDLogin {
+public class UsuariosCRUD {
     private final String SqlUsuarioAcceso = "SELECT idsocio,upper(nombre) as nombre,usuario,password,nivel FROM socio where usuario=? and password=?;";
-    
+    private final String SqlUsuarios = "SELECT idsocio,nombre,usuario, case when nivel=1 then 'Administrador'\n" +
+                                        "when nivel=2 then 'Bibliotecario' \n" +
+                                        "when nivel=3 then 'Usuario' end as nivel FROM socio;";
     public Usuario usuarioAcceso(String Usuario, String Password){
         Connection conn =null;
         PreparedStatement stmt =null;
@@ -45,6 +49,38 @@ public class CRUDLogin {
             Conexion.closeResulset(rs);
         }
         return obUsuario;
+    }
+    public DefaultTableModel usuariosLista(){
+        DefaultTableModel dtm = new DefaultTableModel();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+       
+        try {
+            conn = Conexion.getConexion();
+            stmt = conn.prepareStatement(SqlUsuarios);
+            rs = stmt.executeQuery();
+            ResultSetMetaData meta = rs.getMetaData();
+            int numberOfColumns = meta.getColumnCount();
+            for (int i = 1; i<= numberOfColumns; i++) {
+            dtm.addColumn(meta.getColumnLabel(i));
+            }
+            while (rs.next()) {
+                    
+                    Object[] fila = new Object[numberOfColumns];
+                    for (int i = 0; i<numberOfColumns; i++) {
+                    fila[i]=rs.getObject(i+1);
+                    }
+                    dtm.addRow(fila);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Conexion.closeStatement(stmt);
+            Conexion.closeConnection(conn);
+            Conexion.closeResulset(rs);
+        }
+        return dtm;
     }
     
 }

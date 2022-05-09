@@ -19,4 +19,5 @@ public class ParametrosGlobales {
     //Usuario Global
     public static String GlobalUser;
     public static int GlobalAccesNivel;
+
 }
