@@ -28,7 +28,7 @@ public class JFPrincipal extends javax.swing.JFrame {
     public JFPrincipal() {
         initComponents();
         setLocationWindow();
-        jDateLogin.setText(now.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        jDateLogin.setText(now.format(DateTimeFormatter.ofPattern("yy")));
         jGlobalUsuario.setText(ParametrosGlobales.GlobalUser);
         jPSetPanel.setVisible(false);
         //jMenuOptionMT.setVisible(false);
@@ -38,14 +38,18 @@ public class JFPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     } 
     private void ShowOption(JPanel p){
-        p.setSize(750, 340);
-        p.setLocation(0,0);
-        jPSetPanel.setVisible(true);
-        jPSetPanel.add(p, BorderLayout.CENTER);
-        jPSetPanel.removeAll();
-        jPSetPanel.add(p);
-        jPSetPanel.revalidate();
-        jPSetPanel.repaint();
+        try{
+            p.setSize(750, 340);
+            p.setLocation(0,0);
+            jPSetPanel.setVisible(true);
+            jPSetPanel.add(p, BorderLayout.CENTER);
+            jPSetPanel.removeAll();
+            jPSetPanel.add(p);
+            jPSetPanel.revalidate();
+            jPSetPanel.repaint();
+        }catch(Exception e){
+            System.out.println(e);            
+        } 
     }
     /**
      * This method is called from within the constructor to initialize the form.
