@@ -114,9 +114,9 @@ public class JFLogin extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -141,14 +141,15 @@ public class JFLogin extends javax.swing.JFrame {
         System.out.println("Usuario Ingresado " + jTFUsuario.getText() + " "+ spass);
         Usuario Datos = login.usuarioAcceso(jTFUsuario.getText(), spass);
         System.out.println(Datos);
-        if (Datos.Nivel==1){
-            JOptionPane.showMessageDialog(null, "Ingreso exitoso" +"\n" + "Bienvenido " + Datos.Nombre, "", JOptionPane.INFORMATION_MESSAGE);
-            ParametrosGlobales.GlobalUser = Datos.Nombre;
-            ParametrosGlobales.GlobalAccesNivel = Datos.Nivel;
-            JFPrincipal Principal=new JFPrincipal();
-            Principal.setVisible(true);
-            dispose();
-        }
+        JOptionPane.showMessageDialog(null, "Ingreso exitoso" +"\n" + "Bienvenido " + Datos.Nombre, "", JOptionPane.INFORMATION_MESSAGE);
+        ParametrosGlobales.GlobalAccesId = Datos.getIdUs();
+        ParametrosGlobales.GlobalUser = Datos.getNombre();
+        ParametrosGlobales.GlobalAccesNivel = Datos.getNivel();
+        JFPrincipal Principal=new JFPrincipal();
+        Principal.setVisible(true);
+        dispose();
+                
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

@@ -22,6 +22,7 @@ public class UsuariosCRUD {
     private final String SqlUsuarioAcceso = "SELECT idusuario,nombre,usuario,password,nivel FROM usuario where usuario=? and password=?;";
     private final String SqlUsuarios = "SELECT idusuario,nombre,usuario, nivel, (select descripcion from config where estado='nivel usuario' and valor=nivel) as nivel_nombre FROM usuario;";
     private final String SqlComboNivel="select descripcion from config where estado='nivel usuario';";
+    private final String SqlUsuario="SELECT idusuario,nombre,usuario,password,nivel FROM usuario where idusuario=?";
     public Usuario usuarioAcceso(String Usuario, String Password){
         Connection conn =null;
         PreparedStatement stmt =null;
@@ -106,5 +107,31 @@ public class UsuariosCRUD {
         }
         return dtm;
     }
-    
+    public Usuario usuarioData(int id){
+        Usuario data = new Usuario();
+        Connection conn =null;
+        PreparedStatement stmt =null;
+        ResultSet rs=null;
+        try{
+            conn = Conexion.getConexion();
+            stmt = conn.prepareStatement(SqlUsuario);
+            int index=1;
+            stmt.setInt(index, id);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                data.setIdUs(Integer.parseInt(rs.getObject(1).toString()));
+                data.setNombre(rs.getObject(2).toString());
+                data.setUsuario(rs.getObject(3).toString());
+                data.setClave(rs.getObject(4).toString());
+                data.setNivel(Integer.parseInt(rs.getObject(5).toString()));
+            }
+        }catch(SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al Intentar Ingresar", "Error", JOptionPane.INFORMATION_MESSAGE); 
+        } finally {
+            Conexion.closeConnection(conn);
+            Conexion.closeStatement(stmt);
+            Conexion.closeResulset(rs);
+        }
+        return data;
+    }
 }
