@@ -6,7 +6,7 @@
 package UI;
 
 import Utilidades.ParametrosGlobales;
-import Repositorios.UsuariosCRUD;
+import Modelos.UsuariosCRUD;
 import java.awt.List;
 import java.util.ArrayList;
 import javax.swing.ComboBoxModel;

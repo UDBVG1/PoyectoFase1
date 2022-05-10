@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 package UI;
-import Modelos.Usuario;
+import Entidad.Usuario;
 import Utilidades.Conexion;
-import Repositorios.UsuariosCRUD;
+import Modelos.UsuariosCRUD;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import Utilidades.ParametrosGlobales;

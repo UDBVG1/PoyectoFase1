@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Repositorios;
+package Modelos;
 import Utilidades.Conexion;
-import Modelos.Usuario;
+import Entidad.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
