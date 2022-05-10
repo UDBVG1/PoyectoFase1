@@ -7,6 +7,9 @@ package UI;
 
 import Utilidades.ParametrosGlobales;
 import Repositorios.UsuariosCRUD;
+import java.awt.List;
+import java.util.ArrayList;
+import javax.swing.ComboBoxModel;
 
 /**
  *
@@ -17,10 +20,13 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
     /**
      * Creates new form JPMetodos
      */
+    private ComboBoxModel<String> modelbox;
     private final UsuariosCRUD data = new UsuariosCRUD();
     public JPUsuarioPanel() {
         initComponents();
-        jTUsuarios.setModel(data.usuariosLista()); 
+        jTUsuarios.setModel(data.usuariosLista());
+        metodoCombobox();
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,12 +37,24 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPMostrar = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jTFNombre = new javax.swing.JTextField();
+        jTFUsuario = new javax.swing.JTextField();
+        jTFCantPresta = new javax.swing.JTextField();
+        jCBNivel = new javax.swing.JComboBox<>();
+        jPFContrasena = new javax.swing.JPasswordField();
+        jPFContrasenaConf = new javax.swing.JPasswordField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jTBUsuario = new javax.swing.JToolBar();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        jBAgregar = new javax.swing.JButton();
+        jBGuardar = new javax.swing.JButton();
+        jBEliminar = new javax.swing.JButton();
+        jBLimpiar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTUsuarios = new javax.swing.JTable();
@@ -45,109 +63,191 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(750, 340));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPMostrar.setBackground(new java.awt.Color(204, 255, 204));
+        jTFNombre.setNextFocusableComponent(jTFUsuario);
 
-        javax.swing.GroupLayout jPMostrarLayout = new javax.swing.GroupLayout(jPMostrar);
-        jPMostrar.setLayout(jPMostrarLayout);
-        jPMostrarLayout.setHorizontalGroup(
-            jPMostrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 370, Short.MAX_VALUE)
-        );
-        jPMostrarLayout.setVerticalGroup(
-            jPMostrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 190, Short.MAX_VALUE)
-        );
+        jTFUsuario.setNextFocusableComponent(jCBNivel);
 
-        add(jPMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 50, 370, 190));
+        jTFCantPresta.setNextFocusableComponent(jBAgregar);
+
+        jCBNivel.setName(""); // NOI18N
+        jCBNivel.setNextFocusableComponent(jPFContrasena);
+
+        jPFContrasena.setNextFocusableComponent(jPFContrasenaConf);
+
+        jPFContrasenaConf.setNextFocusableComponent(jTFCantPresta);
+
+        jLabel1.setText("Cantidad Maxima a Prestar");
+
+        jLabel2.setText("Nombre y Apellido");
+
+        jLabel3.setText("Usuario");
+
+        jLabel4.setText("Nivel");
+
+        jLabel5.setText("Confirmar Contraseña");
+
+        jLabel6.setText("Contraseña");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 380, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jTFNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(jTFUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addGap(73, 73, 73))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jPFContrasena)
+                                        .addGap(23, 23, 23)))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jTFCantPresta, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jPFContrasenaConf, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jLabel4)
+                    .addComponent(jCBNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(241, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 190, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTFNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTFUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(9, 9, 9))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel6)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTFCantPresta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jPFContrasena, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPFContrasenaConf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCBNivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
-        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 380, 190));
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 700, 200));
 
         jTBUsuario.setFloatable(false);
+        jTBUsuario.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jTBUsuario.setRollover(true);
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/AgregarUsuario.png"))); // NOI18N
-        jButton4.setFocusable(false);
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jBAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/AgregarUsuario.png"))); // NOI18N
+        jBAgregar.setFocusable(false);
+        jBAgregar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBAgregar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jBAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jBAgregarActionPerformed(evt);
             }
         });
-        jTBUsuario.add(jButton4);
+        jTBUsuario.add(jBAgregar);
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/EditarUsuario.png"))); // NOI18N
-        jButton5.setFocusable(false);
-        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jBGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/AgregarGuardar.png"))); // NOI18N
+        jBGuardar.setFocusable(false);
+        jBGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBGuardar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jBGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jBGuardarActionPerformed(evt);
             }
         });
-        jTBUsuario.add(jButton5);
+        jTBUsuario.add(jBGuardar);
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/EliminarUsuario.png"))); // NOI18N
-        jButton6.setFocusable(false);
-        jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        jBEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/EliminarUsuario.png"))); // NOI18N
+        jBEliminar.setFocusable(false);
+        jBEliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBEliminar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jBEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                jBEliminarActionPerformed(evt);
             }
         });
-        jTBUsuario.add(jButton6);
+        jTBUsuario.add(jBEliminar);
 
-        add(jTBUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, -1));
+        jBLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/LimpiarUsuario.png"))); // NOI18N
+        jBLimpiar.setFocusable(false);
+        jBLimpiar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBLimpiar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jTBUsuario.add(jBLimpiar);
+
+        add(jTBUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 200));
 
         jScrollPane1.setAutoscrolls(true);
         jScrollPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jTUsuarios.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
+        jTUsuarios.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTUsuariosFocusGained(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTUsuarios);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
         );
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 241, 753, 100));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 201, 750, 140));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jBAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarActionPerformed
         ParametrosGlobales.UsuariosPanelAgregar = true;
         ParametrosGlobales.UsuariosPanelModificar = false;
         showOptionPanelMetodos();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jBAgregarActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
         ParametrosGlobales.UsuariosPanelAgregar = false;
         ParametrosGlobales.UsuariosPanelModificar = true;
         showOptionPanelMetodos();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jBGuardarActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
         ParametrosGlobales.UsuariosPanelAgregar = false;
         ParametrosGlobales.UsuariosPanelModificar = true;
         showOptionPanelMetodos();
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_jBEliminarActionPerformed
+
+    private void jTUsuariosFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTUsuariosFocusGained
+        jTFNombre.setText(jTUsuarios.getValueAt(jTUsuarios.getSelectedRow(),1).toString()); 
+        
+    }//GEN-LAST:event_jTUsuariosFocusGained
     private void showOptionPanelMetodos(){
         if (ParametrosGlobales.UsuariosPanelAgregar){
             System.out.println("Mostrar Agregar Layout");
@@ -158,16 +258,35 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
             
         }
     }
+    private void metodoCombobox(){
+        ArrayList usuariolista=data.usuarioList();
+        for(int i=0;i<usuariolista.size();i++){
+            jCBNivel.addItem(usuariolista.get(i).toString());
+        }
+       //JComboBox petList = new JComboBox(petStrings);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JPanel jPMostrar;
+    private javax.swing.JButton jBAgregar;
+    private javax.swing.JButton jBEliminar;
+    private javax.swing.JButton jBGuardar;
+    private javax.swing.JButton jBLimpiar;
+    private javax.swing.JComboBox<String> jCBNivel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPasswordField jPFContrasena;
+    private javax.swing.JPasswordField jPFContrasenaConf;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar jTBUsuario;
+    private javax.swing.JTextField jTFCantPresta;
+    private javax.swing.JTextField jTFNombre;
+    private javax.swing.JTextField jTFUsuario;
     private javax.swing.JTable jTUsuarios;
     // End of variables declaration//GEN-END:variables
 }

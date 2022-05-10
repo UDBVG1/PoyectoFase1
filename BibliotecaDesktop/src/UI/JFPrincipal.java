@@ -150,7 +150,6 @@ public class JFPrincipal extends javax.swing.JFrame {
         jBLogout.setContentAreaFilled(false);
         jBLogout.setFocusPainted(false);
         jBLogout.setFocusable(false);
-        jBLogout.setOpaque(false);
         jBLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBLogoutActionPerformed(evt);

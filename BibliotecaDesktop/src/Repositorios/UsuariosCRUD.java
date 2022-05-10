@@ -6,11 +6,15 @@
 package Repositorios;
 import Utilidades.Conexion;
 import Modelos.Usuario;
+import java.awt.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import javax.swing.ComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -18,10 +22,9 @@ import javax.swing.table.DefaultTableModel;
  * @author amgoo
  */
 public class UsuariosCRUD {
-    private final String SqlUsuarioAcceso = "SELECT idsocio,upper(nombre) as nombre,usuario,password,nivel FROM socio where usuario=? and password=?;";
-    private final String SqlUsuarios = "SELECT idsocio,nombre,usuario, case when nivel=1 then 'Administrador'\n" +
-                                        "when nivel=2 then 'Bibliotecario' \n" +
-                                        "when nivel=3 then 'Usuario' end as nivel FROM socio;";
+    private final String SqlUsuarioAcceso = "SELECT idusuario,nombre,usuario,password,nivel FROM usuario where usuario=? and password=?;";
+    private final String SqlUsuarios = "SELECT idusuario,nombre,usuario, nivel, (select descripcion from config where estado='nivel usuario' and valor=nivel) as nivel_nombre FROM usuario;";
+    private final String SqlComboNivel="select descripcion from config where estado='nivel usuario';";
     public Usuario usuarioAcceso(String Usuario, String Password){
         Connection conn =null;
         PreparedStatement stmt =null;
@@ -72,6 +75,30 @@ public class UsuariosCRUD {
                     fila[i]=rs.getObject(i+1);
                     }
                     dtm.addRow(fila);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Conexion.closeStatement(stmt);
+            Conexion.closeConnection(conn);
+            Conexion.closeResulset(rs);
+        }
+        return dtm;
+    }
+    public ArrayList usuarioList(){
+        ArrayList dtm=new ArrayList();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            conn = Conexion.getConexion();
+            stmt = conn.prepareStatement(SqlComboNivel);
+            rs = stmt.executeQuery();
+            ResultSetMetaData meta = rs.getMetaData();
+            //int numberOfColumns = meta.getColumnCount(); 
+            int num = 1;
+            while (rs.next()) {
+                    dtm.add(rs.getObject(num));
             }
         } catch (SQLException e) {
             e.printStackTrace();
