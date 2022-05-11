@@ -10,6 +10,17 @@ package Modelos;
  * @author admin
  */
 public class Validaciones {
+    public static boolean Vacio(String dato){
+        boolean valido = false;    
+        if(dato.length()==0){
+        valido = true;
+        }
+        return valido;
+    }
+    
+        public static boolean InicialM(String nombre){//1 palabra sin espacios inicial mayu
+        return nombre.matches("^([A-Z]{1}[a-z]+)$");
+    }
     
         public static boolean SoloTexto(String texto){
         return texto.matches("^([a-zA-Z]+)$");//ya sea mayus o minus 
