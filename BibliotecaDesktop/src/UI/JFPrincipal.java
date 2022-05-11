@@ -28,7 +28,7 @@ public class JFPrincipal extends javax.swing.JFrame {
     public JFPrincipal() {
         initComponents();
         setLocationWindow();
-        jDateLogin.setText(now.format(DateTimeFormatter.ofPattern("yy")));
+        jDateLogin.setText(now.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         jGlobalUsuario.setText(ParametrosGlobales.GlobalUser);
         jPSetPanel.setVisible(false);
         //jMenuOptionMT.setVisible(false);
