@@ -330,7 +330,7 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
                 jTFCantPresta.setVisible(false);
                 jTFUsuario.setEnabled(false);
                 Usuario datos = data.usuarioData(ParametrosGlobales.GlobalAccesId);
-                String nombre = datos.getNombre().trim(); 
+                String nombre = datos.getNombre().trim();
                 String[] newStr = nombre.split("\\s+");
                 jTFNombre.setText(newStr[0]);
                 jTFApellido.setText(newStr[1]);
