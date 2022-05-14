@@ -71,6 +71,7 @@ public class JFPrincipal extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jToolBar1 = new javax.swing.JToolBar();
         jButton3 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jBMaterialIcon = new javax.swing.JButton();
@@ -172,12 +173,19 @@ public class JFPrincipal extends javax.swing.JFrame {
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/HomeIcon.png"))); // NOI18N
         jButton3.setFocusable(false);
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
         jToolBar1.add(jButton3);
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel5.setText("   Inicio");
+        jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jToolBar1.add(jLabel5);
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/UsuariosIcon.png"))); // NOI18N
         jButton4.setFocusable(false);
@@ -193,7 +201,8 @@ public class JFPrincipal extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Usuarios");
+        jLabel3.setText(" Usuarios");
+        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jToolBar1.add(jLabel3);
 
         jBMaterialIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/IconoMateriales.png"))); // NOI18N
@@ -205,6 +214,7 @@ public class JFPrincipal extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setText("Materiales");
+        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jToolBar1.add(jLabel2);
 
         jMostrarPanel.add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 70, 340));
@@ -341,6 +351,7 @@ public class JFPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jMostrarPanel;
     private javax.swing.JPanel jPMostrar;

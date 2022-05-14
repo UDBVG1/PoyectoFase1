@@ -9,7 +9,7 @@ import Entidad.Usuario;
 import Utilidades.ParametrosGlobales;
 import Modelos.UsuariosCRUD;
 import java.util.ArrayList;
-import javax.swing.ComboBoxModel;
+//import javax.swing.ComboBoxModel;
 
 /**
  *
@@ -20,7 +20,7 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
     /**
      * Creates new form JPMetodos
      */
-    private ComboBoxModel<String> modelbox;
+    //private ComboBoxModel<String> modelbox;
     private final UsuariosCRUD data = new UsuariosCRUD();
     public JPUsuarioPanel() {
         initComponents();
@@ -211,6 +211,11 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
         jBLimpiar.setFocusable(false);
         jBLimpiar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jBLimpiar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBLimpiarActionPerformed(evt);
+            }
+        });
         jTBUsuario.add(jBLimpiar);
 
         add(jTBUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 200));
@@ -258,6 +263,8 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jBEliminarActionPerformed
 
     private void jTUsuariosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTUsuariosMousePressed
+        jBAgregar.setVisible(false);
+        jBGuardar.setVisible(true);
         String nombre = jTUsuarios.getValueAt(jTUsuarios.getSelectedRow(),1).toString().trim(); 
         String[] newStr = nombre.split("\\s+");
         jTFNombre.setText(newStr[0]);
@@ -265,6 +272,11 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
         jTFUsuario.setText(jTUsuarios.getValueAt(jTUsuarios.getSelectedRow(),2).toString()); 
         
     }//GEN-LAST:event_jTUsuariosMousePressed
+
+    private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
+        jBAgregar.setVisible(true);
+        jBGuardar.setVisible(false);
+    }//GEN-LAST:event_jBLimpiarActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -314,9 +326,11 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
             case 1:
                 jTUsuarios.setModel(data.usuariosLista());
                 metodoCombobox(ParametrosGlobales.GlobalAccesNivel);
+                jBGuardar.setVisible(false);
                 break;
             case 2:
                 jTUsuarios.setModel(data.usuariosLista());
+                jBGuardar.setVisible(false);
                 metodoCombobox(ParametrosGlobales.GlobalAccesNivel);
                 break;
             case 3:
