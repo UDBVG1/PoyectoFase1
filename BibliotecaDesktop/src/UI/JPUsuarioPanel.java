@@ -247,19 +247,17 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
     private void jBAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarActionPerformed
         ParametrosGlobales.UsuariosPanelAgregar = true;
         ParametrosGlobales.UsuariosPanelModificar = false;
-        showOptionPanelMetodos();
+        //showOptionPanelMetodos();
     }//GEN-LAST:event_jBAgregarActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
         ParametrosGlobales.UsuariosPanelAgregar = false;
         ParametrosGlobales.UsuariosPanelModificar = true;
-        showOptionPanelMetodos();
+        //showOptionPanelMetodos();
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
-        ParametrosGlobales.UsuariosPanelAgregar = false;
-        ParametrosGlobales.UsuariosPanelModificar = true;
-        showOptionPanelMetodos();
+        //EliminarUsuario(jTUsuarios.getValueAt(jTUsuarios.getSelectedRow(),0).toString());
     }//GEN-LAST:event_jBEliminarActionPerformed
 
     private void jTUsuariosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTUsuariosMousePressed
@@ -304,16 +302,6 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
     private javax.swing.JTextField jTFUsuario;
     private javax.swing.JTable jTUsuarios;
     // End of variables declaration//GEN-END:variables
-    private void showOptionPanelMetodos(){
-        if (ParametrosGlobales.UsuariosPanelAgregar){
-            System.out.println("Mostrar Agregar Layout");
-            
-        }
-        if(ParametrosGlobales.UsuariosPanelModificar){
-            System.out.println("Mostrar Modificar Layout");
-            
-        }
-    }
     private void metodoCombobox(int nivelus){
         ArrayList usuariolista=data.usuarioList();
         for(int i=nivelus-1;i<usuariolista.size();i++){
