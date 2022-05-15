@@ -9,6 +9,7 @@ import Entidad.Usuario;
 import Utilidades.ParametrosGlobales;
 import Modelos.UsuariosCRUD;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 //import javax.swing.ComboBoxModel;
 
 /**
@@ -22,7 +23,8 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
      */
     //private ComboBoxModel<String> modelbox;
     private final UsuariosCRUD data = new UsuariosCRUD();
-    public JPUsuarioPanel() {
+    private String message =new String();;
+    public JPUsuarioPanel() { 
         initComponents();
         accesos();
     }
@@ -245,9 +247,24 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarActionPerformed
-        ParametrosGlobales.UsuariosPanelAgregar = true;
-        ParametrosGlobales.UsuariosPanelModificar = false;
-        //showOptionPanelMetodos();
+        Usuario usuario = new Usuario();
+        char[] pass = jPFContrasena.getPassword();
+        char[] passC = jPFContrasenaConf.getPassword();
+        String spass = new String(pass);
+        String spassC = new String(passC);
+        usuario.setNombre(jTFNombre.getText()+" "+jTFApellido.getText());
+        usuario.setUsuario(jTFUsuario.getText());
+        usuario.setNivel(jCBNivel.getSelectedIndex()+1);
+        if(spass.equals(spassC)){
+            usuario.setClave(spass);
+            int rows=data.insertarUsuario(usuario);
+            limpiar();
+            JOptionPane.showMessageDialog(null, rows+" Usuario Ingresado", "Completado", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, "Contraseña no coinciden", "Incompletado", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        
     }//GEN-LAST:event_jBAgregarActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
@@ -257,7 +274,10 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
-        //EliminarUsuario(jTUsuarios.getValueAt(jTUsuarios.getSelectedRow(),0).toString());
+        message = data.eliminarUsuario(jTUsuarios.getValueAt(jTUsuarios.getSelectedRow(),0).toString());
+        JOptionPane.showMessageDialog(null, message, "Completado", JOptionPane.INFORMATION_MESSAGE);
+        jTUsuarios.removeAll();
+        jTUsuarios.setModel(data.usuariosLista());
     }//GEN-LAST:event_jBEliminarActionPerformed
 
     private void jTUsuariosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTUsuariosMousePressed
@@ -267,13 +287,14 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
         String[] newStr = nombre.split("\\s+");
         jTFNombre.setText(newStr[0]);
         jTFApellido.setText(newStr[1]);
-        jTFUsuario.setText(jTUsuarios.getValueAt(jTUsuarios.getSelectedRow(),2).toString()); 
-        
+        jTFUsuario.setText(jTUsuarios.getValueAt(jTUsuarios.getSelectedRow(),2).toString());
+        jCBNivel.setSelectedIndex(Integer.parseInt(jTUsuarios.getValueAt(jTUsuarios.getSelectedRow(),3).toString())-1);
     }//GEN-LAST:event_jTUsuariosMousePressed
 
     private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
         jBAgregar.setVisible(true);
         jBGuardar.setVisible(false);
+        limpiar();
     }//GEN-LAST:event_jBLimpiarActionPerformed
     
 
@@ -307,7 +328,6 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
         for(int i=nivelus-1;i<usuariolista.size();i++){
             jCBNivel.addItem(usuariolista.get(i).toString());
         }
-       //JComboBox petList = new JComboBox(petStrings);
     }
     private void accesos() {
         switch (ParametrosGlobales.GlobalAccesNivel) {
@@ -339,5 +359,14 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
                 jTFUsuario.setText(datos.getUsuario());
                 break;
         }
+    }
+
+    private void limpiar() {
+        jTFNombre.setText(null);
+        jTFApellido.setText(null);
+        jTFUsuario.setText(null);
+        jTFCantPresta.setText(null);
+        jPFContrasena.setText(null);
+        jPFContrasenaConf.setText(null);
     }
 }
