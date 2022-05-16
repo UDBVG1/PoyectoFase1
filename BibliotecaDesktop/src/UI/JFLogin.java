@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package UI;
+import Entidad.Libro_Obra;
 import Entidad.Usuario;
 import Utilidades.Conexion;
 import Modelos.UsuariosCRUD;
