@@ -8,6 +8,7 @@ import Utilidades.ParametrosGlobales;
 import java.awt.BorderLayout;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -26,6 +27,7 @@ public class JFPrincipal extends javax.swing.JFrame {
     int vp1=1;
     int vp2=1;
     LocalDateTime now = LocalDateTime.now();
+    private JLabel jLabel5;
     public JFPrincipal() {
         initComponents();
         setLocationWindow();
