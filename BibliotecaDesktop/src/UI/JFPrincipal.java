@@ -27,7 +27,7 @@ public class JFPrincipal extends javax.swing.JFrame {
     int vp1=1;
     int vp2=1;
     LocalDateTime now = LocalDateTime.now();
-    private JLabel jLabel5;
+    
     public JFPrincipal() {
         initComponents();
         setLocationWindow();
@@ -223,7 +223,7 @@ public class JFPrincipal extends javax.swing.JFrame {
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jToolBar1.add(jLabel2);
 
-        PruebaDeIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/IconoMateriales.png"))); // NOI18N
+        PruebaDeIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/PrestamosIcono.png"))); // NOI18N
         PruebaDeIcon.setFocusable(false);
         PruebaDeIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         PruebaDeIcon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -381,6 +381,7 @@ public class JFPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel5Prestamos;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jMostrarPanel;

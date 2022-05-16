@@ -176,6 +176,7 @@ CREATE TABLE IF NOT EXISTS `poo`.`reserva` (
   `fechareserva` DATE NULL,
   `estado` VARCHAR(45) NULL,
   `codigo` VARCHAR(8) NOT NULL,
+  `reservado` INT NULL,
   PRIMARY KEY (`idreserva`, `codigo`),
   INDEX `fk_reserva_material_idx` (`codigo` ASC) ,
   CONSTRAINT `fk_reserva_material`
@@ -226,6 +227,7 @@ CREATE TABLE IF NOT EXISTS `poo`.`prestamos` (
   `codigo` VARCHAR(8) NOT NULL,
   `idsocio` INT(11) NOT NULL,
   `idreserva` INT NULL,
+  `reservafaltante` INT NULL,
   PRIMARY KEY (`idprestamo`, `codigo`, `idsocio`),
   INDEX `fk_Prestamos_Socio` (`idsocio` ASC) ,
   INDEX `fk_prestamos_Material1_idx` (`codigo` ASC) ,
