@@ -27,7 +27,6 @@ public class UsuariosCRUD {
     //Update
     
     //Delete
-
     public Usuario usuarioAcceso(String Usuario, String Password){
         Connection conn =null;
         PreparedStatement stmt =null;
