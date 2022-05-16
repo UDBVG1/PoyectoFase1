@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
  * @author amgoo
  */
 public class UsuariosCRUD {
+
     //SELECTS
     private final String SqlUsuarioAcceso = "SELECT idusuario,nombre,usuario,password,nivel FROM usuario where usuario=? and password=?;";
     private final String SqlUsuarios = "SELECT idusuario,nombre,usuario, nivel, (select descripcion from config where estado='nivel usuario' and valor=nivel) as nivel_nombre FROM usuario;";
@@ -32,6 +33,16 @@ public class UsuariosCRUD {
     //VARIABLES
     private String mensaje;
     
+
+    //Select
+    private final String SqlUsuarioAcceso = "SELECT idusuario,nombre,usuario,password,nivel FROM usuario where usuario=? and password=?;";
+    private final String SqlUsuarios = "SELECT idusuario,nombre,usuario, nivel, (select descripcion from config where estado='nivel usuario' and valor=nivel) as nivel_nombre FROM usuario;";
+    private final String SqlComboNivel="select descripcion from config where estado='nivel usuario';";
+    private final String SqlUsuario="SELECT idusuario,nombre,usuario,password,nivel FROM usuario where idusuario=?";
+    //Update
+    
+    //Delete
+
     public Usuario usuarioAcceso(String Usuario, String Password){
         Connection conn =null;
         PreparedStatement stmt =null;
