@@ -5,11 +5,16 @@
  */
 package Modelos;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 /**
  *
  * @author admin
  */
 public class Validaciones {
+     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    
     public static boolean Vacio(String dato){
         boolean valido = false;    
         if(dato.length()==0){
@@ -18,11 +23,11 @@ public class Validaciones {
         return valido;
     }
     
-        public static boolean InicialM(String nombre){//1 palabra sin espacios inicial mayu
+    public static boolean InicialM(String nombre){//1 palabra sin espacios inicial mayu
         return nombre.matches("^([A-Z]{1}[a-z]+)$");
     }
     
-        public static boolean SoloTexto(String texto){
+    public static boolean SoloTexto(String texto){
         return texto.matches("^([a-zA-Z]+)$");//ya sea mayus o minus 
     }
         
@@ -42,5 +47,15 @@ public class Validaciones {
     public static boolean contra(String contra){
     return contra.matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})");
     }
-    
+
+    public boolean isValidDate(String fecha) {
+         try {
+              format.parse(fecha);
+              return true;
+         }
+         catch(ParseException e){
+              System.out.println("Parse exception validDate" + e);
+              return false;
+         }
+    }
 }

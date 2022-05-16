@@ -20,5 +20,8 @@ public class ParametrosGlobales {
     public static String GlobalUser;
     public static int GlobalAccesNivel;
     public static int GlobalAccesId;
+    
+    //indice del menu de prestamo
+    public static int TipoPrestamo;
 
 }

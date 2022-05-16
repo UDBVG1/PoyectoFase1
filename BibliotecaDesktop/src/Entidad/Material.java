@@ -5,6 +5,17 @@
  */
 package Entidad;
 
+import Utilidades.Conexion;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+
 /**
  *
  * @author admin
@@ -12,6 +23,7 @@ package Entidad;
 public class Material {
     public String ubicacion,titulo,autor;
     public int CantTotal,CantPrestada,CantDisp;
+    private final String SQL_SELECTID = "select COALESCE(concat(upper(?),(lpad(substr(max(codigo),4,7)+1,5,'0'))),'LIB00001') as idcodigo from material where codigo like upper(?);";
     
     public String getUbicacion() {
         return ubicacion;
@@ -61,9 +73,33 @@ public class Material {
         this.CantDisp = CantDisp;
     }
     
-    public String IDinterno(){
+    public String IDinterno(Object tipo){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         String IDinterno="";
+        try{
+                conn = Conexion.getConexion();
+                stmt = conn.prepareStatement(SQL_SELECTID);
+                int index = 1;
+                stmt.setObject(index++, tipo);
+                stmt.setObject(index, tipo+"%");
+                rs = stmt.executeQuery();
+                while(rs.next()){
+                IDinterno = (String) rs.getObject(1);
+                }
+        }catch (SQLException e) {
+                System.out.println("error mysql: " + e);
+        }catch(Exception e2) {
+                System.out.println("error: " + e2);
+        }finally {
+            Conexion.closeConnection(conn);
+            Conexion.closeStatement(stmt);
+            Conexion.closeResulset(rs);
+        }
+        
         return IDinterno;
-        //tengo planiado generar aqui el codigo pero tendriamos que obtener el tipo y substraer las 3 primeras letras 
-    }
+        
+        }
+    
 }

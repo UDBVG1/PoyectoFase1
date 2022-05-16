@@ -9,6 +9,7 @@ import java.awt.BorderLayout;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JPanel;
+
 /**
  *
  * @author amgoo
@@ -28,10 +29,11 @@ public class JFPrincipal extends javax.swing.JFrame {
     public JFPrincipal() {
         initComponents();
         setLocationWindow();
-        jDateLogin.setText(now.format(DateTimeFormatter.ofPattern("yy")));
+        jDateLogin.setText(now.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         jGlobalUsuario.setText(ParametrosGlobales.GlobalUser);
         jPSetPanel.setVisible(false);
         //jMenuOptionMT.setVisible(false);
+        
     }
     
     private void setLocationWindow(){
@@ -76,6 +78,8 @@ public class JFPrincipal extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jBMaterialIcon = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        PruebaDeIcon = new javax.swing.JButton();
+        jLabel5Prestamos = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jGlobalUsuario = new javax.swing.JLabel();
@@ -217,6 +221,22 @@ public class JFPrincipal extends javax.swing.JFrame {
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jToolBar1.add(jLabel2);
 
+        PruebaDeIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/IconoMateriales.png"))); // NOI18N
+        PruebaDeIcon.setFocusable(false);
+        PruebaDeIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        PruebaDeIcon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        PruebaDeIcon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PruebaDeIconActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(PruebaDeIcon);
+
+        jLabel5Prestamos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5Prestamos.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel5Prestamos.setText("Prestamos");
+        jToolBar1.add(jLabel5Prestamos);
+
         jMostrarPanel.add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 70, 340));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -303,6 +323,12 @@ public class JFPrincipal extends javax.swing.JFrame {
             LogOut.setVisible(true);
             dispose();
     }//GEN-LAST:event_jBLogoutActionPerformed
+
+    private void PruebaDeIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PruebaDeIconActionPerformed
+        Prestamo OpcionPrestamo = new Prestamo();
+        jBLogout.setVisible(false);
+        ShowOption(OpcionPrestamo);
+    }//GEN-LAST:event_PruebaDeIconActionPerformed
     
     /**
      * @param args the command line arguments
@@ -337,9 +363,11 @@ public class JFPrincipal extends javax.swing.JFrame {
                 new JFPrincipal().setVisible(true);
             }
         });
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton PruebaDeIcon;
     private javax.swing.JLabel cerrarPrincipal1;
     private javax.swing.JButton jBLogout;
     private javax.swing.JButton jBMaterialIcon;
@@ -351,7 +379,7 @@ public class JFPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel5Prestamos;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jMostrarPanel;
     private javax.swing.JPanel jPMostrar;
