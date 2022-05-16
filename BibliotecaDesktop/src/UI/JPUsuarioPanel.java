@@ -173,6 +173,7 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
         jTBUsuario.setFloatable(false);
         jTBUsuario.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jTBUsuario.setRollover(true);
+        jTBUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jBAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/AgregarUsuario.png"))); // NOI18N
         jBAgregar.setFocusable(false);

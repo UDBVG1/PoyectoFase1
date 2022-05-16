@@ -25,7 +25,7 @@ public class Conexion {
      * @throws java.sql.SQLException
      */
    //*************************creamos la conexion************************
-    public static Connection getConexion() throws SQLException{//asi se crea las exepciones personalizadas
+    public static Connection getConexion(){//asi se crea las exepciones personalizadas
     conn = null;
     try{
     Class.forName(driver);//driver
