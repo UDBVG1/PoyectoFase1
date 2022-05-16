@@ -60,7 +60,6 @@ public class UsuariosCRUD {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-       
         try {
             conn = Conexion.getConexion();
             stmt = conn.prepareStatement(SqlUsuarios);
@@ -96,8 +95,6 @@ public class UsuariosCRUD {
             conn = Conexion.getConexion();
             stmt = conn.prepareStatement(SqlComboNivel);
             rs = stmt.executeQuery();
-            ResultSetMetaData meta = rs.getMetaData();
-            //int numberOfColumns = meta.getColumnCount(); 
             int num = 1;
             while (rs.next()) {
                     dtm.add(rs.getObject(num));
@@ -137,5 +134,50 @@ public class UsuariosCRUD {
             Conexion.closeResulset(rs);
         }
         return data;
+    }
+    
+    public int insertarUsuario(Usuario usuario){
+        int rows=0;
+        Connection conn =null;
+        PreparedStatement stmt =null;
+        ResultSet rs=null;
+        try{
+            conn = Conexion.getConexion();
+            stmt = conn.prepareStatement(SqlUsuarioInsert);
+            int index=1;
+            stmt.setString(index++, usuario.Nombre);
+            stmt.setString(index++, usuario.Usuario);
+            stmt.setString(index++, usuario.Clave);
+            stmt.setInt(index, usuario.Nivel);
+            System.out.print(stmt);
+            rows = stmt.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            Conexion.closeConnection(conn);
+            Conexion.closeStatement(stmt);
+            Conexion.closeResulset(rs);
+        }
+        return rows;
+    }
+    
+    public String eliminarUsuario(String id) {
+        int rows;
+        Connection conn =null;
+        PreparedStatement stmt =null;
+        try {
+            conn = Conexion.getConexion();
+            stmt = conn.prepareStatement(SqlDeleteUsuario);
+            stmt.setInt(1,Integer.parseInt(id));
+            System.out.print(stmt);
+            rows = stmt.executeUpdate();
+            mensaje=rows+" Usuario Eliminado";
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            Conexion.closeConnection(conn);
+            Conexion.closeStatement(stmt);
+        }
+        return mensaje;
     }
 }

@@ -9,7 +9,8 @@ import Entidad.Usuario;
 import Utilidades.ParametrosGlobales;
 import Modelos.UsuariosCRUD;
 import java.util.ArrayList;
-import javax.swing.ComboBoxModel;
+import javax.swing.JOptionPane;
+//import javax.swing.ComboBoxModel;
 
 /**
  *
@@ -20,9 +21,10 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
     /**
      * Creates new form JPMetodos
      */
-    private ComboBoxModel<String> modelbox;
+    //private ComboBoxModel<String> modelbox;
     private final UsuariosCRUD data = new UsuariosCRUD();
-    public JPUsuarioPanel() {
+    private String message =new String();;
+    public JPUsuarioPanel() { 
         initComponents();
         accesos();
     }
@@ -212,6 +214,11 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
         jBLimpiar.setFocusable(false);
         jBLimpiar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jBLimpiar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBLimpiarActionPerformed(evt);
+            }
+        });
         jTBUsuario.add(jBLimpiar);
 
         add(jTBUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 200));
@@ -241,31 +248,55 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarActionPerformed
-        ParametrosGlobales.UsuariosPanelAgregar = true;
-        ParametrosGlobales.UsuariosPanelModificar = false;
-        showOptionPanelMetodos();
+        Usuario usuario = new Usuario();
+        char[] pass = jPFContrasena.getPassword();
+        char[] passC = jPFContrasenaConf.getPassword();
+        String spass = new String(pass);
+        String spassC = new String(passC);
+        usuario.setNombre(jTFNombre.getText()+" "+jTFApellido.getText());
+        usuario.setUsuario(jTFUsuario.getText());
+        usuario.setNivel(jCBNivel.getSelectedIndex()+1);
+        if(spass.equals(spassC)){
+            usuario.setClave(spass);
+            int rows=data.insertarUsuario(usuario);
+            limpiar();
+            JOptionPane.showMessageDialog(null, rows+" Usuario Ingresado", "Completado", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, "Contraseña no coinciden", "Incompletado", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        
     }//GEN-LAST:event_jBAgregarActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
         ParametrosGlobales.UsuariosPanelAgregar = false;
         ParametrosGlobales.UsuariosPanelModificar = true;
-        showOptionPanelMetodos();
+        //showOptionPanelMetodos();
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
-        ParametrosGlobales.UsuariosPanelAgregar = false;
-        ParametrosGlobales.UsuariosPanelModificar = true;
-        showOptionPanelMetodos();
+        message = data.eliminarUsuario(jTUsuarios.getValueAt(jTUsuarios.getSelectedRow(),0).toString());
+        JOptionPane.showMessageDialog(null, message, "Completado", JOptionPane.INFORMATION_MESSAGE);
+        jTUsuarios.removeAll();
+        jTUsuarios.setModel(data.usuariosLista());
     }//GEN-LAST:event_jBEliminarActionPerformed
 
     private void jTUsuariosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTUsuariosMousePressed
+        jBAgregar.setVisible(false);
+        jBGuardar.setVisible(true);
         String nombre = jTUsuarios.getValueAt(jTUsuarios.getSelectedRow(),1).toString().trim(); 
         String[] newStr = nombre.split("\\s+");
         jTFNombre.setText(newStr[0]);
         jTFApellido.setText(newStr[1]);
-        jTFUsuario.setText(jTUsuarios.getValueAt(jTUsuarios.getSelectedRow(),2).toString()); 
-        
+        jTFUsuario.setText(jTUsuarios.getValueAt(jTUsuarios.getSelectedRow(),2).toString());
+        jCBNivel.setSelectedIndex(Integer.parseInt(jTUsuarios.getValueAt(jTUsuarios.getSelectedRow(),3).toString())-1);
     }//GEN-LAST:event_jTUsuariosMousePressed
+
+    private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
+        jBAgregar.setVisible(true);
+        jBGuardar.setVisible(false);
+        limpiar();
+    }//GEN-LAST:event_jBLimpiarActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -293,31 +324,22 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
     private javax.swing.JTextField jTFUsuario;
     private javax.swing.JTable jTUsuarios;
     // End of variables declaration//GEN-END:variables
-    private void showOptionPanelMetodos(){
-        if (ParametrosGlobales.UsuariosPanelAgregar){
-            System.out.println("Mostrar Agregar Layout");
-            
-        }
-        if(ParametrosGlobales.UsuariosPanelModificar){
-            System.out.println("Mostrar Modificar Layout");
-            
-        }
-    }
     private void metodoCombobox(int nivelus){
         ArrayList usuariolista=data.usuarioList();
         for(int i=nivelus-1;i<usuariolista.size();i++){
             jCBNivel.addItem(usuariolista.get(i).toString());
         }
-       //JComboBox petList = new JComboBox(petStrings);
     }
     private void accesos() {
         switch (ParametrosGlobales.GlobalAccesNivel) {
             case 1:
                 jTUsuarios.setModel(data.usuariosLista());
                 metodoCombobox(ParametrosGlobales.GlobalAccesNivel);
+                jBGuardar.setVisible(false);
                 break;
             case 2:
                 jTUsuarios.setModel(data.usuariosLista());
+                jBGuardar.setVisible(false);
                 metodoCombobox(ParametrosGlobales.GlobalAccesNivel);
                 break;
             case 3:
@@ -338,5 +360,14 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
                 jTFUsuario.setText(datos.getUsuario());
                 break;
         }
+    }
+
+    private void limpiar() {
+        jTFNombre.setText(null);
+        jTFApellido.setText(null);
+        jTFUsuario.setText(null);
+        jTFCantPresta.setText(null);
+        jPFContrasena.setText(null);
+        jPFContrasenaConf.setText(null);
     }
 }
