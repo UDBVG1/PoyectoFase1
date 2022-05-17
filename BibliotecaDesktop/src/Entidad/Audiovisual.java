@@ -9,7 +9,7 @@ package Entidad;
  *
  * @author admin
  */
-public class CDs extends Material{
+public class Audiovisual extends Material{
     public String genero,duracion;
     public int numCanciones;
 

@@ -9,9 +9,9 @@ package Entidad;
  *
  * @author admin
  */
-public class Libro_Obra extends Material{
-    public int numPaginas,anioPubli,ISBN;
-    public String editorial;
+public class Escrito extends Material{
+    public int numPaginas,ISBN,fechaPubli;
+    public String editorial,periodicidad;
 
     public int getNumPaginas() {
         return numPaginas;
@@ -19,14 +19,6 @@ public class Libro_Obra extends Material{
 
     public void setNumPaginas(int numPaginas) {
         this.numPaginas = numPaginas;
-    }
-
-    public int getAnioPubli() {
-        return anioPubli;
-    }
-
-    public void setAnioPubli(int anioPubli) {
-        this.anioPubli = anioPubli;
     }
 
     public int getISBN() {
@@ -43,6 +35,22 @@ public class Libro_Obra extends Material{
 
     public void setEditorial(String editorial) {
         this.editorial = editorial;
+    }
+    
+     public String getPeriodicidad() {
+        return periodicidad;
+    }
+
+    public void setPeriodicidad(String periodicidad) {
+        this.periodicidad = periodicidad;
+    }
+
+    public int getFechaPubli() {
+        return fechaPubli;
+    }
+
+    public void setFechaPubli(int fechaPubli) {
+        this.fechaPubli = fechaPubli;
     }
 
     @Override

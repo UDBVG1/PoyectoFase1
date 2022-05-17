@@ -14,11 +14,13 @@ public class ParametrosGlobales {
     //para usar en la aplicaion en general
     public static boolean UsuariosPanelAgregar;
     public static boolean UsuariosPanelModificar;
-    
-    
+  
     //Usuario Global
     public static String GlobalUser;
     public static int GlobalAccesNivel;
     public static int GlobalAccesId;
 
+    //Materiales
+      public static String tipo;
+    
 }

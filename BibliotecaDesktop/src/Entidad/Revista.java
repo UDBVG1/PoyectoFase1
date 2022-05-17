@@ -20,21 +20,7 @@ public class Revista extends Material{
         this.editorial = editorial;
     }
 
-    public String getPeriodicidad() {
-        return periodicidad;
-    }
 
-    public void setPeriodicidad(String periodicidad) {
-        this.periodicidad = periodicidad;
-    }
-
-    public String getFechaPubli() {
-        return fechaPubli;
-    }
-
-    public void setFechaPubli(String fechaPubli) {
-        this.fechaPubli = fechaPubli;
-    }
 
     @Override
     public String toString() {

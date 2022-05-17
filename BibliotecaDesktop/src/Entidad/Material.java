@@ -10,15 +10,33 @@ package Entidad;
  * @author admin
  */
 public class Material {
-    public String ubicacion,titulo,autor;
-    public int CantTotal,CantPrestada,CantDisp;
+    public String titulo,autor,codigo,catalogacion, tipo;
+    public int CantTotal,CantPrestada,CantDisp, tiempo;
     
-    public String getUbicacion() {
-        return ubicacion;
+    public int getTiempo(){
+        return tiempo;
+    }
+    public void setTiempo(int Tiempo){
+        this.tiempo=Tiempo;
     }
 
-    public void setUbicacion(String ubicacion) {
-        this.ubicacion = ubicacion;
+    public String getTipo(){
+        return tipo;
+    }
+    public void setTipo(String tipo){
+        this.tipo=tipo;
+    }
+    public String getcatalogacion(){
+        return catalogacion;
+    }
+    public void setCatalogacion(String catalogacion){
+        this.catalogacion=catalogacion;
+    }
+    public String getCodigo(){
+        return codigo;
+    }
+    public void setCodigo(String code){
+        this.codigo=code;
     }
 
     public String getTitulo() {
