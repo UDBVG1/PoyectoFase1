@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package UI;
-import Entidad.Libro_Obra;
 import Entidad.Usuario;
 import Utilidades.Conexion;
 import Modelos.UsuariosCRUD;
@@ -168,17 +167,19 @@ public class JFLogin extends javax.swing.JFrame {
         char[] pass = jPasswordField1.getPassword();
         String spass = new String(pass);
         System.out.println("Usuario Ingresado " + jTFUsuario.getText() + " "+ spass);
-        Usuario Datos = login.usuarioAcceso(jTFUsuario.getText(), spass);
-        System.out.println(Datos);
-        
-            JOptionPane.showMessageDialog(null, "Ingreso exitoso" +"\n" + "Bienvenido " + Datos.Nombre, "", JOptionPane.INFORMATION_MESSAGE);
-            ParametrosGlobales.GlobalAccesId = Datos.getIdUs();
-            ParametrosGlobales.GlobalUser = Datos.getNombre();
-            ParametrosGlobales.GlobalAccesNivel = Datos.getNivel();
+        Usuario datos = login.usuarioAcceso(jTFUsuario.getText(), spass);
+        System.out.println(datos);
+        if (datos.Nivel>0){
+            JOptionPane.showMessageDialog(null, "Ingreso exitoso" +"\n" + "Bienvenido " + datos.Nombre, "", JOptionPane.INFORMATION_MESSAGE);
+            ParametrosGlobales.GlobalAccesId = datos.getIdUs();
+            ParametrosGlobales.GlobalUser = datos.getNombre();
+            ParametrosGlobales.GlobalAccesNivel = datos.getNivel();
             JFPrincipal Principal=new JFPrincipal();
             Principal.setVisible(true);
             dispose(); 
-        
+        }else{
+            JOptionPane.showMessageDialog(null, "Ususario o Contraseña Incorrecta", "", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
