@@ -11,7 +11,7 @@ package Entidad;
  */
 public class Usuario {
     public int IdUs,Nivel;
-    public String Nombre,Usuario,Clave;
+    public String Nombre,Usuario,Identificador,Clave;
     
     public int getIdUs(){
         return IdUs;
@@ -25,6 +25,13 @@ public class Usuario {
     }
     public void setNombre(String Nombre){
         this.Nombre=Nombre;
+    }
+    
+    public String getIdentificador(){
+        return Identificador;
+    }
+    public void setIdentificador(String Identificador){
+        this.Identificador=Identificador;
     }
     
     public String getUsuario(){
@@ -50,6 +57,6 @@ public class Usuario {
     
     @Override
     public String toString() {
-        return "Usuario{" + "idUs= " + IdUs + ", nombre= " + Nombre + ", usuario= " + Usuario + ", password= " + Clave + ", nivel= " + Nivel + '}';
+        return "Usuario{" + "idUs= " + IdUs + ", nombre= " + Nombre + ", usuario= " + Usuario + ", identificador= " + Identificador + ", password= " + Clave + ", nivel= " + Nivel + '}';
     }
 }
