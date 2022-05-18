@@ -1,0 +1,11 @@
+            int numberOfColumns = meta.getColumnCount();
+            System.out.print("Nro: "+ numberOfColumns);
+            for (int i = 1; i<= numberOfColumns; i++) {
+            dtm.addColumn(meta.getColumnLabel(i));
+            }
+			
+			
+			
+			Object[] header = new Object[]{"Nombre", "Fecha de nacimiento", "Documento"};
+			DefaultTableModel model = new DefaultTableModel(header, 0);
+			model.addRow(new Object[]{persona.getNombre(), persona.getFechaDeNacimiento(), persona.getDocumento()});

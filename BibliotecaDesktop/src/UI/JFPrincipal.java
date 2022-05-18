@@ -215,6 +215,11 @@ public class JFPrincipal extends javax.swing.JFrame {
         jBMaterialIcon.setFocusable(false);
         jBMaterialIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jBMaterialIcon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jBMaterialIcon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBMaterialIconActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jBMaterialIcon);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -326,6 +331,12 @@ public class JFPrincipal extends javax.swing.JFrame {
             dispose();
     }//GEN-LAST:event_jBLogoutActionPerformed
 
+    private void jBMaterialIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMaterialIconActionPerformed
+        // TODO add your handling code here:
+        JPMaterialesPanel OpcionMaterial = new JPMaterialesPanel();
+        jBLogout.setVisible(false);
+        ShowOption(OpcionMaterial);
+    }//GEN-LAST:event_jBMaterialIconActionPerformed
     private void PruebaDeIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PruebaDeIconActionPerformed
         Prestamo OpcionPrestamo = new Prestamo();
         jBLogout.setVisible(false);
