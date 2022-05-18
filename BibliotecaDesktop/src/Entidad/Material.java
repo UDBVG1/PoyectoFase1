@@ -23,6 +23,7 @@ import java.time.format.DateTimeFormatter;
 public class Material {
     public String titulo,autor,codigo,catalogacion, tipo;
     public int CantTotal,CantPrestada,CantDisp, tiempo;
+    private final String SQL_SELECTID = "select COALESCE(concat(upper(?),(lpad(substr(max(codigo),4,7)+1,5,'0'))),'LIB00001') as idcodigo from material where codigo like upper(?);";
     
     public int getTiempo(){
         return tiempo;
