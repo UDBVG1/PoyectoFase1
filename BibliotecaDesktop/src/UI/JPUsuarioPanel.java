@@ -9,7 +9,8 @@ import Entidad.Usuario;
 import Utilidades.ParametrosGlobales;
 import Modelos.UsuariosCRUD;
 import java.util.ArrayList;
-import javax.swing.ComboBoxModel;
+import javax.swing.JOptionPane;
+//import javax.swing.ComboBoxModel;
 
 /**
  *
@@ -20,9 +21,10 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
     /**
      * Creates new form JPMetodos
      */
-    private ComboBoxModel<String> modelbox;
+    //private ComboBoxModel<String> modelbox;
     private final UsuariosCRUD data = new UsuariosCRUD();
-    public JPUsuarioPanel() {
+    private String message =new String();;
+    public JPUsuarioPanel() { 
         initComponents();
         accesos();
     }
@@ -38,7 +40,7 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jTFNombre = new javax.swing.JTextField();
         jTFUsuario = new javax.swing.JTextField();
-        jTFCantPresta = new javax.swing.JTextField();
+        jTFIdentificacion = new javax.swing.JTextField();
         jCBNivel = new javax.swing.JComboBox<>();
         jPFContrasena = new javax.swing.JPasswordField();
         jPFContrasenaConf = new javax.swing.JPasswordField();
@@ -67,16 +69,16 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
 
         jTFUsuario.setNextFocusableComponent(jCBNivel);
 
-        jTFCantPresta.setNextFocusableComponent(jBAgregar);
+        jTFIdentificacion.setNextFocusableComponent(jBAgregar);
 
         jCBNivel.setName(""); // NOI18N
         jCBNivel.setNextFocusableComponent(jPFContrasena);
 
         jPFContrasena.setNextFocusableComponent(jPFContrasenaConf);
 
-        jPFContrasenaConf.setNextFocusableComponent(jTFCantPresta);
+        jPFContrasenaConf.setNextFocusableComponent(jTFIdentificacion);
 
-        jLabel1.setText("Cantidad Maxima a Prestar");
+        jLabel1.setText("Identificacion");
 
         jLabel2.setText("Nombre");
 
@@ -89,6 +91,11 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
         jLabel6.setText("Contraseña");
 
         jTFApellido.setNextFocusableComponent(jTBUsuario);
+        jTFApellido.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTFApellidoFocusLost(evt);
+            }
+        });
 
         jLabel7.setText("Apellido");
 
@@ -114,19 +121,16 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
                     .addComponent(jCBNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addComponent(jPFContrasena)
+                    .addComponent(jPFContrasenaConf)
+                    .addComponent(jTFIdentificacion)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addGap(73, 73, 73))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(jPFContrasena)
-                            .addGap(23, 23, 23)))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jPFContrasenaConf, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jTFCantPresta, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(370, Short.MAX_VALUE))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel5))
+                        .addGap(0, 15, Short.MAX_VALUE)))
+                .addGap(378, 378, 378))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,7 +168,7 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTFCantPresta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTFIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
 
@@ -173,6 +177,7 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
         jTBUsuario.setFloatable(false);
         jTBUsuario.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jTBUsuario.setRollover(true);
+        jTBUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jBAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/AgregarUsuario.png"))); // NOI18N
         jBAgregar.setFocusable(false);
@@ -211,6 +216,11 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
         jBLimpiar.setFocusable(false);
         jBLimpiar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jBLimpiar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBLimpiarActionPerformed(evt);
+            }
+        });
         jTBUsuario.add(jBLimpiar);
 
         add(jTBUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 200));
@@ -240,31 +250,85 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarActionPerformed
-        ParametrosGlobales.UsuariosPanelAgregar = true;
-        ParametrosGlobales.UsuariosPanelModificar = false;
-        showOptionPanelMetodos();
+        Usuario usuario = new Usuario();
+        char[] pass = jPFContrasena.getPassword();
+        char[] passC = jPFContrasenaConf.getPassword();
+        String spass = new String(pass);
+        String spassC = new String(passC);
+        usuario.setNombre(jTFNombre.getText()+" "+jTFApellido.getText());
+        usuario.setUsuario(jTFUsuario.getText());
+        usuario.setNivel(jCBNivel.getSelectedIndex()+1);
+        if(spass.equals(spassC)){
+            usuario.setClave(spass);
+            int rows=data.insertarUsuario(usuario);
+            limpiar();
+            JOptionPane.showMessageDialog(null, rows+" Usuario Ingresado", "Completado", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, "Contraseña no coinciden", "Incompletado", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        
     }//GEN-LAST:event_jBAgregarActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
-        ParametrosGlobales.UsuariosPanelAgregar = false;
-        ParametrosGlobales.UsuariosPanelModificar = true;
-        showOptionPanelMetodos();
+        Usuario usuario = new Usuario();
+        boolean proceso = true;
+        char[] pass = jPFContrasena.getPassword();
+        char[] passC = jPFContrasenaConf.getPassword();
+        String spass = new String(pass);
+        String spassC = new String(passC);
+        usuario.setIdUs(Integer.parseInt(jTUsuarios.getValueAt(jTUsuarios.getSelectedRow(),0).toString()));
+        usuario.setNombre(jTFNombre.getText()+" "+jTFApellido.getText());
+        usuario.setUsuario(jTFUsuario.getText());
+        usuario.setNivel(jCBNivel.getSelectedIndex()+1);
+        if(spass.equals(spassC)){
+            if (spass.isEmpty()){
+                usuario.setClave(null);
+            }else{
+                usuario.setClave(spass);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Contraseña no coinciden", "Incompletado", JOptionPane.WARNING_MESSAGE);
+            proceso=false;
+        }
+        if (proceso){
+            int rows=data.updateUsuario(usuario);
+            JOptionPane.showMessageDialog(null, rows+" Cambio Aplicado", "Proceso", JOptionPane.INFORMATION_MESSAGE);
+        } 
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
-        ParametrosGlobales.UsuariosPanelAgregar = false;
-        ParametrosGlobales.UsuariosPanelModificar = true;
-        showOptionPanelMetodos();
+        message = data.eliminarUsuario(jTUsuarios.getValueAt(jTUsuarios.getSelectedRow(),0).toString());
+        JOptionPane.showMessageDialog(null, message, "Completado", JOptionPane.INFORMATION_MESSAGE);
+        jTUsuarios.removeAll();
+        jTUsuarios.setModel(data.usuariosLista(ParametrosGlobales.GlobalAccesNivel));
     }//GEN-LAST:event_jBEliminarActionPerformed
 
     private void jTUsuariosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTUsuariosMousePressed
+        jBAgregar.setVisible(false);
+        jBGuardar.setVisible(true);
         String nombre = jTUsuarios.getValueAt(jTUsuarios.getSelectedRow(),1).toString().trim(); 
         String[] newStr = nombre.split("\\s+");
         jTFNombre.setText(newStr[0]);
         jTFApellido.setText(newStr[1]);
-        jTFUsuario.setText(jTUsuarios.getValueAt(jTUsuarios.getSelectedRow(),2).toString()); 
-        
+        jTFUsuario.setText(jTUsuarios.getValueAt(jTUsuarios.getSelectedRow(),2).toString());
+        jCBNivel.setSelectedIndex(Integer.parseInt(jTUsuarios.getValueAt(jTUsuarios.getSelectedRow(),3).toString())-ParametrosGlobales.GlobalAccesNivel);
+        jTFIdentificacion.setText(jTUsuarios.getValueAt(jTUsuarios.getSelectedRow(),5).toString());
     }//GEN-LAST:event_jTUsuariosMousePressed
+
+    private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
+        jBAgregar.setVisible(true);
+        jBGuardar.setVisible(false);
+        limpiar();
+    }//GEN-LAST:event_jBLimpiarActionPerformed
+
+    private void jTFApellidoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFApellidoFocusLost
+        String iniciales;
+        String nombre = jTFNombre.getText().trim();
+        String apellido = jTFApellido.getText().trim();
+        iniciales=nombre.substring(0,0)+apellido.substring(0, 0);
+        jTFUsuario.setText(iniciales);
+    }//GEN-LAST:event_jTFApellidoFocusLost
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -287,37 +351,29 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar jTBUsuario;
     private javax.swing.JTextField jTFApellido;
-    private javax.swing.JTextField jTFCantPresta;
+    private javax.swing.JTextField jTFIdentificacion;
     private javax.swing.JTextField jTFNombre;
     private javax.swing.JTextField jTFUsuario;
     private javax.swing.JTable jTUsuarios;
     // End of variables declaration//GEN-END:variables
-    private void showOptionPanelMetodos(){
-        if (ParametrosGlobales.UsuariosPanelAgregar){
-            System.out.println("Mostrar Agregar Layout");
-            
-        }
-        if(ParametrosGlobales.UsuariosPanelModificar){
-            System.out.println("Mostrar Modificar Layout");
-            
-        }
-    }
     private void metodoCombobox(int nivelus){
         ArrayList usuariolista=data.usuarioList();
         for(int i=nivelus-1;i<usuariolista.size();i++){
             jCBNivel.addItem(usuariolista.get(i).toString());
         }
-       //JComboBox petList = new JComboBox(petStrings);
     }
     private void accesos() {
         switch (ParametrosGlobales.GlobalAccesNivel) {
             case 1:
-                jTUsuarios.setModel(data.usuariosLista());
+                jTUsuarios.setModel(data.usuariosLista(ParametrosGlobales.GlobalAccesNivel));
                 metodoCombobox(ParametrosGlobales.GlobalAccesNivel);
+                jBGuardar.setVisible(false);
                 break;
             case 2:
-                jTUsuarios.setModel(data.usuariosLista());
+                jTUsuarios.setModel(data.usuariosLista(ParametrosGlobales.GlobalAccesNivel));
+                jBGuardar.setVisible(false);
                 metodoCombobox(ParametrosGlobales.GlobalAccesNivel);
+                jTFUsuario.setEnabled(false);
                 break;
             case 3:
                 jBEliminar.setVisible(false);
@@ -327,7 +383,7 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
                 jLabel4.setVisible(false);
                 jCBNivel.setVisible(false);
                 jLabel1.setVisible(false);
-                jTFCantPresta.setVisible(false);
+                jTFIdentificacion.setVisible(false);
                 jTFUsuario.setEnabled(false);
                 Usuario datos = data.usuarioData(ParametrosGlobales.GlobalAccesId);
                 String nombre = datos.getNombre().trim();
@@ -337,5 +393,14 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
                 jTFUsuario.setText(datos.getUsuario());
                 break;
         }
+    }
+
+    private void limpiar() {
+        jTFNombre.setText(null);
+        jTFApellido.setText(null);
+        jTFUsuario.setText(null);
+        jTFIdentificacion.setText(null);
+        jPFContrasena.setText(null);
+        jPFContrasenaConf.setText(null);
     }
 }
