@@ -7,14 +7,17 @@ package Modelos;
 
 import Utilidades.Conexion;
 import Entidad.*;
+import Utilidades.ParametrosGlobales;
 import static java.lang.Math.floor;
 import java.util.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -24,16 +27,53 @@ public class CRUDD {
     
     
 //Función que ejecuta sentencia para listar miembros de una base de datos.
-    
-    public ArrayList<Material> material_lista(String SQL, int Tipo){
+    /*
+    public DefaultTableModel material_lista(String SQL, int Tipo) throws SQLException{
         
 
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
+        DefaultTableModel dtm=new DefaultTableModel();
+        try {
+            conn = Conexion.getConexion();
+            stmt = conn.prepareStatement(SQL);          
+            rs = stmt.executeQuery();
+
+            ResultSetMetaData meta = rs.getMetaData();
+            int numberOfColumns = meta.getColumnCount();
+            for (int i = 1; i<= numberOfColumns; i++) {
+            dtm.addColumn(meta.getColumnLabel(i));
+            }
+            while (rs.next()) {
+                    
+                    Object[] fila = new Object[numberOfColumns];
+                    for (int i = 0; i<numberOfColumns; i++) {
+                    fila[i]=rs.getObject(i+1);
+                    }
+                    dtm.addRow(fila);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Conexion.closeStatement(stmt);
+            Conexion.closeConnection(conn);
+            Conexion.closeResulset(rs);
+        }
+        return dtm;
+    }    
+    */
+    public List<List<String>> Listar(String SQL, int Tipo){
         
-        ArrayList<Material> ListaMaterial=new ArrayList<Material>();
-        Material mat;
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<List<String>> ListaMaterial= new ArrayList();
+        List<String> MiMaterial = new ArrayList();
+        
+        ListaMaterial.clear();
+        MiMaterial.clear();
        
         try {
             conn = Conexion.getConexion();
@@ -41,19 +81,20 @@ public class CRUDD {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                    mat= new Material();
-                    mat.codigo=rs.getString("codigo");
-                    mat.titulo=rs.getString("titulo");
-                    mat.catalogacion=rs.getString("catalogacion");
-                    mat.CantDisp=Integer.parseInt(rs.getString("cantidad_disponible"));
-                    mat.CantTotal=Integer.parseInt(rs.getString("cantidad_total"));
+                    MiMaterial= new ArrayList();
+                    MiMaterial.add(rs.getString("codigo"));
+                    MiMaterial.add(rs.getString("titulo"));
+                    MiMaterial.add(rs.getString("catalogacion"));
+                    MiMaterial.add(rs.getString("cantidad_disponible"));
+                    MiMaterial.add(rs.getString("cantidad_total"));
                     switch (Tipo){
                         case 1:
                             break;
+                        case 2:
                         default:
                             
                     }
-                    ListaMaterial.add(mat);
+                    ListaMaterial.add(MiMaterial);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -67,7 +108,7 @@ public class CRUDD {
     
     public void insertarDatos(String SQL,String SQL2,ArrayList<String> Informacion,ArrayList<String> Informacion2,String codigo, int i, int j,int a, int b, int c) {
         int rows = 0;
-        int idEscrito=0;
+        int id=0;
 
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -82,30 +123,32 @@ public class CRUDD {
 
             for (x=0; x<i;x++){
                     if(x==a || x==b || x==c){
-
-                        JOptionPane.showMessageDialog(null,index + "   "+Informacion.get(x) + " x: " + x + " i: " +i);
-                        stmt.setInt(index++, Integer.parseInt(Informacion.get(x)));
-                        
+                    stmt.setInt(index++, Integer.parseInt(Informacion.get(x)));                        
                     }
                     else{
                     stmt.setString(index++, Informacion.get(x));
-                    JOptionPane.showMessageDialog(null,index + "   "+Informacion.get(x) + " x: " + x + " i: "+ i);
                     }
             }
-            
-            JOptionPane.showMessageDialog( null," x: " + x + " i: "+ i);
             rows = stmt.executeUpdate();
             System.out.println(SQL);        
             if (rows > 0) {
                 JOptionPane.showMessageDialog(null, "Registro exitoso" + "/n" + "Registros afectados" + rows, "Ingresado", JOptionPane.INFORMATION_MESSAGE);
             }
-            ResultSet getidescrito = stmt.getGeneratedKeys();
-            
-            if(getidescrito.next()){ 
-                idEscrito = getidescrito.getInt(1);
+            if(ParametrosGlobales.mat_table=true){
+            ResultSet getidescrito = stmt.getGeneratedKeys();            
+                if(getidescrito.next()){ 
+                    id = getidescrito.getInt(1);
+                }
             }
             
+            if(ParametrosGlobales.mat_table=false){
+            ResultSet getidaudiovisual = stmt.getGeneratedKeys();          
+            if(getidaudiovisual.next()){ 
+                id = getidaudiovisual.getInt(1);
+            }   
+            }
             //Ingresando en materiales
+            
             stmt2 = conn.prepareStatement(SQL2);
             index = 1;
             rows=0;
@@ -115,7 +158,7 @@ public class CRUDD {
                 for (x=1; x<j;x++){
                     stmt2.setInt(index++,Integer.parseInt(Informacion2.get(x)));
                 }
-            stmt2.setInt(index, idEscrito);
+            stmt2.setInt(index, id);
             rows = stmt2.executeUpdate();
             
             if (rows > 0) {

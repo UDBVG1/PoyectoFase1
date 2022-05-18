@@ -7,6 +7,7 @@ package UI;
 import Modelos.MaterialCRUDD;
 import Entidad.*;
 import Utilidades.ParametrosGlobales;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -19,6 +20,8 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
      */
     public String[] Lista={"Libro","Obra","Revista","CDA","DVD"};
     public MaterialCRUDD Nuevo_material=new MaterialCRUDD();
+    private DefaultTableModel info=Nuevo_material.Matriz_material();
+    public String cod;
     public JPMaterialesPanel() {
         initComponents();
         Accesos();
@@ -315,6 +318,16 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
             }
         ));
         Tabla1.setRequestFocusEnabled(false);
+        Tabla1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Tabla1MouseClicked(evt);
+            }
+        });
+        Tabla1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Tabla1KeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(Tabla1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -425,25 +438,34 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
         String tipo_material, valor;
 
         //Cargando datos en entidad
+        
         valor=(String)tipo.getSelectedItem();
-        if (ParametrosGlobales.tipo=="CDA" || ParametrosGlobales.tipo=="DVD"){
+        if (ParametrosGlobales.tipo.equals("CDA") || ParametrosGlobales.tipo.equals("DVD")){
             Audiovisual MiAudiovisual=new Audiovisual();
             tipo_material=valor;
-            
+            try{
             MiAudiovisual.titulo=titulo.getText();
             MiAudiovisual.tipo=ParametrosGlobales.tipo;
             MiAudiovisual.autor=autor.getText();
             MiAudiovisual.catalogacion=catalogacion.getText();
-            MiAudiovisual.tiempo= setInt(tiempo.getText());
-            MiAudiovisual.CantTotal=setInt(cant_total.getText());
-            MiAudiovisual.CantDisp=setInt(cant_disponible.getText());
+            MiAudiovisual.tiempo= Integer.parseInt(tiempo.getText());
+            MiAudiovisual.CantTotal=Integer.parseInt(cant_total.getText());
+            MiAudiovisual.CantDisp=Integer.parseInt(cant_disponible.getText());
             MiAudiovisual.genero=cambiante.getText();
             MiAudiovisual.duracion=cambiante1.getText();
             if (ParametrosGlobales.tipo=="CDA"){
-            MiAudiovisual.numCanciones=setInt(cambiante2.getText());
-            }     
+            MiAudiovisual.numCanciones=Integer.parseInt(cambiante2.getText());
+            }
+            cod=Nuevo_material.InsertarAudio(MiAudiovisual);
+            
+            clear();
+            construir_tabla();
+            }catch(NumberFormatException ex){
+        	System.out.println(ex);
+            }
         }
         else{
+            try{
             Escrito MiEscrito=new Escrito();
             tipo_material=ParametrosGlobales.tipo;
             
@@ -462,24 +484,40 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
                     MiEscrito.fechaPubli=Integer.parseInt(cambiante3.getText());
                     break;
                 case "OBR":
-                    MiEscrito.numPaginas=Integer.parseInt(cambiante2.getText());
-                    MiEscrito.fechaPubli=Integer.parseInt(cambiante3.getText());
+                    MiEscrito.numPaginas=Integer.parseInt(cambiante1.getText());
+                    MiEscrito.fechaPubli=Integer.parseInt(cambiante2.getText());
                     break;
                 case "REV":
-                    MiEscrito.periodicidad=cambiante3.getText();
+                    MiEscrito.numPaginas=Integer.parseInt(cambiante1.getText());
+                    MiEscrito.periodicidad=cambiante2.getText();
                     break;
                 default:
                                    
             }
             
-            Nuevo_material.InsertarEscrito(MiEscrito);
+            cod=Nuevo_material.InsertarEscrito(MiEscrito);
+            JOptionPane.showMessageDialog(null, "Nuevo Codigo Generado: " + cod, "Alta", JOptionPane.INFORMATION_MESSAGE);
             clear();
             construir_tabla();
-            
+            }catch(NumberFormatException ex){
+        	System.out.println(ex);
+            }        
         }
     }//GEN-LAST:event_jAccionActionPerformed
+
+    private void Tabla1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Tabla1KeyPressed
+  
+        
+    }//GEN-LAST:event_Tabla1KeyPressed
+
+    private void Tabla1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla1MouseClicked
+        String dato=String.valueOf(info.getValueAt(Tabla1.getSelectedRow(),0));
+         System.out.println(dato);
+        
+    }//GEN-LAST:event_Tabla1MouseClicked
     
     public void MostrarLibro(){
+            ParametrosGlobales.mat_table=true;
             jLautor.setText("Autor:");
             jLcambiante.setVisible(true);
             cambiante.setVisible(true);
@@ -496,6 +534,7 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
     }
     
     public void MostrarRevista(){
+            ParametrosGlobales.mat_table=true;
             jLautor.setText("Autor:");
             jLcambiante.setVisible(true);
             cambiante.setVisible(true);
@@ -511,6 +550,7 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
     }
     
     public void MostrarObra(){
+            ParametrosGlobales.mat_table=true;
             jLautor.setText("Autor:");
             jLcambiante.setVisible(true);
             cambiante.setVisible(true);
@@ -526,10 +566,11 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
     }
     
     public void MostrarDVD(){
+            ParametrosGlobales.mat_table=false;
             jLautor.setText("Director:");
-                       jLcambiante.setVisible(true);
+            jLcambiante.setVisible(true);
             cambiante.setVisible(true);
-                        jLcambiante1.setVisible(true);
+            jLcambiante1.setVisible(true);
             cambiante1.setVisible(true);
             jLcambiante.setText("Genero:");
             jLcambiante1.setText("Duración:");
@@ -540,6 +581,7 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
     }
     
     public void MostrarCDA(){
+            ParametrosGlobales.mat_table=false;
             jLautor.setText("Cantante:");
             jLcambiante.setText("Genero:");
             jLcambiante.setVisible(true);
@@ -553,6 +595,7 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
             jLcambiante3.setVisible(false);
             cambiante3.setVisible(false);
     }
+    
     private void Accesos(){
         codigo.setEnabled(false);
         tipo.removeAllItems();
@@ -604,9 +647,8 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
     }
     
     private void construir_tabla(){
-        
-        DefaultTableModel info=Nuevo_material.Matriz_material();
-        Tabla1.setModel(info);
+     info=Nuevo_material.Matriz_material();
+     Tabla1.setModel(info);
  
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -646,7 +688,4 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
     private javax.swing.JTextField titulo;
     // End of variables declaration//GEN-END:variables
 
-    private int setInt(String text) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

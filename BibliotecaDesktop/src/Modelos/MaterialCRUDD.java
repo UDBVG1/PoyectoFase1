@@ -23,18 +23,17 @@ public class MaterialCRUDD extends CRUDD{
                 "LEFT join audiovisual r on m.idaudiovisual=r.idaudiovisual\n" +
                 ";";
      private final String SQL_SELECTRN = "select count(*) from material where codigo = ?;"; 
-     private String SQL_INSERT_ESCRITO="";
+     private String SQL_INSERT="";
     private final String SQL_INSERTAUDIO="INSERT INTO `audiovisual` (`idaudiovisual`, `titulo`, `tipo`, `artista`, `genero`, `duracion`, `canciones`, `director`)\n" +
                                             " VALUES (?, ?,?, ?,?, ?',?,?,?);";
-     private final String SQL_MATERIAL="INSERT INTO `material` (`codigo`, `catalogacion`, `cantidad_total`, `cantidad_disponible`, `tiempo`, `idescrito`)\n" +
-                                       "VALUES (?, ?,?,?,?,?);";
+     private String SQL_MATERIAL="";
      /*
     
     */
      
     private final ArrayList<String> matriz_entidad = new ArrayList<String>();
     private final ArrayList<String> matriz_material = new ArrayList<String>();
-
+/*
     public DefaultTableModel Matriz_material(){
         Object[] Titulos=new Object[]{"Codigo","Titulo","Cantidad Disponible","Cantidad Total", "Catalogacion"};
 
@@ -52,39 +51,64 @@ public class MaterialCRUDD extends CRUDD{
         }
         
         return matriz;
+    }*/
+    
+        public DefaultTableModel Matriz_material(){
+        Object[] Titulos=new Object[]{"Codigo","Titulo","Cantidad Disponible","Cantidad Total", "Catalogacion"};
+
+        List<List<String>> miLista=super.Listar(SQLMaterial,0);
+        DefaultTableModel matriz = new DefaultTableModel(Titulos,0);
+        
+        for (int i=0 ; i<miLista.size() ; i++){
+                   matriz.addRow(new Object[]{
+                   miLista.get(i).get(0) + "",
+                   miLista.get(i).get(1) + "",
+                   miLista.get(i).get(2) + "",
+                   miLista.get(i).get(3) + "",
+                   miLista.get(i).get(4)
+               });
+        }
+        
+        return matriz;
     }
     
-    public void InsertarEscrito(Escrito Entidad){
+        public ArrayList<String> Buscar_Material(){
+            ArrayList<String> Material =new ArrayList();
+            
+            
+            return Material;
+        }
+    public String InsertarEscrito(Escrito Entidad){
         String codigo; 
         int i,j,a,b,c;
 
-        i=j=a=b=c=0;
+        i=j=0;
+        a=b=c=100;
         /*Asignar a String*/
         matriz_entidad.clear();
         matriz_material.clear();
-        SQL_INSERT_ESCRITO="";
         matriz_entidad.add(Entidad.getTitulo());
         matriz_entidad.add(Entidad.getTipo());
         matriz_entidad.add(Entidad.getAutor());
         matriz_entidad.add(String.valueOf(Entidad.getNumPaginas()));
         a=3;
         matriz_entidad.add(Entidad.getEditorial());
-        SQL_INSERT_ESCRITO="INSERT INTO `escrito` (`titulo`, `tipo`, `autor`, `num_pag`, `editorial`,";
+        SQL_INSERT="INSERT INTO `escrito` (`titulo`, `tipo`, `autor`, `num_pag`, `editorial`,";
         switch (Entidad.getTipo()){
             case "LIB":
                 matriz_entidad.add(String.valueOf(Entidad.getISBN()));
                 matriz_entidad.add(String.valueOf(Entidad.getFechaPubli()));
-                SQL_INSERT_ESCRITO=SQL_INSERT_ESCRITO + "`isbn`,`publicacion`) values(?,?,?,?,?,?,?);";
+                SQL_INSERT=SQL_INSERT + "`isbn`,`publicacion`) values(?,?,?,?,?,?,?);";
                 b=5;c=6;
                 break;
             case "REV":
                 matriz_entidad.add(Entidad.getPeriodicidad());
                 b=100; c=100;
-                SQL_INSERT_ESCRITO=SQL_INSERT_ESCRITO + " `periodicidad`) values(?,?,?,?,?,?);";
+                SQL_INSERT=SQL_INSERT + " `periodicidad`) values(?,?,?,?,?,?);";
                 break;
             case "OBR":
                 matriz_entidad.add(String.valueOf(Entidad.getFechaPubli()));
-                SQL_INSERT_ESCRITO=SQL_INSERT_ESCRITO + " `publicacion`) values(?,?,?,?,?,?);";
+                SQL_INSERT=SQL_INSERT + " `publicacion`) values(?,?,?,?,?,?);";
                 b=5;c=100;
                 break;
                
@@ -97,14 +121,55 @@ public class MaterialCRUDD extends CRUDD{
         matriz_material.add(String.valueOf(Entidad.getCantDisp()));
         matriz_material.add(String.valueOf(Entidad.getTiempo()));
         j=4;
+        SQL_MATERIAL="INSERT INTO `material` (`codigo`, `catalogacion`, `cantidad_total`, `cantidad_disponible`, `tiempo`, `idescrito`)\n" +
+                                       "VALUES (?, ?,?,?,?,?);";
+        codigo=super.NumRandom(SQL_SELECTRN,Entidad.tipo);
+
+        
+        super.insertarDatos(SQL_INSERT, SQL_MATERIAL,matriz_entidad ,matriz_material, codigo,i,j,a,b,c); 
+        return codigo;
+    }
+    
+    public String InsertarAudio(Audiovisual Entidad){
+        String codigo; 
+        int i,j,a,b,c;
+
+        i=j=0;
+        a=b=c=100;
+        /*Asignar a String*/
+        matriz_entidad.clear();
+        matriz_material.clear();
+        matriz_entidad.add(Entidad.getTitulo());
+        matriz_entidad.add(Entidad.getTipo());
+        matriz_entidad.add(Entidad.getAutor());
+        matriz_entidad.add(Entidad.getGenero());
+        matriz_entidad.add(Entidad.getDuracion());
+        SQL_INSERT="INSERT INTO `audiovisual` (`titulo`, `tipo`,"; 
+        if (Entidad.getTipo()=="CDA"){
+                SQL_INSERT=SQL_INSERT + " `artista`,`genero`,`duracion`,`canciones`) values(?,?,?,?,?,?);";
+                matriz_entidad.add(String.valueOf(Entidad.getNumCanciones()));
+                a=6;b=100;c=100;
+        }
+        else{
+           SQL_INSERT=SQL_INSERT + " `director`,`genero`,`duracion`) values(?,?,?,?,?);"; 
+        }
+
+        i=matriz_entidad.size();
+        
+        SQL_MATERIAL="INSERT INTO `material` (`codigo`, `catalogacion`, `cantidad_total`, `cantidad_disponible`, `tiempo`, `idaudiovisual`)\n" +
+                                       "VALUES (?, ?,?,?,?,?);";
+        matriz_material.add(Entidad.getcatalogacion());
+        matriz_material.add(String.valueOf(Entidad.getCantTotal()));
+        matriz_material.add(String.valueOf(Entidad.getCantDisp()));
+        matriz_material.add(String.valueOf(Entidad.getTiempo()));
+        j=4;
         
         codigo=super.NumRandom(SQL_SELECTRN,Entidad.tipo);
 
         
-        super.insertarDatos(SQL_INSERT_ESCRITO, SQL_MATERIAL,matriz_entidad ,matriz_material, codigo,i,j,a,b,c);   
+        super.insertarDatos(SQL_INSERT, SQL_MATERIAL,matriz_entidad ,matriz_material, codigo,i,j,a,b,c); 
+        return codigo;
     }
-    
-
     
     
     
