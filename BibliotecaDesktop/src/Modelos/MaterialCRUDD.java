@@ -17,11 +17,21 @@ public class MaterialCRUDD extends CRUDD{
 //Declaracion de variables SQL
     
     private final String SQLMaterial="SELECT m.codigo,m.idescrito,m.idaudiovisual, case when m.idescrito is not null then l.titulo \n" +
-                "WHEN m.idaudiovisual is not null THEN r.titulo \n" +
-                "else null end AS titulo,catalogacion,cantidad_total,cantidad_disponible\n" +
-                "FROM material m LEFT join escrito l on m.idescrito=l.idescrito \n" +
-                "LEFT join audiovisual r on m.idaudiovisual=r.idaudiovisual\n" +
-                ";";
+                                        "WHEN m.idaudiovisual is not null THEN r.titulo \n" +
+                                        "else null end AS titulo,catalogacion,cantidad_total,cantidad_disponible\n" +
+                                        "FROM material m LEFT join escrito l on m.idescrito=l.idescrito \n" +
+                                        "LEFT join audiovisual r on m.idaudiovisual=r.idaudiovisual\n" +
+                                        ";";
+    private final String sqlTodoMaterial="SELECT 	m.codigo,case when m.idlibros is not null then l.titulo\n" +
+                                                    "when m.idrevistas is not null then r.titulo\n" +
+                                                    "when m.idm_cd is not null then mc.titulo\n" +
+                                                    "when m.idm_dvd is not null then md.titulo\n" +
+                                                    "else null end AS titulo,cantidad_total,cantidad_disponible\n" +
+                                                    " FROM material m\n" +
+                                                    "LEFT join libros l on m.idlibros=l.idlibros\n" +
+                                                    "LEFT join revista r on m.idrevistas=r.idrevistas\n" +
+                                                    "LEFT join m_cd mc on m.idm_cd=mc.idm_cd\n" +
+                                                    "LEFT join m_dvd md on m.idm_dvd=md.idm_dvd;";
      private final String SQL_SELECTRN = "select count(*) from material where codigo = ?;"; 
      private String SQL_INSERT="";
     private final String SQL_INSERTAUDIO="INSERT INTO `audiovisual` (`idaudiovisual`, `titulo`, `tipo`, `artista`, `genero`, `duracion`, `canciones`, `director`)\n" +
@@ -31,8 +41,8 @@ public class MaterialCRUDD extends CRUDD{
     
     */
      
-    private final ArrayList<String> matriz_entidad = new ArrayList<String>();
-    private final ArrayList<String> matriz_material = new ArrayList<String>();
+    private final ArrayList<String> matriz_entidad = new ArrayList<>();
+    private final ArrayList<String> matriz_material = new ArrayList<>();
 /*
     public DefaultTableModel Matriz_material(){
         Object[] Titulos=new Object[]{"Codigo","Titulo","Cantidad Disponible","Cantidad Total", "Catalogacion"};
@@ -78,6 +88,7 @@ public class MaterialCRUDD extends CRUDD{
             
             return Material;
         }
+        
     public String InsertarEscrito(Escrito Entidad){
         String codigo; 
         int i,j,a,b,c;
@@ -145,7 +156,7 @@ public class MaterialCRUDD extends CRUDD{
         matriz_entidad.add(Entidad.getGenero());
         matriz_entidad.add(Entidad.getDuracion());
         SQL_INSERT="INSERT INTO `audiovisual` (`titulo`, `tipo`,"; 
-        if (Entidad.getTipo()=="CDA"){
+        if ("CDA".equals(Entidad.getTipo())){
                 SQL_INSERT=SQL_INSERT + " `artista`,`genero`,`duracion`,`canciones`) values(?,?,?,?,?,?);";
                 matriz_entidad.add(String.valueOf(Entidad.getNumCanciones()));
                 a=6;b=100;c=100;
@@ -171,6 +182,10 @@ public class MaterialCRUDD extends CRUDD{
         return codigo;
     }
     
+    public DefaultTableModel listarMateriales(){
+        DefaultTableModel dtm=super.material_lista(sqlTodoMaterial);
+        return dtm;
+    }
     
     
 }

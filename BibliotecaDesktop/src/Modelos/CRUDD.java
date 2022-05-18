@@ -27,8 +27,8 @@ public class CRUDD {
     
     
 //Función que ejecuta sentencia para listar miembros de una base de datos.
-    /*
-    public DefaultTableModel material_lista(String SQL, int Tipo) throws SQLException{
+    
+    public DefaultTableModel material_lista(String SQL) {
         
 
         Connection conn = null;
@@ -62,7 +62,7 @@ public class CRUDD {
         }
         return dtm;
     }    
-    */
+    
     public List<List<String>> Listar(String SQL, int Tipo){
         
 

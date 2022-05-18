@@ -174,7 +174,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLtitulo" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                                  <Component id="titulo" max="32767" attributes="0"/>
+                                  <Component id="titulo" pref="256" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
@@ -230,13 +230,15 @@
                       <Component id="cambiante2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLtiempo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tiempo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLcant_total" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cant_total" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLcambiante3" alignment="0" max="32767" attributes="0"/>
-                      <Component id="cambiante3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLtiempo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tiempo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLcant_total" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cant_total" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cambiante3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
