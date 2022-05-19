@@ -650,7 +650,7 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
     }
     
     private void construir_tabla(){
-     info=Nuevo_material.Matriz_material();
+     info=Nuevo_material.listarMateriales();
      Tabla1.setModel(info);
  
     }
