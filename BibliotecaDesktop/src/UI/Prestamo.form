@@ -166,6 +166,9 @@
               <Image iconType="3" name="/Utilidades/Recursos/EditarMaterial.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ReservarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="Devolucion">
           <Properties>
@@ -207,6 +210,7 @@
                 <Column editable="true" title="Title 4" type="java.lang.Object"/>
               </Table>
             </Property>
+            <Property name="autoResizeMode" type="int" value="0"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -237,7 +241,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="tituloDev">
       <Properties>
         <Property name="text" type="java.lang.String" value="Informacion acerca sus prestamos"/>
       </Properties>

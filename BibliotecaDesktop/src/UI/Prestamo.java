@@ -9,6 +9,8 @@ import Modelos.PrestamosCRUD;
 import Modelos.Validaciones;
 import java.util.ArrayList;
 import Utilidades.ParametrosGlobales;
+import java.util.Set;
+import javax.swing.table.TableColumn;
 /**
  *
  * @author admin
@@ -24,7 +26,8 @@ public class Prestamo extends javax.swing.JPanel {
         validar = new Validaciones();
         prestamo = new PrestamosCRUD();
         jTableDatos.setModel(prestamo.mostrar(prestamo.SQL_SELECTall));
-        jTable1.setModel(prestamo.mostrarPrestamoUsuario());
+        acceso();
+        OcultarCodigo();
     }
 
     /**
@@ -56,7 +59,7 @@ public class Prestamo extends javax.swing.JPanel {
         jTableDatos = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
+        tituloDev = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -103,6 +106,11 @@ public class Prestamo extends javax.swing.JPanel {
         jToolBar1.add(Prestar);
 
         Reservar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/EditarMaterial.png"))); // NOI18N
+        Reservar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReservarActionPerformed(evt);
+            }
+        });
         jToolBar1.add(Reservar);
 
         Devolucion.setText("DEV");
@@ -134,6 +142,7 @@ public class Prestamo extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTableDatos.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jScrollPane3.setViewportView(jTableDatos);
 
         add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 690, 140));
@@ -153,8 +162,8 @@ public class Prestamo extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, 350, 150));
 
-        jLabel2.setText("Informacion acerca sus prestamos");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, -1, -1));
+        tituloDev.setText("Informacion acerca sus prestamos");
+        add(tituloDev, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, -1, -1));
 
         jLabel3.setText("PRESTAMO");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, -1, -1));
@@ -168,21 +177,25 @@ public class Prestamo extends javax.swing.JPanel {
             labelsNames("Editorial","ISBN");
             jTableDatos.setModel(prestamo.mostrar(prestamo.SQL_SELECTlibros));
             ParametrosGlobales.TipoPrestamo = 1;
+            OcultarCodigo();
                 break;
             case "Revista":
             labelsNames("Periodicidad","Año ublicacion");
             jTableDatos.setModel(prestamo.mostrar(prestamo.SQL_SELECTrevista));
             ParametrosGlobales.TipoPrestamo = 2;
+            OcultarCodigo();
                 break;
             case "CD":
             labelsNames("Genero","Duracion");
             jTableDatos.setModel(prestamo.mostrar(prestamo.SQL_SELECTcd));
             ParametrosGlobales.TipoPrestamo = 3;
+            OcultarCodigo();
                 break;
             case "DVD":
             labelsNames("Genero","Duracion");
             jTableDatos.setModel(prestamo.mostrar(prestamo.SQL_SELECTdvd));
             ParametrosGlobales.TipoPrestamo = 4;
+            OcultarCodigo();
                 break;
             case "Tesis":
             
@@ -192,7 +205,9 @@ public class Prestamo extends javax.swing.JPanel {
             
                 break;
             default:
-            jTableDatos.setModel(prestamo.mostrar(prestamo.SQL_SELECTall));    
+            jTableDatos.setModel(prestamo.mostrar(prestamo.SQL_SELECTall));
+            ParametrosGlobales.TipoPrestamo = 0;
+            OcultarCodigo();
                 break;
         } 
         
@@ -223,29 +238,38 @@ public class Prestamo extends javax.swing.JPanel {
         switch(ParametrosGlobales.TipoPrestamo){
             case 1:
             jTableDatos.setModel(prestamo.Filtrar(prestamo.SQL_BUSCARL,titulo ,autor ,edit ,isbn ));
+        
                 break;
             case 2:
             jTableDatos.setModel(prestamo.Filtrar(prestamo.SQL_BUSCARR,titulo ,autor ,periodicidad ,publicacion ));
+            
                 break;
             case 3:
-            jTableDatos.setModel(prestamo.Filtrar(prestamo.SQL_BUSCARC,titulo ,autor ,genero ,duracion ));   
+            jTableDatos.setModel(prestamo.Filtrar(prestamo.SQL_BUSCARC,titulo ,autor ,genero ,duracion )); 
+           
                 break;
             case 4:
-            jTableDatos.setModel(prestamo.Filtrar(prestamo.SQL_BUSCARD,titulo ,autor ,genero ,duracion ));   
+            jTableDatos.setModel(prestamo.Filtrar(prestamo.SQL_BUSCARD,titulo ,autor ,genero ,duracion )); 
+            
                 break;
         }
         
     }//GEN-LAST:event_filtradoActionPerformed
 
     private void PrestarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrestarActionPerformed
-          prestamo.insertarPrestamo(codigoPrestamo(),ParametrosGlobales.GlobalAccesId);//(ParametrosGlobales.GlobalAccesId)ese de globalaccessid es el int autoincrementable de el usuario que lo identifica
-          prestamo.updateMaterial(-1,codigoPrestamo());
+      prestamo.insertarPrestamo(codigo(),ParametrosGlobales.GlobalAccesId);
+      prestamo.updateMaterial(-1,codigo()); 
     }//GEN-LAST:event_PrestarActionPerformed
 
     private void DevolucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DevolucionActionPerformed
 
           prestamo.updateMaterial(1,codigoDev());      
     }//GEN-LAST:event_DevolucionActionPerformed
+
+    private void ReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReservarActionPerformed
+      prestamo.insertarReserva(codigo(),ParametrosGlobales.GlobalAccesId);
+        
+    }//GEN-LAST:event_ReservarActionPerformed
 
 
 
@@ -257,7 +281,6 @@ public class Prestamo extends javax.swing.JPanel {
     private javax.swing.JButton filtrado;
     private javax.swing.JLabel generoLabel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelAutor;
     private javax.swing.JLabel jLabelTitulo;
@@ -271,6 +294,7 @@ public class Prestamo extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JLabel tituloDev;
     private javax.swing.JLabel warning;
     // End of variables declaration//GEN-END:variables
     public void labelsNames(String nombre1,String nombre2){
@@ -280,11 +304,11 @@ public class Prestamo extends javax.swing.JPanel {
 
 
     
-    public Object codigoPrestamo(){
+    public Object codigo(){
         Object codigo = null;
         int fila = jTableDatos.getSelectedRow();
         System.out.println(codigo);
-        return codigo = jTableDatos.getValueAt(fila, 1);
+        return codigo = jTableDatos.getValueAt(fila, 0);
     }
     
     public Object codigoDev(){
@@ -294,23 +318,39 @@ public class Prestamo extends javax.swing.JPanel {
         return codigo = jTable1.getValueAt(fila, 1); 
     }
     
-    public Object fechaEntrega(){
-        Object codigo = null;
-        int fila = jTable1.getSelectedRow();
-        System.out.println(codigo);
-        return codigo = jTable1.getValueAt(fila, 3);           
+//    public Object fechaEntrega(){
+//        Object codigo = null;
+//        int fila = jTable1.getSelectedRow();
+//        System.out.println(codigo);
+//        return codigo = jTable1.getValueAt(fila, 3);           
+//    }
+    public void OcultarCodigo(){
+        if(ParametrosGlobales.GlobalAccesNivel == 1){
+          jTableDatos.getColumnModel().getColumn(0).setPreferredWidth(0);
+          jTableDatos.getColumnModel().getColumn(0).setResizable(false);
+        }
     }
     
     private void acceso() {
         switch (ParametrosGlobales.GlobalAccesNivel) {
             case 1:
-                
+             tituloDev.setText("Informacion acerca de sus prestamos");
+             Prestar.setVisible(false);
+             Devolucion.setVisible(false);
+             jTable1.setModel(prestamo.mostrarPrestamoUsuario());
+             
                 break;
             case 2:
-                
+              tituloDev.setText("Prestamos");
+              Prestar.setVisible(true); 
+              Devolucion.setVisible(true);
+              jTable1.setModel(prestamo.mostrarPrestamos());              
                 break;
             case 3:
-                
+              tituloDev.setText("Prestamos");
+              Prestar.setVisible(true); 
+              Devolucion.setVisible(true);
+              jTable1.setModel(prestamo.mostrarPrestamos()); 
                 break;
         }
     }
