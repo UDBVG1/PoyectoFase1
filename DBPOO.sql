@@ -169,7 +169,7 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`reserva`
+-- Table `poo`.`reserva`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `poo`.`reserva` (
   `idreserva` INT NOT NULL AUTO_INCREMENT,
@@ -177,7 +177,6 @@ CREATE TABLE IF NOT EXISTS `poo`.`reserva` (
   `estado` VARCHAR(45) NULL,
   `reservado` INT NULL,
   `codigo` VARCHAR(8) NOT NULL,
-  `reservado` INT NULL,
   PRIMARY KEY (`idreserva`, `codigo`),
   INDEX `fk_reserva_material_idx` (`codigo` ASC) ,
   CONSTRAINT `fk_reserva_material`
@@ -189,7 +188,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`config`
+-- Table `poo`.`config`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `poo`.`config` (
   `idconfig` INT NOT NULL AUTO_INCREMENT,
@@ -225,7 +224,7 @@ CREATE TABLE IF NOT EXISTS `poo`.`prestamos` (
   `fechaprestamo` DATE NULL DEFAULT NULL,
   `fechaentrega` DATE NOT NULL,
   `prestado` INT NULL,
-  `mora` DECIMAL(4) NULL,
+  `mora` DECIMAL(4) NULL default 0,
   `codigo` VARCHAR(8) NOT NULL,
   `idsocio` INT(11) NOT NULL,
   `idreserva` INT NULL,
@@ -246,12 +245,11 @@ CREATE TABLE IF NOT EXISTS `poo`.`prestamos` (
     ON UPDATE CASCADE,
   CONSTRAINT `fk_prestamos_reserva1`
     FOREIGN KEY (`idreserva`)
-    REFERENCES `mydb`.`reserva` (`idreserva`)
+    REFERENCES `poo`.`reserva` (`idreserva`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
-
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
