@@ -11,6 +11,7 @@ import Modelos.UsuariosCRUD;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import org.w3c.dom.events.EventException;
 //import javax.swing.ComboBoxModel;
 
 /**
@@ -69,6 +70,11 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
         jTFNombre.setNextFocusableComponent(jTFApellido);
 
         jTFUsuario.setNextFocusableComponent(jCBNivel);
+        jTFUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTFUsuarioFocusGained(evt);
+            }
+        });
 
         jTFIdentificacion.setNextFocusableComponent(jBAgregar);
 
@@ -327,15 +333,21 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
     private void jTFApellidoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFApellidoKeyPressed
-        if (evt.getKeyChar()==KeyEvent.VK_ENTER){
+
+    }//GEN-LAST:event_jTFApellidoKeyPressed
+
+    private void jTFUsuarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFUsuarioFocusGained
+        try{
             String iniciales;
             String nombre = jTFNombre.getText();
             String apellido = jTFApellido.getText();
             iniciales=nombre.substring(0,1)+apellido.substring(0, 1);
             System.out.println(iniciales);
             jTFUsuario.setText(data.usuarioGenerate(iniciales));
+        }catch(EventException e){
+            JFLogin.logger.error(e.toString());
         }
-    }//GEN-LAST:event_jTFApellidoKeyPressed
+    }//GEN-LAST:event_jTFUsuarioFocusGained
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
