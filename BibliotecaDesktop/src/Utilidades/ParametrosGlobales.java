@@ -5,6 +5,8 @@
  */
 package Utilidades;
 
+import java.util.logging.Logger;
+
 /**
  *
  * @author amgoo
@@ -22,6 +24,8 @@ public class ParametrosGlobales {
     
     //indice del menu de prestamo
     public static int TipoPrestamo;
+    
+
 
     //Materiales
       public static String tipo;

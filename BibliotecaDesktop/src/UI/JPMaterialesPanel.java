@@ -18,9 +18,9 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
     /**
      * Creates new form JPMaterialesPanel
      */
-    public String[] Lista={"Libro","Obra","Revista","CDA","DVD"};
+    public String[] Lista={"LIBRO","OBRA","REVISTA","CDA","DVD"};    
     public MaterialCRUDD Nuevo_material=new MaterialCRUDD();
-    private DefaultTableModel info=Nuevo_material.Matriz_material();
+    public DefaultTableModel info=new DefaultTableModel();
     public String cod;
     public JPMaterialesPanel() {
         initComponents();
@@ -100,6 +100,11 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
         jTBMaterial.add(jEditar);
 
         jEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/EliminarMaterial.png"))); // NOI18N
+        jEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jEliminarActionPerformed(evt);
+            }
+        });
         jTBMaterial.add(jEliminar);
 
         jMostrarTodo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/ListarMaterial.png"))); // NOI18N
@@ -401,37 +406,15 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_cambiante3ActionPerformed
 
     private void tipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tipoItemStateChanged
-
-        String valor;
-        valor=(String)tipo.getSelectedItem();
-        if (valor == null){
+    String valor;
+    valor=(String)tipo.getSelectedItem();
+            if (valor == null){
             MostrarLibro();
         }
         else{
-        switch (valor){
-            case "Libro":
-                ParametrosGlobales.tipo="LIB";
-                MostrarLibro();
-                break;
-            case "Revista":
-                ParametrosGlobales.tipo="REV";
-                MostrarRevista();
-                break;
-            case "Obra":
-                ParametrosGlobales.tipo="OBR";
-                MostrarObra();
-                break;
-            case "CDA":
-                ParametrosGlobales.tipo="CDA";
-                MostrarCDA();
-                break;
-            case "DVD":
-                ParametrosGlobales.tipo="DVD";
-                MostrarDVD();
-                break;
+                    Mostrar(valor.substring(0, 3));
             }
-        }
- 
+
     }//GEN-LAST:event_tipoItemStateChanged
 
     private void jAccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAccionActionPerformed
@@ -512,11 +495,55 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_Tabla1KeyPressed
 
     private void Tabla1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla1MouseClicked
+        DefaultTableModel datos=new DefaultTableModel();
+        String dato2="null";
         String dato=String.valueOf(info.getValueAt(Tabla1.getSelectedRow(),0));
-         System.out.println(dato);
+        
+        
+        
+        datos=Nuevo_material.BuscarMaterial(dato,dato.substring(0,3));
+        dato2=String.valueOf(datos.getValueAt(0,0));
+        codigo.setText(dato2);
+        Mostrar(dato2.substring(0,3));
+        titulo.setText(String.valueOf(datos.getValueAt(0,1)));
+        autor.setText(String.valueOf(datos.getValueAt(0,3)));
+        catalogacion.setText(String.valueOf(datos.getValueAt(0,2)));
         
     }//GEN-LAST:event_Tabla1MouseClicked
+
+    private void jEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEliminarActionPerformed
+        String material;
+        material=codigo.getText();
+        
+    }//GEN-LAST:event_jEliminarActionPerformed
     
+    public void Mostrar(String valor){
+
+        switch (valor){
+            case "LIB":
+                ParametrosGlobales.tipo="LIB";
+                MostrarLibro();
+                break;
+            case "REV":
+                ParametrosGlobales.tipo="REV";
+                MostrarRevista();
+                break;
+            case "OBR":
+                ParametrosGlobales.tipo="OBR";
+                MostrarObra();
+                break;
+            case "CDA":
+                ParametrosGlobales.tipo="CDA";
+                MostrarCDA();
+                break;
+            case "DVD":
+                ParametrosGlobales.tipo="DVD";
+                MostrarDVD();
+                break;
+            
+        }
+ 
+    }
     public void MostrarLibro(){
             ParametrosGlobales.mat_table=true;
             jLautor.setText("Autor:");
@@ -624,7 +651,7 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
                 jAgregar.setVisible(false);
                 jEditar.setVisible(false);
                 jEliminar.setVisible(false);
-                jMostrarTodo.setVisible(false);
+                jMostrarTodo.setVisible(true);
                 Tabla1.setModel(Nuevo_material.listarMateriales());
                 //construir_tabla();
                 break;
@@ -650,7 +677,8 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
     }
     
     private void construir_tabla(){
-     info=Nuevo_material.Matriz_material();
+     
+     info=Nuevo_material.listarMateriales();
      Tabla1.setModel(info);
  
     }

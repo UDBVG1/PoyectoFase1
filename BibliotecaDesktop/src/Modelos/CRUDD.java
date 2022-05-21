@@ -28,7 +28,7 @@ public class CRUDD {
     
 //Función que ejecuta sentencia para listar miembros de una base de datos.
     
-    public DefaultTableModel material_lista(String SQL) {
+    public DefaultTableModel material_lista(String SQL, int tipo,String codigo) {
         
 
         Connection conn = null;
@@ -37,7 +37,11 @@ public class CRUDD {
         DefaultTableModel dtm=new DefaultTableModel();
         try {
             conn = Conexion.getConexion();
-            stmt = conn.prepareStatement(SQL);          
+            stmt = conn.prepareStatement(SQL); 
+            if (tipo==1){
+                int index=1;
+                stmt.setString(index, codigo);
+            }
             rs = stmt.executeQuery();
 
             ResultSetMetaData meta = rs.getMetaData();
