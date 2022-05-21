@@ -5,6 +5,7 @@
  */
 package Modelos;
 
+import static UI.JFLogin.logger;
 import Utilidades.Conexion;
 import Utilidades.ParametrosGlobales;
 import static java.lang.Integer.parseInt;
@@ -18,7 +19,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author admin
@@ -139,7 +139,7 @@ public class PrestamosCRUD {
                     dtm.addRow(fila);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("ERROR en la conexion bd", e);
         } finally {
             Conexion.closeStatement(stmt);
             Conexion.closeConnection(conn);
