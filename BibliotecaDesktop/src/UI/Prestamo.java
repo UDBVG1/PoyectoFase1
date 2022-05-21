@@ -139,6 +139,11 @@ public class Prestamo extends javax.swing.JPanel {
         add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 700, 120));
 
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 350, 160));
@@ -258,11 +263,11 @@ public class Prestamo extends javax.swing.JPanel {
         prestamo.devolucion(idsocio, codigoDev());
         
         if(ParametrosGlobales.GlobalAccesId == 3){
-          jTable1.setModel(prestamo.mostrarPrestamoUsuario(ParametrosGlobales.GlobalAccesId));  
+          jTable1.setModel(prestamo.mostrarPrestamoUsuario(ParametrosGlobales.GlobalAccesId,prestamo.SQL_SELECTPRESX));  
         }else{
           jTable1.setModel(prestamo.mostrarRev());   
         }
-    
+        
     }//GEN-LAST:event_DevolucionActionPerformed
 
     private void ReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReservarActionPerformed
@@ -273,8 +278,15 @@ public class Prestamo extends javax.swing.JPanel {
     private void botonFiltrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonFiltrarUsuarioActionPerformed
         int idsocio;
         idsocio = prestamo.GetUsuario(IDUsuario.getText());
-        jTable1.setModel(prestamo.mostrarPrestamoUsuario(idsocio));
+        jTable1.setModel(prestamo.mostrarPrestamoUsuario(idsocio,prestamo.SQL_SELECTREVSOCIO));
     }//GEN-LAST:event_botonFiltrarUsuarioActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        if(ParametrosGlobales.GlobalAccesNivel == 1){
+        jTableDatos.setModel(prestamo.FiltrarSeleccion(prestamo.SQL_SelectFiltrado,codigoDev() ));
+        }
+         
+    }//GEN-LAST:event_jTable1MouseClicked
 
 
 
@@ -339,6 +351,8 @@ public class Prestamo extends javax.swing.JPanel {
         }
     }
     
+    
+    
     private void acceso() {
         switch (ParametrosGlobales.GlobalAccesNivel) {
             case 1:
@@ -362,7 +376,7 @@ public class Prestamo extends javax.swing.JPanel {
              tituloDev.setText("Informacion acerca de sus prestamos");
              Prestar.setVisible(false);
              Devolucion.setVisible(false);
-             jTable1.setModel(prestamo.mostrarPrestamoUsuario(ParametrosGlobales.GlobalAccesId));
+             jTable1.setModel(prestamo.mostrarPrestamoUsuario(ParametrosGlobales.GlobalAccesId,prestamo.SQL_SELECTPRESX));
              jTable1.setRowSelectionAllowed(false);
              jTable1.setColumnSelectionAllowed(false);
              jTable1.setCellSelectionEnabled(false); 

@@ -94,6 +94,18 @@ public class PrestamosCRUD {
                                     "LEFT join prestamos p on m.codigo = p.codigo\n" +
                                     "where p.idsocio = ?;"; // buscar los prestamos segun usuario que esta logueado
      
+     public String SQL_SELECTREVSOCIO = "SELECT m.codigo as Codigo,case when m.idescrito is not null then l.titulo\n" +
+                                        "when m.idaudiovisual is not null then mc.titulo\n" +
+                                        "else null end AS titulo,autor,estado,u.usuario\n" +
+                                        "FROM material m\n" +
+                                        "LEFT join escrito l on m.idescrito=l.idescrito\n" +
+                                        "LEFT join audiovisual mc on m.idaudiovisual=mc.idaudiovisual\n" +
+                                        "LEFT join reserva r on m.codigo = r.codigo\n" +
+                                        "LEFT join usuario u on u.idusuario = r.idusuario\n" +
+                                        "where r.idusuario = ?;";
+     
+     public String SQL_SelectFiltrado = "select codigo, cantidad_disponible from material where codigo = ?;";
+     
      private String SQL_getIdUsuario = "select idusuario from usuario where usuario = ?;";
      
      private String SQL_devolucion = "update reserva set estado = 'Inactivo' where idusuario = ? and codigo = ?;";
@@ -232,14 +244,14 @@ public class PrestamosCRUD {
         }
     }
     
-    public DefaultTableModel mostrarPrestamoUsuario(int nivel){
+    public DefaultTableModel mostrarPrestamoUsuario(int nivel,String SQL_SELECT){
         DefaultTableModel dtm = new DefaultTableModel();
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;      
         try{
             conn = Conexion.getConexion();
-            stmt = conn.prepareStatement(SQL_SELECTPRESX);
+            stmt = conn.prepareStatement(SQL_SELECT);
             int index = 1;
             stmt.setInt(index++,nivel);
             rs = stmt.executeQuery();
@@ -379,5 +391,41 @@ public class PrestamosCRUD {
             Conexion.closeStatement(stmt);
             Conexion.closeConnection(conn);
         }        
+    }
+    
+        public DefaultTableModel FiltrarSeleccion(String select,Object box1){
+        DefaultTableModel dtm = new DefaultTableModel();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+       
+        try {
+            conn = Conexion.getConexion();
+            stmt = conn.prepareStatement(select);
+            int index = 1;
+            stmt.setObject(index,box1);
+            
+            rs = stmt.executeQuery();
+            ResultSetMetaData meta = rs.getMetaData();
+            int numberOfColumns = meta.getColumnCount();
+            for (int i = 1; i<= numberOfColumns; i++) {
+            dtm.addColumn(meta.getColumnLabel(i));
+            }
+            while (rs.next()) {
+                    
+                    Object[] fila = new Object[numberOfColumns];
+                    for (int i = 0; i<numberOfColumns; i++) {
+                    fila[i]=rs.getObject(i+1);
+                    }
+                    dtm.addRow(fila);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Conexion.closeStatement(stmt);
+            Conexion.closeConnection(conn);
+            Conexion.closeResulset(rs);
+        }
+        return dtm;
     }
 }
