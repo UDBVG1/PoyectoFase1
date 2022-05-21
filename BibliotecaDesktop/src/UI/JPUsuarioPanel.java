@@ -8,6 +8,7 @@ package UI;
 import Entidad.Usuario;
 import Utilidades.ParametrosGlobales;
 import Modelos.UsuariosCRUD;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 //import javax.swing.ComboBoxModel;
@@ -90,10 +91,10 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
 
         jLabel6.setText("Contraseña");
 
-        jTFApellido.setNextFocusableComponent(jTBUsuario);
-        jTFApellido.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jTFApellidoFocusLost(evt);
+        jTFApellido.setNextFocusableComponent(jTFUsuario);
+        jTFApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTFApellidoKeyPressed(evt);
             }
         });
 
@@ -291,9 +292,12 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Contraseña no coinciden", "Incompletado", JOptionPane.WARNING_MESSAGE);
             proceso=false;
         }
+        usuario.setIdentificador(jTFIdentificacion.getText());
         if (proceso){
             int rows=data.updateUsuario(usuario);
             JOptionPane.showMessageDialog(null, rows+" Cambio Aplicado", "Proceso", JOptionPane.INFORMATION_MESSAGE);
+            jTUsuarios.removeAll();
+            jTUsuarios.setModel(data.usuariosLista(ParametrosGlobales.GlobalAccesNivel));
         } 
     }//GEN-LAST:event_jBGuardarActionPerformed
 
@@ -322,13 +326,16 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
         limpiar();
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
-    private void jTFApellidoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFApellidoFocusLost
-        String iniciales;
-        String nombre = jTFNombre.getText().trim();
-        String apellido = jTFApellido.getText().trim();
-        iniciales=nombre.substring(0,0)+apellido.substring(0, 0);
-        jTFUsuario.setText(iniciales);
-    }//GEN-LAST:event_jTFApellidoFocusLost
+    private void jTFApellidoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFApellidoKeyPressed
+        if (evt.getKeyChar()==KeyEvent.VK_ENTER){
+            String iniciales;
+            String nombre = jTFNombre.getText();
+            String apellido = jTFApellido.getText();
+            iniciales=nombre.substring(0,1)+apellido.substring(0, 1);
+            System.out.println(iniciales);
+            jTFUsuario.setText(data.usuarioGenerate(iniciales));
+        }
+    }//GEN-LAST:event_jTFApellidoKeyPressed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
