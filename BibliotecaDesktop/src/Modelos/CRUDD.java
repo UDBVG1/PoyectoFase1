@@ -28,8 +28,9 @@ public class CRUDD {
     
 //Función que ejecuta sentencia para listar miembros de una base de datos.
     
-    public DefaultTableModel material_lista(String SQL, int tipo,String codigo) {
+    public DefaultTableModel material_lista(String SQL, int tipo,ArrayList datos) {
         
+        int index;
 
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -38,12 +39,26 @@ public class CRUDD {
         try {
             conn = Conexion.getConexion();
             stmt = conn.prepareStatement(SQL); 
-            if (tipo==1){
-                int index=1;
-                stmt.setString(index, codigo);
+            switch(tipo){
+                case 1:
+                    index=1;
+                    stmt.setString(index,String.valueOf(datos.get(0))) ;
+                    break;
+                case 2:
+                    index=1;
+                    //stmt.setString(index,String.valueOf(datos.get(0)));
+                    for (int i=0;i<datos.size();i++){
+                    
+                    stmt.setString(index++,String.valueOf(datos.get(i)));
+                    System.out.println("valor datos : "+i+ " index: "+index+ " " +String.valueOf(datos.get(i)));
+                    }
+                    
+                    break;
+                default:
+                                      
             }
             rs = stmt.executeQuery();
-
+            
             ResultSetMetaData meta = rs.getMetaData();
             int numberOfColumns = meta.getColumnCount();
             for (int i = 1; i<= numberOfColumns; i++) {
@@ -57,6 +72,7 @@ public class CRUDD {
                     }
                     dtm.addRow(fila);
             }
+            System.out.println("valor: "+String.valueOf(dtm.getValueAt(0,1)));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -251,8 +267,8 @@ public class CRUDD {
             cadena = tipo + String.valueOf(fiveDigits);
             stmt.setString(1, cadena);
             rs = stmt.executeQuery();
-            }
             
+            }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al buscar el id", "extraer", JOptionPane.INFORMATION_MESSAGE);
         } finally {
@@ -260,6 +276,26 @@ public class CRUDD {
             Conexion.closeConnection(conn);
         }
         return cadena;
+        }
+        
+        public void EliminarMaterial(String SQL, int id){
+        int rows;
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        rows=0;
+        try {
+            conn = Conexion.getConexion();
+            stmt = conn.prepareStatement(SQL);
+            stmt.setInt(1,id);
+            System.out.print(stmt);
+            rows = stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace(); 
+        } finally {
+            Conexion.closeConnection(conn);
+            Conexion.closeStatement(stmt);
+        }
+            
         }
 }
         

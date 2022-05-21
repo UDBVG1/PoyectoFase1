@@ -7,6 +7,7 @@ package UI;
 import Modelos.MaterialCRUDD;
 import Entidad.*;
 import Utilidades.ParametrosGlobales;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -18,10 +19,14 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
     /**
      * Creates new form JPMaterialesPanel
      */
-    public String[] Lista={"LIBRO","OBRA","REVISTA","CDA","DVD"};    
+      
     public MaterialCRUDD Nuevo_material=new MaterialCRUDD();
     public DefaultTableModel info=new DefaultTableModel();
+    public DefaultTableModel datos=new DefaultTableModel();
+    public ArrayList<String> elementos=new ArrayList();
     public String cod;
+    public int indice;
+     public String[] Lista={"LIBRO","OBRA","REVISTA","CDA","DVD"};
     public JPMaterialesPanel() {
         initComponents();
         Accesos();
@@ -37,7 +42,6 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
         jTBMaterial = new javax.swing.JToolBar();
         jAgregar = new javax.swing.JButton();
         jEditar = new javax.swing.JButton();
@@ -60,28 +64,18 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
         cant_disponible = new javax.swing.JTextField();
         jLautor = new javax.swing.JLabel();
         autor = new javax.swing.JTextField();
-        jLcambiante = new javax.swing.JLabel();
-        cambiante = new javax.swing.JTextField();
-        jLcambiante1 = new javax.swing.JLabel();
-        cambiante1 = new javax.swing.JTextField();
-        jLcambiante2 = new javax.swing.JLabel();
-        cambiante2 = new javax.swing.JTextField();
-        jLcambiante3 = new javax.swing.JLabel();
-        cambiante3 = new javax.swing.JTextField();
         jAccion = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla1 = new javax.swing.JTable();
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 172, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
+        jPanel2 = new javax.swing.JPanel();
+        jLcambiante = new javax.swing.JLabel();
+        jLcambiante1 = new javax.swing.JLabel();
+        jLcambiante2 = new javax.swing.JLabel();
+        jLcambiante3 = new javax.swing.JLabel();
+        cambiante = new javax.swing.JTextField();
+        cambiante1 = new javax.swing.JTextField();
+        cambiante2 = new javax.swing.JTextField();
+        cambiante3 = new javax.swing.JTextField();
 
         jTBMaterial.setFloatable(false);
         jTBMaterial.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -97,6 +91,11 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
         jTBMaterial.add(jAgregar);
 
         jEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/EditarMaterial.png"))); // NOI18N
+        jEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jEditarActionPerformed(evt);
+            }
+        });
         jTBMaterial.add(jEditar);
 
         jEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/EliminarMaterial.png"))); // NOI18N
@@ -169,32 +168,6 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
 
         jLautor.setText("Autor:");
 
-        jLcambiante.setText("cambiante");
-
-        jLcambiante1.setText("cambiante1");
-
-        cambiante1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cambiante1ActionPerformed(evt);
-            }
-        });
-
-        jLcambiante2.setText("cambiante2");
-
-        cambiante2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cambiante2ActionPerformed(evt);
-            }
-        });
-
-        jLcambiante3.setText("cambiante3");
-
-        cambiante3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cambiante3ActionPerformed(evt);
-            }
-        });
-
         jAccion.setText("Agregar");
         jAccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,106 +183,78 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLcodigo)
+                        .addGap(18, 18, 18)
+                        .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLtipo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLtiempo)
                             .addComponent(jLcant_disponible))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tiempo, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
-                            .addComponent(cant_disponible))
+                            .addComponent(tiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cant_disponible, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLcant_total, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cant_total, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jAccion))
-                        .addGap(39, 39, 39)
-                        .addComponent(jLcambiante3, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cambiante2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cambiante3, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cambiante1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cambiante, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLcodigo)
-                        .addGap(18, 18, 18)
-                        .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLtipo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jAccion)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLcatalogacion)
                                     .addComponent(jLautor))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(catalogacion, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(catalogacion, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(autor)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLtitulo)
-                                .addGap(27, 27, 27)
-                                .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)))
-                        .addGap(39, 39, 39)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLcambiante1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLcambiante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLcambiante2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(168, 168, 168))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(79, 79, 79)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLcodigo)
-                            .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLtipo))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLtitulo)
-                            .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cambiante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLcambiante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(8, 8, 8)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLautor)
-                            .addComponent(autor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLcambiante1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cambiante1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLcodigo)
+                    .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLtipo))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLtitulo)
+                    .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLautor)
+                    .addComponent(autor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLcatalogacion)
-                    .addComponent(catalogacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLcambiante2)
-                    .addComponent(cambiante2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(catalogacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLcambiante3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLtiempo)
-                        .addComponent(tiempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLcant_total)
-                        .addComponent(cant_total, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cambiante3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLtiempo)
+                    .addComponent(tiempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLcant_total)
+                    .addComponent(cant_total, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cant_disponible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLcant_disponible)
                     .addComponent(jAccion))
-                .addContainerGap())
+                .addGap(205, 205, 205))
         );
 
         Tabla1.setModel(new javax.swing.table.DefaultTableModel(
@@ -324,6 +269,7 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
             }
         ));
         Tabla1.setRequestFocusEnabled(false);
+        Tabla1.setRowSelectionAllowed(false);
         Tabla1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Tabla1MouseClicked(evt);
@@ -336,42 +282,274 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(Tabla1);
 
+        jLcambiante.setText("cambiante");
+
+        jLcambiante1.setText("cambiante1");
+
+        jLcambiante2.setText("cambiante2");
+
+        jLcambiante3.setText("cambiante3");
+        jLcambiante3.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+
+        cambiante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cambianteActionPerformed(evt);
+            }
+        });
+
+        cambiante3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cambiante3ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLcambiante1, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                    .addComponent(jLcambiante2)
+                    .addComponent(jLcambiante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLcambiante3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cambiante)
+                    .addComponent(cambiante1)
+                    .addComponent(cambiante2)
+                    .addComponent(cambiante3, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLcambiante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cambiante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLcambiante1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cambiante1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLcambiante2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cambiante2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLcambiante3)
+                    .addComponent(cambiante3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jTBMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 724, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(2, 2, 2)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTBMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMostrarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMostrarTodoActionPerformed
         // TODO add your handling code here:
+        clear();
+        jAccion.setVisible(true);
+        jAccion.setText("Buscar");
     }//GEN-LAST:event_jMostrarTodoActionPerformed
 
     private void jAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAgregarActionPerformed
         // TODO add your handling code here:
         clear();
+                jAccion.setVisible(true);
+        jAccion.setText("Agregar");
             
     }//GEN-LAST:event_jAgregarActionPerformed
+
+    private void jEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEliminarActionPerformed
+        String material;
+        if(codigo.getText().isEmpty()){
+        JOptionPane.showMessageDialog(null, "¡No hay material que borrar!\n Ingrese un código para buscarlo.", "Alerta", JOptionPane.WARNING_MESSAGE);
+        }
+        else{
+        material=codigo.getText();
+        int resp=JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar el material? " + material ,"Alerta",JOptionPane.YES_NO_OPTION);
+        
+        if(resp==0){
+         int j=Nuevo_material.EliminarMateriales(material, material.substring(0,3));
+         if(j==0){JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
+        }
+        }
+        clear();
+        construir_tabla();
+        }
+        
+        
+    }//GEN-LAST:event_jEliminarActionPerformed
+
+    private void Tabla1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Tabla1KeyPressed
+
+    }//GEN-LAST:event_Tabla1KeyPressed
+
+    private void Tabla1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla1MouseClicked
+
+        String dato=String.valueOf(info.getValueAt(Tabla1.getSelectedRow(),0));
+        System.out.println(dato);
+        datos=Nuevo_material.BuscarMaterial(dato,dato.substring(0,3));
+        LlenarDatos();
+
+    }//GEN-LAST:event_Tabla1MouseClicked
+
+    private void jAccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAccionActionPerformed
+        // TODO add your handling code here:
+        if (jAccion.getText()=="Agregar"){
+        String tipo_material, valor;
+
+        //Cargando datos en entidad
+        
+        valor=(String)tipo.getSelectedItem();
+        if (ParametrosGlobales.tipo.equals("CDA") || ParametrosGlobales.tipo.equals("DVD")){
+            Audiovisual MiAudiovisual=new Audiovisual();
+            tipo_material=valor;
+            try{
+                MiAudiovisual.titulo=titulo.getText();
+                MiAudiovisual.tipo=ParametrosGlobales.tipo;
+                MiAudiovisual.autor=autor.getText();
+                MiAudiovisual.catalogacion=catalogacion.getText();
+                MiAudiovisual.tiempo= Integer.parseInt(tiempo.getText());
+                MiAudiovisual.CantTotal=Integer.parseInt(cant_total.getText());
+                MiAudiovisual.CantDisp=Integer.parseInt(cant_disponible.getText());
+                MiAudiovisual.genero=cambiante.getText();
+                MiAudiovisual.duracion=cambiante1.getText();
+                if (ParametrosGlobales.tipo=="CDA"){
+                    MiAudiovisual.numCanciones=Integer.parseInt(cambiante2.getText());
+                }
+                cod=Nuevo_material.InsertarAudio(MiAudiovisual);
+
+                clear();
+                construir_tabla();
+            }catch(NumberFormatException ex){
+                System.out.println(ex);
+            }
+        }
+        else{
+            try{
+                Escrito MiEscrito=new Escrito();
+                tipo_material=ParametrosGlobales.tipo;
+
+                MiEscrito.titulo=titulo.getText();
+                MiEscrito.tipo=tipo_material;
+                MiEscrito.autor=autor.getText();
+                MiEscrito.catalogacion=catalogacion.getText();
+                MiEscrito.tiempo= Integer.parseInt(tiempo.getText());
+                MiEscrito.CantTotal=Integer.parseInt(cant_total.getText());
+                MiEscrito.CantDisp=Integer.parseInt(cant_disponible.getText());
+                MiEscrito.editorial=cambiante.getText();
+                switch(tipo_material){
+                    case "LIB":
+                    MiEscrito.ISBN=Integer.parseInt(cambiante1.getText());
+                    MiEscrito.numPaginas=Integer.parseInt(cambiante2.getText());
+                    MiEscrito.fechaPubli=Integer.parseInt(cambiante3.getText());
+                    break;
+                    case "OBR":
+                    MiEscrito.numPaginas=Integer.parseInt(cambiante1.getText());
+                    MiEscrito.fechaPubli=Integer.parseInt(cambiante2.getText());
+                    break;
+                    case "REV":
+                    MiEscrito.numPaginas=Integer.parseInt(cambiante1.getText());
+                    MiEscrito.periodicidad=cambiante2.getText();
+                    break;
+                    default:
+
+                }
+
+                cod=Nuevo_material.InsertarEscrito(MiEscrito);
+                JOptionPane.showMessageDialog(null, "Nuevo Codigo Generado: " + cod, "Alta", JOptionPane.INFORMATION_MESSAGE);
+                clear();
+                construir_tabla();
+            }catch(NumberFormatException ex){
+                System.out.println(ex);
+            }
+        }
+        }
+        else{
+            elementos.clear();
+                 
+                if(titulo.getText().isEmpty()){
+                    elementos.add("vacio");
+                }
+                else{
+                  elementos.add(titulo.getText());  
+                }
+                
+                if(autor.getText().length()==0){
+                    elementos.add("vacio");
+                }
+                else{
+                  elementos.add(autor.getText());    
+                }
+                
+                if(cambiante.getText().length()==0){
+                    elementos.add("vacio");
+                }
+                else{
+                    elementos.add(cambiante.getText());
+                }
+                
+                if(cambiante1.getText().length()==0){
+                    elementos.add("vacio");
+                }
+                else
+                {
+                    elementos.add(cambiante1.getText());
+                }
+                
+                if(cambiante2.getText().length()==0){
+                    elementos.add("vacio");
+                }
+                else{
+                    elementos.add(cambiante2.getText()); 
+                }
+
+                if(autor.getText().length()==0){
+                    elementos.add("vacio");
+                    elementos.add("vacio");
+                }
+                else{
+                elementos.add(autor.getText());  
+                elementos.add(autor.getText());  
+                }
+
+            
+            
+             info=Nuevo_material.Busqueda(elementos);
+             clear();
+             Tabla1.setModel(info);
+             
+        }
+        
+    }//GEN-LAST:event_jAccionActionPerformed
 
     private void cant_disponibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cant_disponibleActionPerformed
         // TODO add your handling code here:
@@ -389,162 +567,93 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_tipoActionPerformed
 
+    private void tipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tipoItemStateChanged
+        String valor;
+        valor=(String)tipo.getSelectedItem();
+        if (valor == null){
+            MostrarLibro(false);
+        }
+        else{
+            Mostrar(valor.substring(0, 3),false);
+        }
+    }//GEN-LAST:event_tipoItemStateChanged
+
     private void tituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tituloActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tituloActionPerformed
 
-    private void cambiante1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiante1ActionPerformed
+    private void cambianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambianteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cambiante1ActionPerformed
-
-    private void cambiante2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiante2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cambiante2ActionPerformed
+    }//GEN-LAST:event_cambianteActionPerformed
 
     private void cambiante3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiante3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cambiante3ActionPerformed
 
-    private void tipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tipoItemStateChanged
-    String valor;
-    valor=(String)tipo.getSelectedItem();
-            if (valor == null){
-            MostrarLibro();
-        }
-        else{
-                    Mostrar(valor.substring(0, 3));
-            }
-
-    }//GEN-LAST:event_tipoItemStateChanged
-
-    private void jAccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAccionActionPerformed
+    private void jEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEditarActionPerformed
         // TODO add your handling code here:
-        String tipo_material, valor;
-
-        //Cargando datos en entidad
         
-        valor=(String)tipo.getSelectedItem();
-        if (ParametrosGlobales.tipo.equals("CDA") || ParametrosGlobales.tipo.equals("DVD")){
-            Audiovisual MiAudiovisual=new Audiovisual();
-            tipo_material=valor;
-            try{
-            MiAudiovisual.titulo=titulo.getText();
-            MiAudiovisual.tipo=ParametrosGlobales.tipo;
-            MiAudiovisual.autor=autor.getText();
-            MiAudiovisual.catalogacion=catalogacion.getText();
-            MiAudiovisual.tiempo= Integer.parseInt(tiempo.getText());
-            MiAudiovisual.CantTotal=Integer.parseInt(cant_total.getText());
-            MiAudiovisual.CantDisp=Integer.parseInt(cant_disponible.getText());
-            MiAudiovisual.genero=cambiante.getText();
-            MiAudiovisual.duracion=cambiante1.getText();
-            if (ParametrosGlobales.tipo=="CDA"){
-            MiAudiovisual.numCanciones=Integer.parseInt(cambiante2.getText());
-            }
-            cod=Nuevo_material.InsertarAudio(MiAudiovisual);
+        Actualizar();
+    }//GEN-LAST:event_jEditarActionPerformed
+    
+    public void Actualizar(){
+        if (codigo.getText().isEmpty()){
             
-            clear();
-            construir_tabla();
-            }catch(NumberFormatException ex){
-        	System.out.println(ex);
-            }
         }
-        else{
-            try{
-            Escrito MiEscrito=new Escrito();
-            tipo_material=ParametrosGlobales.tipo;
-            
-            MiEscrito.titulo=titulo.getText();
-            MiEscrito.tipo=tipo_material;
-            MiEscrito.autor=autor.getText();
-            MiEscrito.catalogacion=catalogacion.getText();
-            MiEscrito.tiempo= Integer.parseInt(tiempo.getText());
-            MiEscrito.CantTotal=Integer.parseInt(cant_total.getText());
-            MiEscrito.CantDisp=Integer.parseInt(cant_disponible.getText());
-            MiEscrito.editorial=cambiante.getText();
-            switch(tipo_material){
-                case "LIB":
-                    MiEscrito.ISBN=Integer.parseInt(cambiante1.getText());
-                    MiEscrito.numPaginas=Integer.parseInt(cambiante2.getText());
-                    MiEscrito.fechaPubli=Integer.parseInt(cambiante3.getText());
-                    break;
-                case "OBR":
-                    MiEscrito.numPaginas=Integer.parseInt(cambiante1.getText());
-                    MiEscrito.fechaPubli=Integer.parseInt(cambiante2.getText());
-                    break;
-                case "REV":
-                    MiEscrito.numPaginas=Integer.parseInt(cambiante1.getText());
-                    MiEscrito.periodicidad=cambiante2.getText();
-                    break;
-                default:
-                                   
-            }
-            
-            cod=Nuevo_material.InsertarEscrito(MiEscrito);
-            JOptionPane.showMessageDialog(null, "Nuevo Codigo Generado: " + cod, "Alta", JOptionPane.INFORMATION_MESSAGE);
-            clear();
-            construir_tabla();
-            }catch(NumberFormatException ex){
-        	System.out.println(ex);
-            }        
-        }
-    }//GEN-LAST:event_jAccionActionPerformed
-
-    private void Tabla1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Tabla1KeyPressed
-  
-        
-    }//GEN-LAST:event_Tabla1KeyPressed
-
-    private void Tabla1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla1MouseClicked
-        DefaultTableModel datos=new DefaultTableModel();
-        String dato2="null";
-        String dato=String.valueOf(info.getValueAt(Tabla1.getSelectedRow(),0));
-        
-        
-        
-        datos=Nuevo_material.BuscarMaterial(dato,dato.substring(0,3));
-        dato2=String.valueOf(datos.getValueAt(0,0));
-        codigo.setText(dato2);
-        Mostrar(dato2.substring(0,3));
+    }
+    public void LlenarDatos(){
+        String texto=null;         
+        texto=String.valueOf(datos.getValueAt(0,0));
+        codigo.setText(texto);
+        indice=0;
         titulo.setText(String.valueOf(datos.getValueAt(0,1)));
-        autor.setText(String.valueOf(datos.getValueAt(0,3)));
         catalogacion.setText(String.valueOf(datos.getValueAt(0,2)));
         
-    }//GEN-LAST:event_Tabla1MouseClicked
-
-    private void jEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEliminarActionPerformed
-        String material;
-        material=codigo.getText();
+        Mostrar(texto.substring(0,3),true);
+        switch(ParametrosGlobales.GlobalAccesNivel){
+            case 1:
+                tiempo.setText(String.valueOf(datos.getValueAt(0,indice++)));
+                cant_total.setText(String.valueOf(datos.getValueAt(0,indice++)));
+                cant_disponible.setText(String.valueOf(datos.getValueAt(0,indice++)));
+                break;
+            case 2:
+                cant_total.setText(String.valueOf(datos.getValueAt(0,indice++)));
+                cant_disponible.setText(String.valueOf(datos.getValueAt(0,indice++)));
+                break;
+            case 3:
+                cant_disponible.setText(String.valueOf(datos.getValueAt(0,indice++)));
+                break;
+        }
+                
+    }
+    public void Mostrar(String valor, Boolean show){
         
-    }//GEN-LAST:event_jEliminarActionPerformed
-    
-    public void Mostrar(String valor){
-
         switch (valor){
             case "LIB":
                 ParametrosGlobales.tipo="LIB";
-                MostrarLibro();
+                MostrarLibro(show);
                 break;
             case "REV":
                 ParametrosGlobales.tipo="REV";
-                MostrarRevista();
+                MostrarRevista(show);
                 break;
             case "OBR":
                 ParametrosGlobales.tipo="OBR";
-                MostrarObra();
+                MostrarObra(show);
                 break;
             case "CDA":
                 ParametrosGlobales.tipo="CDA";
-                MostrarCDA();
+                MostrarCDA(show);
                 break;
             case "DVD":
                 ParametrosGlobales.tipo="DVD";
-                MostrarDVD();
+                MostrarDVD(show);
                 break;
             
         }
  
     }
-    public void MostrarLibro(){
+    public void MostrarLibro(Boolean Show){
             ParametrosGlobales.mat_table=true;
             jLautor.setText("Autor:");
             jLcambiante.setVisible(true);
@@ -559,11 +668,20 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
             jLcambiante3.setVisible(true);
             cambiante3.setVisible(true);
             jLcambiante3.setText("Año Publicacion:");
+            if (Show){
+                autor.setText(String.valueOf(datos.getValueAt(0,3)));
+                cambiante2.setText(String.valueOf(datos.getValueAt(0,4)));
+                cambiante.setText(String.valueOf(datos.getValueAt(0,5)));
+                cambiante1.setText(String.valueOf(datos.getValueAt(0,6)));
+                cambiante3.setText(String.valueOf(datos.getValueAt(0,7)));
+                indice=8;
+            }
     }
     
-    public void MostrarRevista(){
+    public void MostrarRevista(Boolean Show){
             ParametrosGlobales.mat_table=true;
-            jLautor.setText("Autor:");
+            jLautor.setVisible(false);
+            autor.setVisible(false);
             jLcambiante.setVisible(true);
             cambiante.setVisible(true);
             jLcambiante.setText("Editorial:");
@@ -575,62 +693,143 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
             jLcambiante2.setText("Periodicidad:");
             jLcambiante3.setVisible(false);
             cambiante3.setVisible(false);
+             if (Show){
+                cambiante1.setText(String.valueOf(datos.getValueAt(0,3)));
+                cambiante.setText(String.valueOf(datos.getValueAt(0,4)));
+                cambiante2.setText(String.valueOf(datos.getValueAt(0,5)));
+                indice=6;
+
+            }
     }
     
-    public void MostrarObra(){
+    public void MostrarObra(Boolean Show){
             ParametrosGlobales.mat_table=true;
             jLautor.setText("Autor:");
             jLcambiante.setVisible(true);
             cambiante.setVisible(true);
             jLcambiante.setText("Editorial:");
-            jLcambiante1.setVisible(true);
-            cambiante1.setVisible(true);
-            jLcambiante1.setText("Cant. Paginas:");
+            jLcambiante1.setVisible(false);
+            cambiante1.setVisible(false);
+            jLcambiante3.setText("Cant. Paginas:");
             jLcambiante2.setVisible(true);
             cambiante2.setVisible(true);
             jLcambiante2.setText("Año Publicacion:");
-            jLcambiante3.setVisible(false);
-            cambiante3.setVisible(false);
+            jLcambiante3.setVisible(true);
+            cambiante3.setVisible(true);
+            if (Show){
+                autor.setText(String.valueOf(datos.getValueAt(0,3)));
+                cambiante3.setText(String.valueOf(datos.getValueAt(0,4)));
+                cambiante.setText(String.valueOf(datos.getValueAt(0,5)));
+                cambiante2.setText(String.valueOf(datos.getValueAt(0,6)));
+
+                indice=7;
+            }
     }
     
-    public void MostrarDVD(){
+    public void MostrarDVD(Boolean Show){
             ParametrosGlobales.mat_table=false;
             jLautor.setText("Director:");
+            
             jLcambiante.setVisible(true);
             cambiante.setVisible(true);
-            jLcambiante1.setVisible(true);
-            cambiante1.setVisible(true);
             jLcambiante.setText("Genero:");
+            
+            jLcambiante1.setVisible(true);
+            cambiante1.setVisible(true);           
             jLcambiante1.setText("Duración:");
+            
             jLcambiante2.setVisible(false);
             cambiante2.setVisible(false);
             jLcambiante3.setVisible(false);
             cambiante3.setVisible(false);
+            if (Show){
+                autor.setText(String.valueOf(datos.getValueAt(0,3)));
+                cambiante.setText(String.valueOf(datos.getValueAt(0,4)));
+                cambiante1.setText(String.valueOf(datos.getValueAt(0,5)));
+                indice=6;
+            }
     }
     
-    public void MostrarCDA(){
+    public void MostrarCDA(Boolean Show){
             ParametrosGlobales.mat_table=false;
             jLautor.setText("Cantante:");
+            
             jLcambiante.setText("Genero:");
             jLcambiante.setVisible(true);
             cambiante.setVisible(true);
+            
             jLcambiante1.setVisible(true);
             cambiante1.setVisible(true);
             jLcambiante1.setText("Duración:");
+            
             jLcambiante2.setVisible(true);
             cambiante2.setVisible(true);
             jLcambiante2.setText("Cant. Canciones:");
+            
             jLcambiante3.setVisible(false);
             cambiante3.setVisible(false);
+            if (Show){
+            autor.setText(String.valueOf(datos.getValueAt(0,3)));
+            cambiante.setText(String.valueOf(datos.getValueAt(0,4)));
+            cambiante1.setText(String.valueOf(datos.getValueAt(0,5)));
+            cambiante2.setText(String.valueOf(datos.getValueAt(0,6)));
+            indice=7;
+            }
+    }
+    public void MostrarN3(){
+                jAgregar.setVisible(false);
+                jEditar.setVisible(false);
+                jEliminar.setVisible(false);
+                jMostrarTodo.setVisible(true);
+                
+//                jLcambiante3.setVisible(false);
+//                cambiante3.setVisible(false);
+//                
+//                jLcambiante2.setVisible(false);
+//                cambiante2.setVisible(false);
+//                
+//                jLcambiante1.setVisible(false);
+//                cambiante1.setVisible(false);
+//                
+//                jLcambiante.setVisible(false);
+//                cambiante.setVisible(false);
+                
+                jLtiempo.setVisible(false);
+                tiempo.setVisible(false);
+                
+                jLcant_total.setVisible(false);
+                cant_total.setVisible(false);
+                
+                jAccion.setVisible(true);
+                jAccion.setText("Buscar");
+                codigo.setEditable(false);
+                titulo.setEditable(false);
+                autor.setEditable(false);
+                catalogacion.setEditable(false);
+                cambiante.setEditable(false);
+                cambiante1.setEditable(false);
+                cambiante2.setEditable(false);
+                cambiante3.setEditable(false);
+                cant_disponible.setEditable(false);
+                
+                
+    }
+    
+    public void MostrarN2(){
+               // jAgregar.setVisible(true);
+                jEditar.setVisible(true);
+                jEliminar.setVisible(false);
+                jMostrarTodo.setVisible(true);
+                jLtiempo.setVisible(false);
+                tiempo.setVisible(false);
+                jLcant_total.setVisible(false);
+                cant_total.setVisible(false);
+                jAccion.setVisible(true);
+                jAccion.setText("Buscar");
     }
     
     private void Accesos(){
-        codigo.setEnabled(false);
-        tipo.removeAllItems();
-        for(int i=0; i<5;i++){
-        tipo.addItem(Lista[i]);
-        }
-        construir_tabla();
+
         switch (ParametrosGlobales.GlobalAccesNivel) {
             
            case 1:
@@ -639,24 +838,34 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
                 jEditar.setVisible(true);
                 jEliminar.setVisible(true);
                 jMostrarTodo.setVisible(true);
+                jAccion.setVisible(false);
+
+                codigo.setEnabled(false);
                 tipo.removeAllItems();
                 for(int i=0; i<5;i++){
                 tipo.addItem(Lista[i]);
-                }
-                Tabla1.setModel(Nuevo_material.listarMateriales());
-                //construir_tabla();
+                 }
+                construir_tabla();
+
                 break;
             case 2:
-
-                jAgregar.setVisible(false);
-                jEditar.setVisible(false);
-                jEliminar.setVisible(false);
-                jMostrarTodo.setVisible(true);
-                Tabla1.setModel(Nuevo_material.listarMateriales());
-                //construir_tabla();
+                codigo.setEnabled(false);
+                tipo.removeAllItems();
+                for(int i=0; i<5;i++){
+                tipo.addItem(Lista[i]);
+                 }
+                jAccion.setVisible(false);
+                construir_tabla();
+                MostrarN2();
                 break;
             case 3:
-
+                MostrarN3();
+                codigo.setEnabled(false);
+                tipo.removeAllItems();
+                for(int i=0; i<5;i++){
+                tipo.addItem(Lista[i]);
+                 }
+                construir_tabla();
                 break;
         } 
         
@@ -674,12 +883,14 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
         cambiante1.setText("");
         cambiante2.setText("");
         cambiante3.setText("");
+        jAccion.setVisible(false);
     }
     
     private void construir_tabla(){
      
      info=Nuevo_material.listarMateriales();
      Tabla1.setModel(info);
+     
  
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
