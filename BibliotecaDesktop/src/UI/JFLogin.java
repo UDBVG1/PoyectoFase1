@@ -10,11 +10,15 @@ import Modelos.UsuariosCRUD;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import Utilidades.ParametrosGlobales;
+import Utilidades.PruebaLogs;
+import org.apache.log4j.Logger;
+import org.apache.log4j.BasicConfigurator;
 /**
  *
  * @author amgoo
  */
 public class JFLogin extends javax.swing.JFrame {
+    public static final Logger logger =Logger.getLogger(JFLogin.class);
     private final UsuariosCRUD login= new UsuariosCRUD();
     private int level;
     /**
@@ -23,6 +27,7 @@ public class JFLogin extends javax.swing.JFrame {
     public JFLogin() {
         initComponents();
         setLocationWindow();
+//        Logger log = Logger.getLogger(PruebaLogs.class);
     }
     
     private void setLocationWindow(){
@@ -191,6 +196,7 @@ public class JFLogin extends javax.swing.JFrame {
      * @throws java.sql.SQLException
      */
     public static void main(String args[]) throws SQLException {
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -213,7 +219,7 @@ public class JFLogin extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(JFLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             new JFLogin().setVisible(true);
@@ -224,6 +230,7 @@ public class JFLogin extends javax.swing.JFrame {
         }
         else{
             System.out.println("Conexión erronea");
+            logger.error("error");
         }
     }
 

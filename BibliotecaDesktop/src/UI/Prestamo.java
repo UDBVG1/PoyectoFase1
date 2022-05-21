@@ -237,12 +237,10 @@ public class Prestamo extends javax.swing.JPanel {
         
         switch(ParametrosGlobales.TipoPrestamo){
             case 1:
-            jTableDatos.setModel(prestamo.Filtrar(prestamo.SQL_BUSCARL,titulo ,autor ,edit ,isbn ));
-        
+            jTableDatos.setModel(prestamo.Filtrar(prestamo.SQL_BUSCARL,titulo ,autor ,edit ,isbn ));       
                 break;
             case 2:
-            jTableDatos.setModel(prestamo.Filtrar(prestamo.SQL_BUSCARR,titulo ,autor ,periodicidad ,publicacion ));
-            
+            jTableDatos.setModel(prestamo.Filtrar(prestamo.SQL_BUSCARR,titulo ,autor ,periodicidad ,publicacion ));             
                 break;
             case 3:
             jTableDatos.setModel(prestamo.Filtrar(prestamo.SQL_BUSCARC,titulo ,autor ,genero ,duracion )); 
@@ -338,19 +336,27 @@ public class Prestamo extends javax.swing.JPanel {
              Prestar.setVisible(false);
              Devolucion.setVisible(false);
              jTable1.setModel(prestamo.mostrarPrestamoUsuario());
-             
+             jTable1.setRowSelectionAllowed(false);
+             jTable1.setColumnSelectionAllowed(false);
+             jTable1.setCellSelectionEnabled(false); 
                 break;
             case 2:
               tituloDev.setText("Prestamos");
               Prestar.setVisible(true); 
               Devolucion.setVisible(true);
-              jTable1.setModel(prestamo.mostrarPrestamos());              
+              jTable1.setModel(prestamo.mostrarPrestamos()); 
+              jTable1.setRowSelectionAllowed(true);
+              jTable1.setColumnSelectionAllowed(true);
+              jTable1.setCellSelectionEnabled(true); 
                 break;
             case 3:
               tituloDev.setText("Prestamos");
               Prestar.setVisible(true); 
               Devolucion.setVisible(true);
               jTable1.setModel(prestamo.mostrarPrestamos()); 
+              jTable1.setRowSelectionAllowed(true);
+              jTable1.setColumnSelectionAllowed(true);
+              jTable1.setCellSelectionEnabled(true);              
                 break;
         }
     }

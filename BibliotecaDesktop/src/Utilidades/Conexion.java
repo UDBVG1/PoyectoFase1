@@ -10,9 +10,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import org.apache.log4j.Logger;
 
 public class Conexion {
+//   static final Logger logger =Logger.getLogger(Conexion.class);
    public static Connection conn=null;//conn es la conexion
    private static String driver ="com.mysql.jdbc.Driver";//The name of the class that implements java.sql.Driver in MySQL Connector/J has changed from com.mysql.jdbc.Driver to com.mysql.cj.jdbc.Driver. The old class name has been deprecated.
    private static String user = "root";
@@ -33,8 +34,10 @@ public class Conexion {
      //PS = conn.createStatement(); //cuando queramso invocar sentencias de tipo mysql 
      //deberemos de usar stm. por que es el que invoca la opcion para nosotros usar las sentencias mysql desde la intefaz
     }
-    catch(ClassNotFoundException | SQLException e){//estas son las exepcione que se pueden unir ocn ese palito 
-    System.out.println("ERROR:No encuentro el driver de la BD: " + e.getMessage());
+    catch(ClassNotFoundException | SQLException e){
+        System.out.println("ERROR No encuentro el driver de la BD: "+ e);
+//    );//estas son las exepcione que se pueden unir ocn ese palito 
+//    System.out.println("ERROR:No encuentro el driver de la BD: " + e.getMessage());
     }
     return conn;
     }//esta no se manda a llamar solo los close y la interaccion con la b
@@ -47,7 +50,8 @@ public class Conexion {
         rs.close();
     }
     }catch (SQLException e) {
-    System.out.println("ERROR:Fallo en SQL: " + e.getMessage());
+        System.out.println("ERROR No encuentro el driver de la BD: "+ e);
+    //logger.error("ERROR en la conexion bd"+ e);
         }
     }
             
@@ -57,7 +61,8 @@ public class Conexion {
         Pstm.close();
     }
     } catch (SQLException e) {
-    System.out.println("ERROR:Fallo en SQL: " + e.getMessage());
+        System.out.println("ERROR No encuentro el driver de la BD: "+ e);
+    //logger.error("ERROR:Fallo en SQL: " + e.getMessage());
       }
     }
     public static void closeConnection(Connection conn){//cerrar la conexion
@@ -66,7 +71,8 @@ public class Conexion {
     conn.close();
     }
         } catch (SQLException e) {
-    System.out.println("ERROR:Fallo en SQL: " + e.getMessage());
+            System.out.println("ERROR No encuentro el driver de la BD: "+ e);
+    //logger.error("ERROR:Fallo en SQL: " + e.getMessage());
         }
     }
     //cuando ya se quiera cerrar las conexiones solo se manda a llamar a las funciones de close
