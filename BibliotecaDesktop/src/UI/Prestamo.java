@@ -10,6 +10,7 @@ import Modelos.Validaciones;
 import java.util.ArrayList;
 import Utilidades.ParametrosGlobales;
 import java.util.Set;
+import javax.swing.JOptionPane;
 import javax.swing.table.TableColumn;
 /**
  *
@@ -61,14 +62,16 @@ public class Prestamo extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         tituloDev = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        botonFiltrarUsuario = new javax.swing.JButton();
+        IDUsuario = new javax.swing.JTextField();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelTitulo.setText("Titulo");
-        add(jLabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
+        add(jLabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, -1, -1));
 
         jLabelAutor.setText("Autor");
-        add(jLabelAutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, -1, -1));
+        add(jLabelAutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, -1, -1));
 
         ComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Libro", "Revista", "CD", "DVD", "Tesis", "Obra" }));
         ComboBoxTipo.addActionListener(new java.awt.event.ActionListener() {
@@ -76,20 +79,20 @@ public class Prestamo extends javax.swing.JPanel {
                 ComboBoxTipoActionPerformed(evt);
             }
         });
-        add(ComboBoxTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
+        add(ComboBoxTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, -1, 20));
 
         jLabel1.setText("Tipo");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, -1, -1));
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 140, -1));
-        add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 150, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, -1, 20));
+        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 140, -1));
+        add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 150, -1));
 
         jLabeleditorial.setText("Editorial");
-        add(jLabeleditorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, -1, 10));
+        add(jLabeleditorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, -1, 10));
 
         generoLabel.setText("Genero");
-        add(generoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, -1, -1));
-        add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 110, -1));
-        add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 70, 100, -1));
+        add(generoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, -1, 20));
+        add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 110, 20));
+        add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, 100, 20));
         add(warning, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jToolBar1.setFloatable(false);
@@ -133,18 +136,27 @@ public class Prestamo extends javax.swing.JPanel {
         jTableDatos.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         jScrollPane3.setViewportView(jTableDatos);
 
-        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 700, 140));
+        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 700, 120));
 
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         jScrollPane1.setViewportView(jTable1);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, 350, 160));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 350, 160));
 
         tituloDev.setText("Informacion acerca sus prestamos");
-        add(tituloDev, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, -1, -1));
+        add(tituloDev, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 0, -1, -1));
 
         jLabel3.setText("PRESTAMO");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, -1, -1));
+
+        botonFiltrarUsuario.setText("Filtrar por usuario");
+        botonFiltrarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonFiltrarUsuarioActionPerformed(evt);
+            }
+        });
+        add(botonFiltrarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 20, -1, 20));
+        add(IDUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, 200, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void ComboBoxTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxTipoActionPerformed
@@ -234,12 +246,23 @@ public class Prestamo extends javax.swing.JPanel {
 
     private void PrestarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrestarActionPerformed
       prestamo.insertarPrestamo(codigo(),ParametrosGlobales.GlobalAccesId);
-      prestamo.updateMaterial(-1,codigo()); 
+      prestamo.updateMaterial(-1,codigo());
+      
     }//GEN-LAST:event_PrestarActionPerformed
 
     private void DevolucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DevolucionActionPerformed
-
-          prestamo.updateMaterial(1,codigoDev());      
+        prestamo.updateMaterial(1,codigoDev());  
+        int idsocio;
+        idsocio = prestamo.GetUsuario((String) usuario());
+        
+        prestamo.devolucion(idsocio, codigoDev());
+        
+        if(ParametrosGlobales.GlobalAccesId == 3){
+          jTable1.setModel(prestamo.mostrarPrestamoUsuario(ParametrosGlobales.GlobalAccesId));  
+        }else{
+          jTable1.setModel(prestamo.mostrarRev());   
+        }
+    
     }//GEN-LAST:event_DevolucionActionPerformed
 
     private void ReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReservarActionPerformed
@@ -247,13 +270,21 @@ public class Prestamo extends javax.swing.JPanel {
         
     }//GEN-LAST:event_ReservarActionPerformed
 
+    private void botonFiltrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonFiltrarUsuarioActionPerformed
+        int idsocio;
+        idsocio = prestamo.GetUsuario(IDUsuario.getText());
+        jTable1.setModel(prestamo.mostrarPrestamoUsuario(idsocio));
+    }//GEN-LAST:event_botonFiltrarUsuarioActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboBoxTipo;
     private javax.swing.JButton Devolucion;
+    private javax.swing.JTextField IDUsuario;
     private javax.swing.JButton Prestar;
     private javax.swing.JButton Reservar;
+    private javax.swing.JButton botonFiltrarUsuario;
     private javax.swing.JButton filtrado;
     private javax.swing.JLabel generoLabel;
     private javax.swing.JLabel jLabel1;
@@ -290,18 +321,19 @@ public class Prestamo extends javax.swing.JPanel {
     public Object codigoDev(){
         Object codigo = null;
         int fila = jTable1.getSelectedRow();
-        System.out.println(codigo);
-        return codigo = jTable1.getValueAt(fila, 1); 
+        System.out.println("codigo :"+codigo);
+        return codigo = jTable1.getValueAt(fila, 0); 
+    }
+
+    public Object usuario(){
+        Object usuario = null;
+        int fila = jTable1.getSelectedRow();
+        System.out.println(usuario);
+        return usuario = jTable1.getValueAt(fila, 4); 
     }
     
-//    public Object fechaEntrega(){
-//        Object codigo = null;
-//        int fila = jTable1.getSelectedRow();
-//        System.out.println(codigo);
-//        return codigo = jTable1.getValueAt(fila, 3);           
-//    }
     public void OcultarCodigo(){
-        if(ParametrosGlobales.GlobalAccesNivel == 1){
+        if(ParametrosGlobales.GlobalAccesNivel == 3){
           jTableDatos.getColumnModel().getColumn(0).setPreferredWidth(0);
           jTableDatos.getColumnModel().getColumn(0).setResizable(false);
         }
@@ -310,31 +342,32 @@ public class Prestamo extends javax.swing.JPanel {
     private void acceso() {
         switch (ParametrosGlobales.GlobalAccesNivel) {
             case 1:
+              tituloDev.setText("Reservados");
+              Prestar.setVisible(true); 
+              Devolucion.setVisible(true);
+              jTable1.setModel(prestamo.mostrarRev());       
+             IDUsuario.setVisible(true);
+             botonFiltrarUsuario.setVisible(true);                
+                break;
+            case 2:
+              tituloDev.setText("Reservados");
+              Prestar.setVisible(true); 
+              Devolucion.setVisible(true);
+              jTable1.setModel(prestamo.mostrarRev()); 
+
+             IDUsuario.setVisible(true);
+             botonFiltrarUsuario.setVisible(true);              
+                break;
+            case 3:
              tituloDev.setText("Informacion acerca de sus prestamos");
              Prestar.setVisible(false);
              Devolucion.setVisible(false);
-             jTable1.setModel(prestamo.mostrarPrestamoUsuario());
+             jTable1.setModel(prestamo.mostrarPrestamoUsuario(ParametrosGlobales.GlobalAccesId));
              jTable1.setRowSelectionAllowed(false);
              jTable1.setColumnSelectionAllowed(false);
              jTable1.setCellSelectionEnabled(false); 
-                break;
-            case 2:
-              tituloDev.setText("Prestamos");
-              Prestar.setVisible(true); 
-              Devolucion.setVisible(true);
-              jTable1.setModel(prestamo.mostrarPrestamos()); 
-              jTable1.setRowSelectionAllowed(true);
-              jTable1.setColumnSelectionAllowed(true);
-              jTable1.setCellSelectionEnabled(true); 
-                break;
-            case 3:
-              tituloDev.setText("Prestamos");
-              Prestar.setVisible(true); 
-              Devolucion.setVisible(true);
-              jTable1.setModel(prestamo.mostrarPrestamos()); 
-              jTable1.setRowSelectionAllowed(true);
-              jTable1.setColumnSelectionAllowed(true);
-              jTable1.setCellSelectionEnabled(true);              
+             IDUsuario.setVisible(false);
+             botonFiltrarUsuario.setVisible(false);
                 break;
         }
     }

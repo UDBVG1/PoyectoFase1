@@ -69,20 +69,21 @@ public class PrestamosCRUD {
      
      public String SQL_BUSCARCR = "";
      
-     private final String SQL_INSERTREV = "INSERT INTO reserva(fechareserva,estado,reservado,codigo,idsocio) values (CURDATE(),?,?,?,?);";
+     private final String SQL_INSERTREV = "INSERT INTO reserva(fechareserva,estado,reservado,codigo,idusuario) values (CURDATE(),?,?,?,?);";
      
-     private final String SQL_INSERTPRE ="insert into prestamos(fechaprestamo,fechaentrega,prestado,codigo,idsocio) values (curdate(),?,?,?,?)";
+     private final String SQL_INSERTPRE ="insert into prestamos(fechaprestamo,fechaentrega,codigo,idsocio) values (curdate(),?,?,?);";
      
      private final String SQL_UPDATEPD = "update material set cantidad_disponible = (cantidad_disponible + ?) where codigo = ?;";
     
-     public String SQL_SELECTPRESALL = "SELECT 	m.codigo as Codigo,case when m.idescrito is not null then l.titulo\n" +
+     public String SQL_SELECTREVSALL = "SELECT 	m.codigo as Codigo,case when m.idescrito is not null then l.titulo\n" +
                                         "when m.idaudiovisual is not null then mc.titulo\n" +
-                                        "else null end AS titulo,CONVERT(p.fechaprestamo, CHAR) as Fecha_Prestamo,CONVERT(p.fechaentrega, CHAR)as Fecha_Entrega,p.mora\n" +
+                                        "else null end AS titulo,autor,estado,u.usuario\n" +
                                         "FROM material m\n" +
                                         "LEFT join escrito l on m.idescrito=l.idescrito\n" +
                                         "LEFT join audiovisual mc on m.idaudiovisual=mc.idaudiovisual\n" +
-                                        "LEFT join prestamos p on m.codigo = p.codigo\n" +
-                                        "where p.idsocio != 0;";
+                                        "LEFT join reserva r on m.codigo = r.codigo\n" +
+                                        "LEFT join usuario u on u.idusuario = r.idusuario\n" +
+                                        "where r.idusuario != 0;";
      
      public String SQL_SELECTPRESX = "SELECT case when m.idescrito is not null then l.titulo\n" +
                                     "when m.idaudiovisual is not null then mc.titulo\n" +
@@ -92,6 +93,10 @@ public class PrestamosCRUD {
                                     "LEFT join audiovisual mc on m.idaudiovisual=mc.idaudiovisual\n" +
                                     "LEFT join prestamos p on m.codigo = p.codigo\n" +
                                     "where p.idsocio = ?;"; // buscar los prestamos segun usuario que esta logueado
+     
+     private String SQL_getIdUsuario = "select idusuario from usuario where usuario = ?;";
+     
+     private String SQL_devolucion = "update reserva set estado = 'Inactivo' where idusuario = ? and codigo = ?;";
      
      public String FechaEntrega(){//agregando 5 dias mas
         LocalDateTime hoy = LocalDateTime.now();
@@ -227,7 +232,7 @@ public class PrestamosCRUD {
         }
     }
     
-    public DefaultTableModel mostrarPrestamoUsuario(){
+    public DefaultTableModel mostrarPrestamoUsuario(int nivel){
         DefaultTableModel dtm = new DefaultTableModel();
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -236,7 +241,7 @@ public class PrestamosCRUD {
             conn = Conexion.getConexion();
             stmt = conn.prepareStatement(SQL_SELECTPRESX);
             int index = 1;
-            stmt.setInt(index++,ParametrosGlobales.GlobalAccesId);
+            stmt.setInt(index++,nivel);
             rs = stmt.executeQuery();
             ResultSetMetaData meta = rs.getMetaData();
             int numberOfColumns = meta.getColumnCount();
@@ -261,14 +266,14 @@ public class PrestamosCRUD {
         return dtm;
     }  
     
-    public DefaultTableModel mostrarPrestamos(){
+    public DefaultTableModel mostrarRev(){
         DefaultTableModel dtm = new DefaultTableModel();
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;      
         try{
             conn = Conexion.getConexion();
-            stmt = conn.prepareStatement(SQL_SELECTPRESALL);
+            stmt = conn.prepareStatement(SQL_SELECTREVSALL);
             rs = stmt.executeQuery();
             ResultSetMetaData meta = rs.getMetaData();
             int numberOfColumns = meta.getColumnCount();
@@ -303,9 +308,9 @@ public class PrestamosCRUD {
             stmt = conn.prepareStatement(SQL_INSERTPRE);
             int index = 1;
             stmt.setObject(index++,FechaEntrega());
-            String msg = JOptionPane.showInputDialog(null, "Introduce cuantos desea reservar");
-            prestado = parseInt(msg);
-            stmt.setInt(index++,prestado);
+//            String msg = JOptionPane.showInputDialog(null, "Introduce cuantos desea reservar");
+//            prestado = parseInt(msg);
+//            stmt.setInt(index++,prestado);
             stmt.setObject(index++,codigo);
             stmt.setInt(index,idsocio);
             rows = stmt.executeUpdate();
@@ -320,5 +325,59 @@ public class PrestamosCRUD {
             Conexion.closeStatement(stmt);
             Conexion.closeConnection(conn);
         }
+    }
+    
+    public int GetUsuario(String userName){
+        Connection conn =null;
+        PreparedStatement stmt =null;
+        ResultSet rs=null;
+        int idsocio = 0;
+        try{
+            conn = Conexion.getConexion();
+            stmt = conn.prepareStatement(SQL_getIdUsuario);
+            int index=1;
+            stmt.setString(index++, userName);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                 idsocio = (int) rs.getObject(1); 
+            }
+        }catch(SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al Intentar Ingresar", "Error", JOptionPane.INFORMATION_MESSAGE); 
+        } finally {
+            Conexion.closeConnection(conn);
+            Conexion.closeStatement(stmt);
+            Conexion.closeResulset(rs);
+        }
+        return idsocio;        
+    }
+    
+    public void devolucion(int usuario , Object codigo){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+
+        try {
+            conn = Conexion.getConexion();
+            stmt = conn.prepareStatement(SQL_devolucion);
+            int index = 1;
+            stmt.setInt(index++,usuario);
+            stmt.setObject(index++,codigo);
+            
+            rows = stmt.executeUpdate();
+        if (rows > 0) {
+                JOptionPane.showMessageDialog(null, "Devolucion exitosa", "Ingresado", JOptionPane.INFORMATION_MESSAGE);
+            }  
+        else{
+            System.out.println("error devolucion");
+        }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e2) {
+            System.out.println("error devolucion sistema: "+e2);
+        }finally {
+            Conexion.closeStatement(stmt);
+            Conexion.closeConnection(conn);
+        }        
     }
 }
