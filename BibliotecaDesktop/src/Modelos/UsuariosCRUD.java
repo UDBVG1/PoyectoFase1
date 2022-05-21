@@ -24,11 +24,12 @@ public class UsuariosCRUD {
     private final String sqlUsuarios = "SELECT idusuario as ID,nombre as NOMBRE,usuario as USUARIO, nivel AS NIVEL, (select descripcion from config where estado='nivel usuario' and valor=nivel) as NIVEL_USUARIO, identificacion as IDENTIFICACION FROM usuario where nivel>=?;";
     private final String sqlComboNivel="SELECT descripcion from config where estado='nivel usuario';";
     private final String sqlUsuario="SELECT idusuario,nombre,usuario,password,nivel FROM usuario where idusuario=?;";
+    private final String sqlUsuarioGenerate="select coalesce(concat(upper(?),substr(year(curdate()),3,4),(lpad(substr(max(usuario),3,6)+1,4,'0'))),concat(upper(?),substr(year(curdate()),3,4),'0001')) AS U_generado from usuario where usuario like upper(?);";
     //UPDATES
     private final String sqlUsuarioUpdate="UPDATE usuario SET ";
     private final String sqlUsuarioParam=" WHERE (idusuario = ?);";
     //INSERTS
-    private final String sqlUsuarioInsert="INSERT INTO usuario (nombre, usuario, password, nivel) VALUES (?,?,?,?);";
+    private final String sqlUsuarioInsert="INSERT INTO usuario (nombre, identificacion, usuario, password, nivel) VALUES (?,?,?,?,?);";
     //DELETES
     private final String sqlDeleteUsuario="DELETE FROM usuario WHERE idusuario=?;";
     //VARIABLES
@@ -144,6 +145,32 @@ public class UsuariosCRUD {
         return data;
     }
     
+    public String usuarioGenerate(String US){
+        String UsGenerado=null;
+        Connection conn =null;
+        PreparedStatement stmt =null;
+        ResultSet rs=null;
+        try{
+            conn = Conexion.getConexion();
+            stmt = conn.prepareStatement(sqlUsuarioGenerate);
+            int index=1;
+            stmt.setString(index++, US);
+            stmt.setString(index++, US);
+            stmt.setString(index, US+"%");
+            rs = stmt.executeQuery();
+            while(rs.next()){
+                UsGenerado=rs.getObject(1).toString();
+            }
+        }catch(SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Conexion.closeConnection(conn);
+            Conexion.closeStatement(stmt);
+            Conexion.closeResulset(rs);
+        } 
+        return UsGenerado;
+    }
+    
     public int updateUsuario(Usuario usuario){
         int rows=0;
         Connection conn =null;
@@ -196,6 +223,7 @@ public class UsuariosCRUD {
             stmt = conn.prepareStatement(sqlUsuarioInsert);
             int index=1;
             stmt.setString(index++, usuario.Nombre);
+            stmt.setString(index++, usuario.Identificador);
             stmt.setString(index++, usuario.Usuario);
             stmt.setString(index++, usuario.Clave);
             stmt.setInt(index, usuario.Nivel);
