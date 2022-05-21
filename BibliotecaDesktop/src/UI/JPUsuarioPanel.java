@@ -281,7 +281,7 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
         usuario.setIdUs(Integer.parseInt(jTUsuarios.getValueAt(jTUsuarios.getSelectedRow(),0).toString()));
         usuario.setNombre(jTFNombre.getText()+" "+jTFApellido.getText());
         usuario.setUsuario(jTFUsuario.getText());
-        usuario.setNivel(jCBNivel.getSelectedIndex()+1);
+        usuario.setNivel(jCBNivel.getSelectedIndex()+ParametrosGlobales.GlobalAccesNivel);
         if(spass.equals(spassC)){
             if (spass.isEmpty()){
                 usuario.setClave(null);
