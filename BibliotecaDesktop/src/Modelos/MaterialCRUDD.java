@@ -23,11 +23,10 @@ public class MaterialCRUDD extends CRUDD{
                                         "LEFT join audiovisual r on m.idaudiovisual=r.idaudiovisual\n" +
                                         ";";
     
-    
-     private final String SQL_SELECTRN = "select count(*) from material where codigo = ?;"; 
-     private String SQL_INSERT="";
-    private final String SQL_INSERTAUDIO="INSERT INTO `audiovisual` (`idaudiovisual`, `titulo`, `tipo`, `artista`, `genero`, `duracion`, `canciones`, `director`)\n" +
-                                            " VALUES (?, ?,?, ?,?, ?',?,?,?);";
+    private final String SQL_DELETE_ESCRITO="DELETE a,b FROM material a LEFT JOIN libros b ON b.id_libros = a.idlibros WHERE codigo = ? ;";
+   private final String SQL_DELETE_AUDIOVISUAL="DELETE a,b FROM material a LEFT JOIN libros b ON b.id_libros = a.idlibros WHERE a.idlibros = ? ;";
+    private final String SQL_SELECTRN = "select count(*) from material where codigo = ?;"; 
+    private String SQL_INSERT="";
      private String SQL_MATERIAL="";
      /*
     
@@ -36,32 +35,6 @@ public class MaterialCRUDD extends CRUDD{
     private final ArrayList<String> matriz_entidad = new ArrayList<>();
     private final ArrayList<String> matriz_material = new ArrayList<>();
 
-    
-        public DefaultTableModel Matriz_material(){
-        Object[] Titulos=new Object[]{"Codigo","Titulo","Cantidad Disponible","Cantidad Total", "Catalogacion"};
-
-        List<List<String>> miLista=super.Listar(SQLMaterial,0);
-        DefaultTableModel matriz = new DefaultTableModel(Titulos,0);
-        
-        for (int i=0 ; i<miLista.size() ; i++){
-                   matriz.addRow(new Object[]{
-                   miLista.get(i).get(0) + "",
-                   miLista.get(i).get(1) + "",
-                   miLista.get(i).get(2) + "",
-                   miLista.get(i).get(3) + "",
-                   miLista.get(i).get(4)
-               });
-        }
-        
-        return matriz;
-    }
-    
-        public ArrayList<String> Buscar_Material(){
-            ArrayList<String> Material =new ArrayList();
-            
-            
-            return Material;
-        }
         
     public String InsertarEscrito(Escrito Entidad){
         String codigo; 
@@ -158,9 +131,34 @@ public class MaterialCRUDD extends CRUDD{
     
     public DefaultTableModel listarMateriales(){
         SQLMaterial="select codigo, titulo, catalogacion from materiales_vista;";
-        DefaultTableModel dtm=super.material_lista(SQLMaterial);
+        DefaultTableModel dtm=super.material_lista(SQLMaterial,0,"null");
         return dtm;
     }
     
+    public DefaultTableModel BuscarMaterial(String codigo, String datos){
+        
+        SQLMaterial="select codigo,titulo,catalogacion,";
+        switch(datos){
+        case "LIB":
+            SQLMaterial=SQLMaterial + " autor ";  
+            break;
+        case "OBR":
+            SQLMaterial=SQLMaterial + " autor ";  
+            break;
+        case "REV":
+            SQLMaterial=SQLMaterial + " periodicidad ";  
+            break;
+        case "CDA":
+            SQLMaterial=SQLMaterial + "artista";  
+          break;
+        case "DVD":
+            SQLMaterial= SQLMaterial + " director "; 
+            break;
+        }
+        
+        SQLMaterial=SQLMaterial + "from materiales_vista where codigo=?;";
+      DefaultTableModel dtm=super.material_lista(SQLMaterial,1,codigo);
+      return dtm;
+    }
     
 }
