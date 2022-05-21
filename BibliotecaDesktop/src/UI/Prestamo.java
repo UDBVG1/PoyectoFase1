@@ -92,7 +92,6 @@ public class Prestamo extends javax.swing.JPanel {
         add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 70, 100, -1));
         add(warning, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jToolBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, java.awt.Color.darkGray));
         jToolBar1.setFloatable(false);
         jToolBar1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jToolBar1.setRollover(true);
@@ -131,39 +130,18 @@ public class Prestamo extends javax.swing.JPanel {
 
         add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 340));
 
-        jTableDatos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jTableDatos.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jTableDatos.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         jScrollPane3.setViewportView(jTableDatos);
 
-        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 690, 140));
+        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 700, 140));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
+        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         jScrollPane1.setViewportView(jTable1);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, 350, 150));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, 350, 160));
 
         tituloDev.setText("Informacion acerca sus prestamos");
-        add(tituloDev, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, -1, -1));
+        add(tituloDev, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, -1, -1));
 
         jLabel3.setText("PRESTAMO");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, -1, -1));
