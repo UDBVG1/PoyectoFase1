@@ -83,7 +83,8 @@ public class PrestamosCRUD {
                                         "LEFT join audiovisual mc on m.idaudiovisual=mc.idaudiovisual\n" +
                                         "LEFT join reserva r on m.codigo = r.codigo\n" +
                                         "LEFT join usuario u on u.idusuario = r.idusuario\n" +
-                                        "where r.idusuario != 0;";
+                                        "where r.idusuario != 0 and r.estado='Inactivo';";
+                                        
      
      public String SQL_SELECTPRESX = "SELECT case when m.idescrito is not null then l.titulo\n" +
                                     "when m.idaudiovisual is not null then mc.titulo\n" +
