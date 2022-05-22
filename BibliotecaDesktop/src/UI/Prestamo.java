@@ -99,7 +99,7 @@ public class Prestamo extends javax.swing.JPanel {
         jToolBar1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jToolBar1.setRollover(true);
 
-        Prestar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/AgregarMaterial.png"))); // NOI18N
+        Prestar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/PrestarIcon.png"))); // NOI18N
         Prestar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PrestarActionPerformed(evt);
@@ -107,7 +107,7 @@ public class Prestamo extends javax.swing.JPanel {
         });
         jToolBar1.add(Prestar);
 
-        Reservar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/EditarMaterial.png"))); // NOI18N
+        Reservar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/Reservar.png"))); // NOI18N
         Reservar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ReservarActionPerformed(evt);
@@ -115,7 +115,7 @@ public class Prestamo extends javax.swing.JPanel {
         });
         jToolBar1.add(Reservar);
 
-        Devolucion.setText("DEV");
+        Devolucion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/DevolucionIcon.png"))); // NOI18N
         Devolucion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DevolucionActionPerformed(evt);
@@ -123,7 +123,7 @@ public class Prestamo extends javax.swing.JPanel {
         });
         jToolBar1.add(Devolucion);
 
-        filtrado.setText("FILTRAR");
+        filtrado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/filtrar.png"))); // NOI18N
         filtrado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filtradoActionPerformed(evt);

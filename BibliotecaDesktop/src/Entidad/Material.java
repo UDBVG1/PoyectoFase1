@@ -23,7 +23,7 @@ import java.time.format.DateTimeFormatter;
 public class Material {
     public String titulo,autor,codigo,catalogacion, tipo;
     public int CantTotal,CantPrestada,CantDisp, tiempo;
-    private final String SQL_SELECTID = "select COALESCE(concat(upper(?),(lpad(substr(max(codigo),4,7)+1,5,'0'))),'LIB00001') as idcodigo from material where codigo like upper(?);";
+    private final String SQL_SELECTID = "select COALESCE(concat(upper(?),(lpad(substr(max(codigo),4,7)+1,5,'0'))),concat(upper(?),'00001')) as idcodigo from material where codigo like upper(?);";
     
     public int getTiempo(){
         return tiempo;
@@ -100,6 +100,7 @@ public class Material {
                 conn = Conexion.getConexion();
                 stmt = conn.prepareStatement(SQL_SELECTID);
                 int index = 1;
+                stmt.setObject(index++, tipo);
                 stmt.setObject(index++, tipo);
                 stmt.setObject(index, tipo+"%");
                 rs = stmt.executeQuery();

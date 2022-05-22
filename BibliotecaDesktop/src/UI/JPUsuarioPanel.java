@@ -265,6 +265,7 @@ public class JPUsuarioPanel extends javax.swing.JPanel {
         usuario.setNombre(jTFNombre.getText()+" "+jTFApellido.getText());
         usuario.setUsuario(jTFUsuario.getText());
         usuario.setNivel(jCBNivel.getSelectedIndex()+1);
+        usuario.setIdentificador(jTFIdentificacion.getText());
         if(spass.equals(spassC)){
             usuario.setClave(spass);
             int rows=data.insertarUsuario(usuario);
