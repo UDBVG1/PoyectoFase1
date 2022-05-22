@@ -47,6 +47,7 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
         jEditar = new javax.swing.JButton();
         jEliminar = new javax.swing.JButton();
         jMostrarTodo = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLcodigo = new javax.swing.JLabel();
         codigo = new javax.swing.JTextField();
@@ -64,7 +65,6 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
         cant_disponible = new javax.swing.JTextField();
         jLautor = new javax.swing.JLabel();
         autor = new javax.swing.JTextField();
-        jAccion = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla1 = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
@@ -113,6 +113,14 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
             }
         });
         jTBMaterial.add(jMostrarTodo);
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilidades/Recursos/LimpiarUsuario.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jTBMaterial.add(jButton1);
 
         jLcodigo.setText("Codigo:");
 
@@ -168,13 +176,6 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
 
         jLautor.setText("Autor:");
 
-        jAccion.setText("Agregar");
-        jAccion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jAccionActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -182,29 +183,6 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLcodigo)
-                        .addGap(18, 18, 18)
-                        .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLtipo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLtiempo)
-                            .addComponent(jLcant_disponible))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cant_disponible, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLcant_total, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cant_total, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jAccion)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
@@ -219,8 +197,30 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
                                 .addComponent(jLtitulo)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(79, 79, 79)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLcodigo)
+                                .addGap(18, 18, 18)
+                                .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLtipo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLtiempo)
+                                    .addComponent(jLcant_disponible))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cant_disponible, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLcant_total, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cant_total, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -252,9 +252,8 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cant_disponible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLcant_disponible)
-                    .addComponent(jAccion))
-                .addGap(205, 205, 205))
+                    .addComponent(jLcant_disponible))
+                .addGap(207, 207, 207))
         );
 
         Tabla1.setModel(new javax.swing.table.DefaultTableModel(
@@ -364,10 +363,11 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTBMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jTBMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(39, 39, 39)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -375,56 +375,67 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
     private void jMostrarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMostrarTodoActionPerformed
         // TODO add your handling code here:
         clear();
-        jAccion.setVisible(true);
-        jAccion.setText("Buscar");
+      elementos.clear();
+                 
+                if(titulo.getText().isEmpty()){
+                    elementos.add("vacio");
+                }
+                else{
+                  elementos.add(titulo.getText());  
+                }
+                
+                if(autor.getText().length()==0){
+                    elementos.add("vacio");
+                }
+                else{
+                  elementos.add(autor.getText());    
+                }
+                
+                if(cambiante.getText().length()==0){
+                    elementos.add("vacio");
+                }
+                else{
+                    elementos.add(cambiante.getText());
+                }
+                
+                if(cambiante1.getText().length()==0){
+                    elementos.add("vacio");
+                }
+                else
+                {
+                    elementos.add(cambiante1.getText());
+                }
+                
+                if(cambiante2.getText().length()==0){
+                    elementos.add("vacio");
+                }
+                else{
+                    elementos.add(cambiante2.getText()); 
+                }
+
+                if(autor.getText().length()==0){
+                    elementos.add("vacio");
+                    elementos.add("vacio");
+                }
+                else{
+                elementos.add(autor.getText());  
+                elementos.add(autor.getText());  
+                }
+
+            
+            
+             info=Nuevo_material.Busqueda(elementos);
+             clear();
+             Tabla1.setModel(info);
+             
     }//GEN-LAST:event_jMostrarTodoActionPerformed
 
     private void jAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAgregarActionPerformed
         // TODO add your handling code here:
-        clear();
-                jAccion.setVisible(true);
-        jAccion.setText("Agregar");
-            
-    }//GEN-LAST:event_jAgregarActionPerformed
-
-    private void jEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEliminarActionPerformed
-        String material;
-        if(codigo.getText().isEmpty()){
-        JOptionPane.showMessageDialog(null, "¡No hay material que borrar!\n Ingrese un código para buscarlo.", "Alerta", JOptionPane.WARNING_MESSAGE);
-        }
-        else{
-        material=codigo.getText();
-        int resp=JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar el material? " + material ,"Alerta",JOptionPane.YES_NO_OPTION);
-        
-        if(resp==0){
-         int j=Nuevo_material.EliminarMateriales(material, material.substring(0,3));
-         if(j==0){JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
-        }
-        }
-        clear();
-        construir_tabla();
-        }
-        
-        
-    }//GEN-LAST:event_jEliminarActionPerformed
-
-    private void Tabla1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Tabla1KeyPressed
-
-    }//GEN-LAST:event_Tabla1KeyPressed
-
-    private void Tabla1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla1MouseClicked
-
-        String dato=String.valueOf(info.getValueAt(Tabla1.getSelectedRow(),0));
-        System.out.println(dato);
-        datos=Nuevo_material.BuscarMaterial(dato,dato.substring(0,3));
-        LlenarDatos();
-
-    }//GEN-LAST:event_Tabla1MouseClicked
-
-    private void jAccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAccionActionPerformed
-        // TODO add your handling code here:
-        if (jAccion.getText()=="Agregar"){
-        String tipo_material, valor;
+ 
+              //  jAccion.setVisible(true);
+        //jAccion.setText("Agregar");
+                String tipo_material, valor;
 
         //Cargando datos en entidad
         
@@ -492,64 +503,42 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
                 System.out.println(ex);
             }
         }
+            
+    }//GEN-LAST:event_jAgregarActionPerformed
+
+    private void jEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEliminarActionPerformed
+        String material;
+        if(codigo.getText().isEmpty()){
+        JOptionPane.showMessageDialog(null, "¡No hay material que borrar!\n Ingrese un código para buscarlo.", "Alerta", JOptionPane.WARNING_MESSAGE);
         }
         else{
-            elementos.clear();
-                 
-                if(titulo.getText().isEmpty()){
-                    elementos.add("vacio");
-                }
-                else{
-                  elementos.add(titulo.getText());  
-                }
-                
-                if(autor.getText().length()==0){
-                    elementos.add("vacio");
-                }
-                else{
-                  elementos.add(autor.getText());    
-                }
-                
-                if(cambiante.getText().length()==0){
-                    elementos.add("vacio");
-                }
-                else{
-                    elementos.add(cambiante.getText());
-                }
-                
-                if(cambiante1.getText().length()==0){
-                    elementos.add("vacio");
-                }
-                else
-                {
-                    elementos.add(cambiante1.getText());
-                }
-                
-                if(cambiante2.getText().length()==0){
-                    elementos.add("vacio");
-                }
-                else{
-                    elementos.add(cambiante2.getText()); 
-                }
-
-                if(autor.getText().length()==0){
-                    elementos.add("vacio");
-                    elementos.add("vacio");
-                }
-                else{
-                elementos.add(autor.getText());  
-                elementos.add(autor.getText());  
-                }
-
-            
-            
-             info=Nuevo_material.Busqueda(elementos);
-             clear();
-             Tabla1.setModel(info);
-             
+        material=codigo.getText();
+        int resp=JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar el material? " + material ,"Alerta",JOptionPane.YES_NO_OPTION);
+        
+        if(resp==0){
+         int j=Nuevo_material.EliminarMateriales(material, material.substring(0,3));
+         if(j==0){JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
+        }
+        }
+        clear();
+        construir_tabla();
         }
         
-    }//GEN-LAST:event_jAccionActionPerformed
+        
+    }//GEN-LAST:event_jEliminarActionPerformed
+
+    private void Tabla1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Tabla1KeyPressed
+
+    }//GEN-LAST:event_Tabla1KeyPressed
+
+    private void Tabla1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla1MouseClicked
+
+        String dato=String.valueOf(info.getValueAt(Tabla1.getSelectedRow(),0));
+        System.out.println(dato);
+        datos=Nuevo_material.BuscarMaterial(dato,dato.substring(0,3));
+        LlenarDatos();
+
+    }//GEN-LAST:event_Tabla1MouseClicked
  
     private void cant_disponibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cant_disponibleActionPerformed
         // TODO add your handling code here:
@@ -595,97 +584,128 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
         
         Actualizar();
     }//GEN-LAST:event_jEditarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        clear();
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     public void Actualizar(){
         String validar;
+        String codigo_material;
         if (codigo.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "No hay elemento seleccionado", "Informacion", JOptionPane.INFORMATION_MESSAGE);
         }
         else{
         String dato=codigo.getText();
         datos=Nuevo_material.BuscarMaterial(dato,dato.substring(0,3));
-         if (ParametrosGlobales.tipo.equals("CDA") || ParametrosGlobales.tipo.equals("DVD")){
-            Audiovisual MiAudiovisual=new Audiovisual();
-                MiAudiovisual.titulo=titulo.getText();
-                MiAudiovisual.tipo=ParametrosGlobales.tipo;
-                MiAudiovisual.autor=autor.getText();
-                MiAudiovisual.catalogacion=catalogacion.getText();
-                MiAudiovisual.tiempo= Integer.parseInt(tiempo.getText());
-                MiAudiovisual.CantTotal=Integer.parseInt(cant_total.getText());
-                MiAudiovisual.CantDisp=Integer.parseInt(cant_disponible.getText());
-                MiAudiovisual.genero=cambiante.getText();
-                MiAudiovisual.duracion=cambiante1.getText();
-                if (ParametrosGlobales.tipo=="CDA"){
-                    MiAudiovisual.numCanciones=Integer.parseInt(cambiante2.getText());
-                }
-         }
-         else{
-                Escrito MiEscrito=new Escrito();
-                MiEscrito.titulo=titulo.getText();
                 
-                MiEscrito.autor=autor.getText();
-                MiEscrito.catalogacion=catalogacion.getText();
-                MiEscrito.tiempo= Integer.parseInt(tiempo.getText());
-                MiEscrito.CantTotal=Integer.parseInt(cant_total.getText());
-                MiEscrito.CantDisp=Integer.parseInt(cant_disponible.getText());
-                MiEscrito.editorial=cambiante.getText();
-                switch(tipo_material){
-                    case "LIB":
-                    MiEscrito.ISBN=Integer.parseInt(cambiante1.getText());
-                    MiEscrito.numPaginas=Integer.parseInt(cambiante2.getText());
-                    MiEscrito.fechaPubli=Integer.parseInt(cambiante3.getText());
-                    break;
-                    case "OBR":
-                    MiEscrito.numPaginas=Integer.parseInt(cambiante1.getText());
-                    MiEscrito.fechaPubli=Integer.parseInt(cambiante2.getText());
-                    break;
-                    case "REV":
-                    MiEscrito.numPaginas=Integer.parseInt(cambiante1.getText());
-                    MiEscrito.periodicidad=cambiante2.getText();
-                    break;
-                    default:
-
-                }
-         }
-        
-     /*   validar=String.valueOf(datos.getValueAt(0,1));
-        
+        validar=String.valueOf(datos.getValueAt(0,1)); 
         if(!titulo.getText().equals(validar)){
             Nuevo_material.Actualizar(titulo.getText(),dato, 1);
         }
-         validar=String.valueOf(datos.getValueAt(0,2));
-        if(!autor.getText().equals(validar)){
-            Nuevo_material.Actualizar(autor.getText(),dato, 2);
-        }
-         validar=String.valueOf(datos.getValueAt(0,3));
+        validar=String.valueOf(datos.getValueAt(0,3));
         if(!catalogacion.getText().equals(validar)){
-            Nuevo_material.Actualizar(catalogacion.getText(),dato, 3);
+        Nuevo_material.Actualizar(catalogacion.getText(),dato, 3);
         }
-        validar=String.valueOf(datos.getValueAt(0,4));
+
+        
+        switch(dato.substring(0,3)){
+        case "LIB":
+            validar=String.valueOf(datos.getValueAt(0,2));
+            if(!autor.getText().equals(validar)){
+            Nuevo_material.Actualizar(autor.getText(),dato, 2);
+            }
+            validar=String.valueOf(datos.getValueAt(0,4));
+            if(!cambiante.getText().equals(validar)){
+                Nuevo_material.Actualizar(cambiante.getText(),dato, 6);
+            }
+            validar=String.valueOf(datos.getValueAt(0,5));
+            if(!cambiante1.getText().equals(validar)){
+                Nuevo_material.Actualizar(cambiante1.getText(),dato,8 );
+            }
+            validar=String.valueOf(datos.getValueAt(0,6));
+            if(!cambiante2.getText().equals(validar)){
+                Nuevo_material.Actualizar(cambiante2.getText(),dato,9);
+            }
+            validar=String.valueOf(datos.getValueAt(0,7));
+            if(!cambiante3.getText().equals(validar)){
+                Nuevo_material.Actualizar(cambiante3.getText(),dato, 11);
+        } indice=8;
+            break;
+        case "OBR":
+            validar=String.valueOf(datos.getValueAt(0,2));
+            if(!autor.getText().equals(validar)){
+            Nuevo_material.Actualizar(autor.getText(),dato, 2);
+            }
+            validar=String.valueOf(datos.getValueAt(0,4));
+            if(!cambiante.getText().equals(validar)){
+                Nuevo_material.Actualizar(cambiante.getText(),dato, 6);
+            }
+            validar=String.valueOf(datos.getValueAt(0,5));
+            if(!cambiante1.getText().equals(validar)){
+                Nuevo_material.Actualizar(cambiante1.getText(),dato, 9);
+            }
+            validar=String.valueOf(datos.getValueAt(0,6));
+            if(!cambiante2.getText().equals(validar)){
+                Nuevo_material.Actualizar(cambiante2.getText(),dato,11 );
+            } indice=7;
+            break;
+        case "REV":
+            validar=String.valueOf(datos.getValueAt(0,4));
+            if(!cambiante.getText().equals(validar)){
+                Nuevo_material.Actualizar(cambiante.getText(),dato, 6);
+            }
+            validar=String.valueOf(datos.getValueAt(0,5));
+            if(!cambiante1.getText().equals(validar)){
+                Nuevo_material.Actualizar(cambiante1.getText(),dato,9 );
+            }
+
+            indice=6;
+            break;
+        case "CDA":
+            validar=String.valueOf(datos.getValueAt(0,2));
+            if(!autor.getText().equals(validar)){
+            Nuevo_material.Actualizar(autor.getText(),dato, 2);
+            }
+            validar=String.valueOf(datos.getValueAt(0,4));
+            if(!cambiante.getText().equals(validar)){
+                Nuevo_material.Actualizar(cambiante.getText(),dato, 7);
+            }
+            validar=String.valueOf(datos.getValueAt(0,5));
+            if(!cambiante1.getText().equals(validar)){
+                Nuevo_material.Actualizar(cambiante1.getText(),dato,10 );
+            }
+            validar=String.valueOf(datos.getValueAt(0,6));
+            if(!cambiante2.getText().equals(validar)){
+                Nuevo_material.Actualizar(cambiante2.getText(),dato,13 );
+            }  indice=7;
+          break;
+        case "DVD":
+            validar=String.valueOf(datos.getValueAt(0,2));
+            if(!autor.getText().equals(validar)){
+            Nuevo_material.Actualizar(autor.getText(),dato, 2);
+            }
+            validar=String.valueOf(datos.getValueAt(0,4));
+            if(!cambiante.getText().equals(validar)){
+                Nuevo_material.Actualizar(cambiante.getText(),dato, 7);
+            }
+            validar=String.valueOf(datos.getValueAt(0,5));
+            if(!cambiante1.getText().equals(validar)){
+                Nuevo_material.Actualizar(cambiante1.getText(),dato, 10 );
+            }
+            indice=6;
+            break;
+        }
+        validar=String.valueOf(datos.getValueAt(0,indice++));
         if(!cant_total.getText().equals(validar)){
             Nuevo_material.Actualizar(cant_total.getText(),dato, 4);
         }
-        validar=String.valueOf(datos.getValueAt(0,5));
+        indice++;
+        validar=String.valueOf(datos.getValueAt(0,indice++));
         if(!tiempo.getText().equals(validar)){
             Nuevo_material.Actualizar(tiempo.getText(),dato, 5);
         }
-        validar=String.valueOf(datos.getValueAt(0,6));
-        if(!cambiante.getText().equals(validar)){
-            Nuevo_material.Actualizar(cambiante.getText(),dato, 6);
-        }
-        validar=String.valueOf(datos.getValueAt(0,7));
-        if(!cambiante1.getText().equals(validar)){
-            Nuevo_material.Actualizar(cambiante1.getText(),dato, 7);
-        }
-        validar=String.valueOf(datos.getValueAt(0,8));
-        if(!cambiante2.getText().equals(validar)){
-            Nuevo_material.Actualizar(cambiante2.getText(),dato, 8);
-        }
-        validar=String.valueOf(datos.getValueAt(0,9));
-        if(!cambiante3.getText().equals(validar)){
-            Nuevo_material.Actualizar(cambiante3.getText(),dato, 9);
-        }
-*/
         construir_tabla();
 
         }
@@ -765,6 +785,7 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
                 cambiante1.setText(String.valueOf(datos.getValueAt(0,6)));
                 cambiante3.setText(String.valueOf(datos.getValueAt(0,7)));
                 indice=8;
+                tipo.setSelectedIndex(0);
             }
     }
     
@@ -788,7 +809,7 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
                 cambiante.setText(String.valueOf(datos.getValueAt(0,4)));
                 cambiante2.setText(String.valueOf(datos.getValueAt(0,5)));
                 indice=6;
-
+            tipo.setSelectedIndex(2);
             }
     }
     
@@ -813,6 +834,7 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
                 cambiante2.setText(String.valueOf(datos.getValueAt(0,6)));
 
                 indice=7;
+                tipo.setSelectedIndex(1);
             }
     }
     
@@ -837,6 +859,7 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
                 cambiante.setText(String.valueOf(datos.getValueAt(0,4)));
                 cambiante1.setText(String.valueOf(datos.getValueAt(0,5)));
                 indice=6;
+                tipo.setSelectedIndex(4);
             }
     }
     
@@ -864,6 +887,7 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
             cambiante1.setText(String.valueOf(datos.getValueAt(0,5)));
             cambiante2.setText(String.valueOf(datos.getValueAt(0,6)));
             indice=7;
+            tipo.setSelectedIndex(3);
             }
     }
     public void MostrarN3(){
@@ -889,17 +913,11 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
                 
                 jLcant_total.setVisible(false);
                 cant_total.setVisible(false);
-                
-                jAccion.setVisible(true);
-                jAccion.setText("Buscar");
+
                 codigo.setEditable(false);
-                titulo.setEditable(false);
-                autor.setEditable(false);
+
                 catalogacion.setEditable(false);
-                cambiante.setEditable(false);
-                cambiante1.setEditable(false);
-                cambiante2.setEditable(false);
-                cambiante3.setEditable(false);
+
                 cant_disponible.setEditable(false);
                 
                 
@@ -914,8 +932,7 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
                 tiempo.setVisible(false);
                 jLcant_total.setVisible(false);
                 cant_total.setVisible(false);
-                jAccion.setVisible(true);
-                jAccion.setText("Buscar");
+
     }
     
     private void Accesos(){
@@ -928,7 +945,7 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
                 jEditar.setVisible(true);
                 jEliminar.setVisible(true);
                 jMostrarTodo.setVisible(true);
-                jAccion.setVisible(false);
+
 
                 codigo.setEnabled(false);
                 tipo.removeAllItems();
@@ -944,7 +961,7 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
                 for(int i=0; i<5;i++){
                 tipo.addItem(Lista[i]);
                  }
-                jAccion.setVisible(false);
+
                 construir_tabla();
                 MostrarN2();
                 break;
@@ -962,18 +979,18 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
     }
     
     public void clear(){
-        codigo.setText(" ");
-        titulo.setText(" ");
-        autor.setText("");
-        catalogacion.setText("");
-        cant_disponible.setText("");
-        cant_total.setText("");
-        tiempo.setText("");
-        cambiante.setText("");
-        cambiante1.setText("");
-        cambiante2.setText("");
-        cambiante3.setText("");
-        jAccion.setVisible(false);
+        codigo.setText(null);
+        titulo.setText(null);
+        autor.setText(null);
+        catalogacion.setText(null);
+        cant_disponible.setText(null);
+        cant_total.setText(null);
+        tiempo.setText(null);
+        cambiante.setText(null);
+        cambiante1.setText(null);
+        cambiante2.setText(null);
+        cambiante3.setText(null);
+
     }
     
     private void construir_tabla(){
@@ -994,8 +1011,8 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
     private javax.swing.JTextField cant_total;
     private javax.swing.JTextField catalogacion;
     private javax.swing.JTextField codigo;
-    private javax.swing.JButton jAccion;
     private javax.swing.JButton jAgregar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jEditar;
     private javax.swing.JButton jEliminar;
     private javax.swing.JLabel jLautor;

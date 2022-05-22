@@ -313,8 +313,17 @@ public class CRUDD {
                        stmt.setString(index++,elemento);
                        stmt.setInt(index, Integer.parseInt(codigo));
                         break;
+                        
+                case 2:
+                       stmt.setString(index++,elemento);
+                       stmt.setString(index, codigo);
+                    break;
+                case 3:
+                       stmt.setInt(index++,Integer.parseInt(elemento));
+                       stmt.setString(index, codigo);
+                    break;
                 default:
-                    JOptionPane.showMessageDialog(null, "¡Error!\n No se puede actualizar", "Alerta", JOptionPane.WARNING_MESSAGE); 
+                    JOptionPane.showMessageDialog(null, "¡Error!\n No se puede actualizar BD", "Alerta", JOptionPane.WARNING_MESSAGE); 
             }
 
         rows = stmt.executeUpdate();

@@ -278,14 +278,35 @@ public class MaterialCRUDD extends CRUDD{
                  super.ActualizarMaterial(SQL_UPDATE,codigo, elemento, 3);
                 break;
             case 6:
-                
+                SQL_UPDATE="UPDATE materiales_vista SET editorial = ? WHERE materiales_vista.codigo = ?;";
+                super.ActualizarMaterial(SQL_UPDATE,codigo, elemento, 2);
                 break;
             case 7:
+                SQL_UPDATE="UPDATE materiales_vista SET genero = ? WHERE materiales_vista.codigo = ?;";
+                super.ActualizarMaterial(SQL_UPDATE,codigo, elemento, 2);
                 break;
             case 8:
+                SQL_UPDATE="UPDATE materiales_vista SET isbn = ? WHERE materiales_vista.codigo = ?;";
+                super.ActualizarMaterial(SQL_UPDATE,codigo, elemento, 3);
                 break;
             case 9:
+                SQL_UPDATE="UPDATE materiales_vista SET num_pag = ? WHERE materiales_vista.codigo = ?;";
+                super.ActualizarMaterial(SQL_UPDATE,codigo, elemento, 3);
                 break;
+            case 10:
+                SQL_UPDATE="UPDATE materiales_vista SET duracion = ? WHERE materiales_vista.codigo = ?;";
+                super.ActualizarMaterial(SQL_UPDATE,codigo, elemento, 2);
+                break;
+            case 11:
+                SQL_UPDATE="UPDATE materiales_vista SET publicacion = ? WHERE materiales_vista.codigo = ?;";
+                super.ActualizarMaterial(SQL_UPDATE,codigo, elemento, 2);
+                break;
+            case 12:
+                SQL_UPDATE="UPDATE materiales_vista SET canciones = ? WHERE materiales_vista.codigo = ?;";
+                super.ActualizarMaterial(SQL_UPDATE,codigo, elemento, 2);
+                break;
+            default:
+                
                 }
                 
                 
