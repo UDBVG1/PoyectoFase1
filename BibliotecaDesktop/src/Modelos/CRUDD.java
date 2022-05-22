@@ -297,6 +297,41 @@ public class CRUDD {
         }
             
         }
+        
+        public void ActualizarMaterial(String SQL,String codigo,String elemento, int tipo){
+        int rows;
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        rows=0;
+
+        try {
+            conn = Conexion.getConexion();
+            stmt = conn.prepareStatement(SQL);
+            int index = 1;
+            switch(tipo){
+                case 1:
+                       stmt.setString(index++,elemento);
+                       stmt.setInt(index, Integer.parseInt(codigo));
+                        break;
+                default:
+                    JOptionPane.showMessageDialog(null, "¡Error!\n No se puede actualizar", "Alerta", JOptionPane.WARNING_MESSAGE); 
+            }
+
+        rows = stmt.executeUpdate();
+        
+        if (rows > 0) {
+                System.out.println("Registro exitoso de material" + "/n" + "Registros afectados" + rows);
+            }
+        else{
+            System.out.println("Registro NO exitoso del material!!");
+        }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Conexion.closeStatement(stmt);
+            Conexion.closeConnection(conn);
+        }
+        }
 }
         
     

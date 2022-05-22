@@ -32,7 +32,7 @@ public class MaterialCRUDD extends CRUDD{
     private String SQL_VALIDAR="SELECT codigo FROM `materiales_vista` WHERE codigo=?;";
     private String SQL_INSERT="";
      private String SQL_MATERIAL="";
-     
+     private String SQL_UPDATE="";
      /*
     
     */
@@ -221,6 +221,100 @@ public class MaterialCRUDD extends CRUDD{
       return dtm;
     }
     
+    public void Actualizar(String elemento, String codigo, int index){
+        String id;
+        int dec=0;
+        switch(index){
+            case 1:
+                    id=AveriguarID(codigo, codigo.substring(0,3));
+                    if (codigo.substring(0,3).equals(Lista[0]) || codigo.substring(0,3).equals(Lista[1])  || codigo.substring(0,3).equals(Lista[2] )){
+                    SQL_UPDATE="UPDATE Escrito SET titulo = ? WHERE idescrito = ?;";
+                    }
+                    else{
+                        if (codigo.substring(0,3).equals(Lista[3]) || codigo.substring(0,3).equals(Lista[4])){
+                        SQL_UPDATE="UPDATE Audiovisual SET titulo = ? WHERE idaudiovisual = ?;";                    
+                        }
+                        else{
+                          JOptionPane.showMessageDialog(null, "¡Error!\n No se encuentra Material", "Alerta", JOptionPane.WARNING_MESSAGE);  
+                          dec=1;
+                        }
+                    }
+                    if(dec==0){
+                        super.ActualizarMaterial(SQL_UPDATE,id, elemento, 1);
+                    }
+                    break;
+            case 2:
+                 if (codigo.substring(0,3).equals(Lista[0]) ||  codigo.substring(0,3).equals(Lista[1] )){   
+                 SQL_UPDATE="UPDATE materiales_vista SET autor = ? WHERE materiales_vista.codigo = ?;";}
+                 else{
+                 if (codigo.substring(0,3).equals(Lista[3])){
+                     SQL_UPDATE="UPDATE materiales_vista SET artista = ? WHERE materiales_vista.codigo = ?;";
+                 }
+                 else{
+                    if (codigo.substring(0,3).equals(Lista[4])){ 
+                        SQL_UPDATE="UPDATE materiales_vista SET director = ? WHERE materiales_vista.codigo = ?;";
+                    }
+                    else{
+                      
+                      JOptionPane.showMessageDialog(null, "¡Error!\n No se encuentra Material", "Alerta", JOptionPane.WARNING_MESSAGE);
+                      dec=1;
+                    }
+                 }
+                 }
+                 if(dec==0){
+                 super.ActualizarMaterial(SQL_UPDATE,codigo, elemento, 2);
+                 }
+                 break;
+            case 3:
+                 SQL_UPDATE="UPDATE materiales_vista SET catalogacion = ? WHERE materiales_vista.codigo = ?;";
+                 super.ActualizarMaterial(SQL_UPDATE,codigo, elemento, 2);
+                 break;
+            case 4:
+                 SQL_UPDATE="UPDATE materiales_vista SET cantidad_total = ? WHERE materiales_vista.codigo = ?;";
+                 super.ActualizarMaterial(SQL_UPDATE,codigo, elemento, 3);
+                break;
+            case 5:
+                 SQL_UPDATE="UPDATE materiales_vista SET tiempo = ? WHERE materiales_vista.codigo = ?;";
+                 super.ActualizarMaterial(SQL_UPDATE,codigo, elemento, 3);
+                break;
+            case 6:
+                
+                break;
+            case 7:
+                break;
+            case 8:
+                break;
+            case 9:
+                break;
+                }
+                
+                
+        }
     
-    
+        public String AveriguarID(String codigo, String tipo){
+        code.clear();
+        code.add(codigo);
+        String id=null;
+            if (tipo.equals(Lista[0]) || tipo.equals(Lista[1])  || tipo.equals(Lista[2] )){
+            SQLMaterial="Select codigo,idescrito from materiales_vista where codigo=?;";            
+            DefaultTableModel dtm=super.material_lista(SQLMaterial,1,code);
+            id=String.valueOf(dtm.getValueAt(0,1));
+            }
+            else{
+            if (tipo.equals(Lista[3]) || tipo.equals(Lista[4])){
+            SQLMaterial="Select codigo,idaudiovisual from materiales_vista where codigo=?;";            
+            DefaultTableModel dtm=super.material_lista(SQLMaterial,1,code);
+            id=String.valueOf(dtm.getValueAt(0,1));
+             }
+            else{
+                JOptionPane.showMessageDialog(null, "¡Error!\n No se encuentra Material", "Alerta", JOptionPane.WARNING_MESSAGE);
+            } 
+           
+          }
+            return id;
+    }
+
 }
+    
+
+    

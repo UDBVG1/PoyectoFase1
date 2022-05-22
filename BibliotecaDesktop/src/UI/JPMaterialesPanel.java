@@ -550,7 +550,7 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
         }
         
     }//GEN-LAST:event_jAccionActionPerformed
-
+ 
     private void cant_disponibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cant_disponibleActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cant_disponibleActionPerformed
@@ -597,12 +597,102 @@ public class JPMaterialesPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jEditarActionPerformed
     
     public void Actualizar(){
+        String validar;
         if (codigo.getText().isEmpty()){
-            
+            JOptionPane.showMessageDialog(null, "No hay elemento seleccionado", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+        String dato=codigo.getText();
+        datos=Nuevo_material.BuscarMaterial(dato,dato.substring(0,3));
+         if (ParametrosGlobales.tipo.equals("CDA") || ParametrosGlobales.tipo.equals("DVD")){
+            Audiovisual MiAudiovisual=new Audiovisual();
+                MiAudiovisual.titulo=titulo.getText();
+                MiAudiovisual.tipo=ParametrosGlobales.tipo;
+                MiAudiovisual.autor=autor.getText();
+                MiAudiovisual.catalogacion=catalogacion.getText();
+                MiAudiovisual.tiempo= Integer.parseInt(tiempo.getText());
+                MiAudiovisual.CantTotal=Integer.parseInt(cant_total.getText());
+                MiAudiovisual.CantDisp=Integer.parseInt(cant_disponible.getText());
+                MiAudiovisual.genero=cambiante.getText();
+                MiAudiovisual.duracion=cambiante1.getText();
+                if (ParametrosGlobales.tipo=="CDA"){
+                    MiAudiovisual.numCanciones=Integer.parseInt(cambiante2.getText());
+                }
+         }
+         else{
+                Escrito MiEscrito=new Escrito();
+                MiEscrito.titulo=titulo.getText();
+                
+                MiEscrito.autor=autor.getText();
+                MiEscrito.catalogacion=catalogacion.getText();
+                MiEscrito.tiempo= Integer.parseInt(tiempo.getText());
+                MiEscrito.CantTotal=Integer.parseInt(cant_total.getText());
+                MiEscrito.CantDisp=Integer.parseInt(cant_disponible.getText());
+                MiEscrito.editorial=cambiante.getText();
+                switch(tipo_material){
+                    case "LIB":
+                    MiEscrito.ISBN=Integer.parseInt(cambiante1.getText());
+                    MiEscrito.numPaginas=Integer.parseInt(cambiante2.getText());
+                    MiEscrito.fechaPubli=Integer.parseInt(cambiante3.getText());
+                    break;
+                    case "OBR":
+                    MiEscrito.numPaginas=Integer.parseInt(cambiante1.getText());
+                    MiEscrito.fechaPubli=Integer.parseInt(cambiante2.getText());
+                    break;
+                    case "REV":
+                    MiEscrito.numPaginas=Integer.parseInt(cambiante1.getText());
+                    MiEscrito.periodicidad=cambiante2.getText();
+                    break;
+                    default:
+
+                }
+         }
+        
+     /*   validar=String.valueOf(datos.getValueAt(0,1));
+        
+        if(!titulo.getText().equals(validar)){
+            Nuevo_material.Actualizar(titulo.getText(),dato, 1);
+        }
+         validar=String.valueOf(datos.getValueAt(0,2));
+        if(!autor.getText().equals(validar)){
+            Nuevo_material.Actualizar(autor.getText(),dato, 2);
+        }
+         validar=String.valueOf(datos.getValueAt(0,3));
+        if(!catalogacion.getText().equals(validar)){
+            Nuevo_material.Actualizar(catalogacion.getText(),dato, 3);
+        }
+        validar=String.valueOf(datos.getValueAt(0,4));
+        if(!cant_total.getText().equals(validar)){
+            Nuevo_material.Actualizar(cant_total.getText(),dato, 4);
+        }
+        validar=String.valueOf(datos.getValueAt(0,5));
+        if(!tiempo.getText().equals(validar)){
+            Nuevo_material.Actualizar(tiempo.getText(),dato, 5);
+        }
+        validar=String.valueOf(datos.getValueAt(0,6));
+        if(!cambiante.getText().equals(validar)){
+            Nuevo_material.Actualizar(cambiante.getText(),dato, 6);
+        }
+        validar=String.valueOf(datos.getValueAt(0,7));
+        if(!cambiante1.getText().equals(validar)){
+            Nuevo_material.Actualizar(cambiante1.getText(),dato, 7);
+        }
+        validar=String.valueOf(datos.getValueAt(0,8));
+        if(!cambiante2.getText().equals(validar)){
+            Nuevo_material.Actualizar(cambiante2.getText(),dato, 8);
+        }
+        validar=String.valueOf(datos.getValueAt(0,9));
+        if(!cambiante3.getText().equals(validar)){
+            Nuevo_material.Actualizar(cambiante3.getText(),dato, 9);
+        }
+*/
+        construir_tabla();
+
         }
     }
     public void LlenarDatos(){
-        String texto=null;         
+        String texto=null; 
+        clear();
         texto=String.valueOf(datos.getValueAt(0,0));
         codigo.setText(texto);
         indice=0;
