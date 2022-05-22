@@ -76,14 +76,14 @@ public class PrestamosCRUD {
      private final String SQL_UPDATEPD = "update material set cantidad_disponible = (cantidad_disponible + ?) where codigo = ?;";
     
      public String SQL_SELECTREVSALL = "SELECT 	m.codigo as Codigo,case when m.idescrito is not null then l.titulo\n" +
-                                        "when m.idaudiovisual is not null then mc.titulo\n" +
-                                        "else null end AS titulo,autor,estado,u.usuario\n" +
-                                        "FROM material m\n" +
-                                        "LEFT join escrito l on m.idescrito=l.idescrito\n" +
-                                        "LEFT join audiovisual mc on m.idaudiovisual=mc.idaudiovisual\n" +
-                                        "LEFT join reserva r on m.codigo = r.codigo\n" +
-                                        "LEFT join usuario u on u.idusuario = r.idusuario\n" +
-                                        "where r.idusuario != 0 and r.estado='Inactivo';";
+"                                        when m.idaudiovisual is not null then mc.titulo\n" +
+"                                        else null end AS titulo,autor,(SELECT c.descripcion FROM poo.config c where c.estado='estado reserva' and valor=r.estado) as estado,u.usuario\n" +
+"                                        FROM material m\n" +
+"                                        LEFT join escrito l on m.idescrito=l.idescrito\n" +
+"                                        LEFT join audiovisual mc on m.idaudiovisual=mc.idaudiovisual\n" +
+"                                        LEFT join reserva r on m.codigo = r.codigo\n" +
+"                                        LEFT join usuario u on u.idusuario = r.idusuario\n" +
+"                                        where r.idusuario != 0 and r.estado not in (2);";
                                         
      
      public String SQL_SELECTPRESX = "SELECT case when m.idescrito is not null then l.titulo\n" +

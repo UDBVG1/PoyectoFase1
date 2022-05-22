@@ -361,7 +361,8 @@ public class Prestamo extends javax.swing.JPanel {
               Devolucion.setVisible(true);
               jTable1.setModel(prestamo.mostrarRev());       
              IDUsuario.setVisible(true);
-             botonFiltrarUsuario.setVisible(true);                
+             botonFiltrarUsuario.setVisible(true);
+             jLabel3.setText("PRESTAMOS");
                 break;
             case 2:
               tituloDev.setText("Reservados");
@@ -370,7 +371,8 @@ public class Prestamo extends javax.swing.JPanel {
               jTable1.setModel(prestamo.mostrarRev()); 
 
              IDUsuario.setVisible(true);
-             botonFiltrarUsuario.setVisible(true);              
+             botonFiltrarUsuario.setVisible(true);
+             jLabel3.setText("PRESTAMOS");
                 break;
             case 3:
              tituloDev.setText("Informacion acerca de sus prestamos");
@@ -382,6 +384,7 @@ public class Prestamo extends javax.swing.JPanel {
              jTable1.setCellSelectionEnabled(false); 
              IDUsuario.setVisible(false);
              botonFiltrarUsuario.setVisible(false);
+             jLabel3.setText("RESERVAS");
                 break;
         }
     }
