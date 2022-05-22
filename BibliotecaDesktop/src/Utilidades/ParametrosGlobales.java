@@ -30,5 +30,6 @@ public class ParametrosGlobales {
     //Materiales
       public static String tipo;
       public static boolean mat_table;
+       
     
 }
