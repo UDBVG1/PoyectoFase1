@@ -198,6 +198,7 @@ public class UsuariosCRUD {
                 setCambios="nivel = '"+usuario.Nivel+"'";
             }
             conn = Conexion.getConexion();
+            System.out.println(sqlUsuarioUpdate+setCambios+sqlUsuarioParam);
             stmt = conn.prepareStatement(sqlUsuarioUpdate+setCambios+sqlUsuarioParam);
             int index=1;
             stmt.setInt(index, usuario.IdUs);
