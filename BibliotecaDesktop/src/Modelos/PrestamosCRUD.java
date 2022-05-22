@@ -67,9 +67,7 @@ public class PrestamosCRUD {
                                 "right join material m on d.idaudiovisual = m.idaudiovisual\n" +
                                 "where tipo='DVD' AND titulo like ? or director like ? or genero like ? or duracion like ?;";
      
-     public String SQL_BUSCARCR = "";
-     
-     private final String SQL_INSERTREV = "INSERT INTO reserva(fechareserva,estado,reservado,codigo,idusuario) values (CURDATE(),?,?,?,?);";
+     private final String SQL_INSERTREV = "INSERT INTO reserva(fechareserva,estado,reservado,codigo,idusuario) values (CURDATE(),'1',?,?,?);";
      
      private final String SQL_INSERTPRE ="insert into prestamos(fechaprestamo,fechaentrega,codigo,idsocio) values (curdate(),?,?,?);";
      
@@ -86,30 +84,22 @@ public class PrestamosCRUD {
 "                                        where r.idusuario != 0 and r.estado not in (2);";
                                         
      
-     public String SQL_SELECTPRESX = "SELECT case when m.idescrito is not null then l.titulo\n" +
+     public String SQL_SELECTPRESX = "SELECT 	m.codigo as Codigo,case when m.idescrito is not null then l.titulo\n" +
                                     "when m.idaudiovisual is not null then mc.titulo\n" +
-                                    "else null end AS titulo,CONVERT(p.fechaentrega, CHAR)as Fecha_Entrega,p.mora\n" +
+                                    "else null end AS titulo,autor,(SELECT c.descripcion FROM poo.config c where c.estado='estado reserva' and valor=r.estado) as estado,u.usuario\n" +
                                     "FROM material m\n" +
                                     "LEFT join escrito l on m.idescrito=l.idescrito\n" +
                                     "LEFT join audiovisual mc on m.idaudiovisual=mc.idaudiovisual\n" +
-                                    "LEFT join prestamos p on m.codigo = p.codigo\n" +
-                                    "where p.idsocio = ?;"; // buscar los prestamos segun usuario que esta logueado
+                                    "LEFT join reserva r on m.codigo = r.codigo\n" +
+                                    "LEFT join usuario u on u.idusuario = r.idusuario\n" +
+                                    "where r.idusuario = ? and r.estado not in (2);";
      
-     public String SQL_SELECTREVSOCIO = "SELECT m.codigo as Codigo,case when m.idescrito is not null then l.titulo\n" +
-                                        "when m.idaudiovisual is not null then mc.titulo\n" +
-                                        "else null end AS titulo,autor,estado,u.usuario\n" +
-                                        "FROM material m\n" +
-                                        "LEFT join escrito l on m.idescrito=l.idescrito\n" +
-                                        "LEFT join audiovisual mc on m.idaudiovisual=mc.idaudiovisual\n" +
-                                        "LEFT join reserva r on m.codigo = r.codigo\n" +
-                                        "LEFT join usuario u on u.idusuario = r.idusuario\n" +
-                                        "where r.idusuario = ?;";
      
      public String SQL_SelectFiltrado = "select codigo, cantidad_disponible from material where codigo = ?;";
      
      private String SQL_getIdUsuario = "select idusuario from usuario where usuario = ?;";
      
-     private String SQL_devolucion = "update reserva set estado = 'Inactivo' where idusuario = ? and codigo = ?;";
+     private String SQL_Estado = "update reserva set estado = ? where idusuario = ? and codigo = ?;";
      
      public String FechaEntrega(){//agregando 5 dias mas
         LocalDateTime hoy = LocalDateTime.now();
@@ -190,18 +180,14 @@ public class PrestamosCRUD {
         return dtm;
     }   
      
-    public void insertarReserva(Object codigo,int idsocio){
+    public void insertarReserva(Object codigo,int idsocio,int reservado){
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
-        int reservado;
         try {
             conn = Conexion.getConexion();
             stmt = conn.prepareStatement(SQL_INSERTREV);
             int index = 1;
-            stmt.setString(index++,"Activo");
-            String msg = JOptionPane.showInputDialog(null, "Introduce cuantos desea reservar");
-            reservado = parseInt(msg);
             stmt.setInt(index++,reservado);
             stmt.setObject(index++,codigo);
             stmt.setInt(index,idsocio);
@@ -231,10 +217,7 @@ public class PrestamosCRUD {
             stmt.setInt(index++,Indicador);
             stmt.setObject(index++,codigo);
             
-            rows = stmt.executeUpdate();
-        if (rows > 0) {
-                JOptionPane.showMessageDialog(null, "Registro exitoso" + "/n" + "Registros afectados" + rows, "Ingresado", JOptionPane.INFORMATION_MESSAGE);
-            }    
+            rows = stmt.executeUpdate();    
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception e2) {
@@ -365,24 +348,22 @@ public class PrestamosCRUD {
         return idsocio;        
     }
     
-    public void devolucion(int usuario , Object codigo){
+    public int Updateestado(String estado,int usuario , Object codigo){
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
 
         try {
             conn = Conexion.getConexion();
-            stmt = conn.prepareStatement(SQL_devolucion);
+            stmt = conn.prepareStatement(SQL_Estado);
             int index = 1;
+            stmt.setString(index++,estado);
             stmt.setInt(index++,usuario);
-            stmt.setObject(index++,codigo);
+            stmt.setObject(index,codigo);
             
             rows = stmt.executeUpdate();
-        if (rows > 0) {
-                JOptionPane.showMessageDialog(null, "Devolucion exitosa", "Ingresado", JOptionPane.INFORMATION_MESSAGE);
-            }  
-        else{
-            System.out.println("error devolucion");
+        if (rows == 0) {
+              System.out.println("error devolucion");  
         }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -391,7 +372,8 @@ public class PrestamosCRUD {
         }finally {
             Conexion.closeStatement(stmt);
             Conexion.closeConnection(conn);
-        }        
+        }   
+       return rows; 
     }
     
         public DefaultTableModel FiltrarSeleccion(String select,Object box1){

@@ -41,14 +41,12 @@
     <Component class="javax.swing.JComboBox" name="ComboBoxTipo">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="7">
+          <StringArray count="5">
             <StringItem index="0" value="Seleccionar"/>
             <StringItem index="1" value="Libro"/>
             <StringItem index="2" value="Revista"/>
             <StringItem index="3" value="CD"/>
             <StringItem index="4" value="DVD"/>
-            <StringItem index="5" value="Tesis"/>
-            <StringItem index="6" value="Obra"/>
           </StringArray>
         </Property>
       </Properties>
@@ -197,6 +195,9 @@
           <Properties>
             <Property name="autoResizeMode" type="int" value="4"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTableDatosMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
