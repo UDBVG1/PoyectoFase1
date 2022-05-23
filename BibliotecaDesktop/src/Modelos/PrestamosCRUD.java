@@ -103,7 +103,7 @@ public class PrestamosCRUD {
      
      public String FechaEntrega(){//agregando 5 dias mas
         LocalDateTime hoy = LocalDateTime.now();
-        LocalDateTime hoyCorto = hoy.plusDays(5);
+        LocalDateTime hoyCorto = hoy.plusDays(5);//SQLCANTIDADAPRESTAR MATERIALES
         //LocalDateTime hoyCorto = hoy.minusDays(5);//5 dias menos
         String fechaEntrega = hoyCorto.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         return fechaEntrega;
